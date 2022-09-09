@@ -33,13 +33,13 @@ public class UserInputController  implements Initializable {
     private RadioButton easyLevel,mediumLevel,hardLevel;
     @FXML
     private TextField nameTextField;
-    private int board;
+    private int boardNumber;
     private Player player;
 
 
-    public void setChoice(int board, String title){
+    public void setChoice(int boardNumber, String title){
         choiceLabel.setText(title);
-         this.board = board;
+         this.boardNumber = boardNumber;
     }
 
     public void backToGameModes(ActionEvent event) throws IOException {
@@ -52,7 +52,7 @@ public class UserInputController  implements Initializable {
 
     public void handlePlayButton(ActionEvent event) throws IOException {
 
-        if(nameTextField.getText().isEmpty() || nameTextField.getText().length() > 12){
+        if(nameTextField.getText() == null|| nameTextField.getText().isEmpty() || nameTextField.getText().length() > 12){
             nameTextField.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
             new animatefx.animation.Shake(nameTextField).play();
 
@@ -102,8 +102,8 @@ public class UserInputController  implements Initializable {
 
         GameController gameController = loader.getController();
         gameController.setPlayer(player);
-        gameController.setBoardNumber(board);
-        gameController.setBoardClass(board);
+        gameController.setBoardNumber(boardNumber);
+        gameController.setBoardClass(boardNumber);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);

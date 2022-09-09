@@ -33,11 +33,12 @@ public class NumberMov extends Movements {
 
         if (!number.equals("0")) {
             if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
-                getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
 
+                getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
                 getNullButton()[getRowN()][getColN()].setText(number);
 
                 clickedButton.setText("");
+                getGameController().setGButtonStyle(clickedButton);
                 clickedButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
                 nTiles[getRowN()][getColN()] = Integer.parseInt(number);

@@ -1,6 +1,6 @@
 package com.puzzle.controller;
 
-import com.puzzle.gameMov.BarMov;
+import com.puzzle.gameMov.ResetMov;
 import com.puzzle.gameMov.CharMov;
 import com.puzzle.gameMov.Movements;
 import com.puzzle.gameMov.NumberMov;
@@ -10,13 +10,10 @@ import com.puzzle.model.NumberBoard;
 import com.puzzle.model.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -61,7 +58,7 @@ public class GameController implements Initializable {
     private Label timeLabel;
 
     private Player player;
-    private int board;
+    private int boardNumber;
     private Stage stage;
     private Scene scene;
 
@@ -78,7 +75,7 @@ public class GameController implements Initializable {
     private File[][] Itiles,IsortedTiles;
 
     private Movements movements;
-    private BarMov barMov;
+    private ResetMov resetMov;
 
     private Timeline clock;
     private int mil = 0, sec = 0, min = 0, hr = 0;
@@ -89,11 +86,11 @@ public class GameController implements Initializable {
         moveLabel.setText("Movimentos: "+ this.player.getMoves());
     }
 
-    public void setBoardNumber(int board){
-        this.board = board;
+    public void setBoardNumber(int boardNumber){
+        this.boardNumber = boardNumber;
     }
     public int getBoardNumber(){
-        return board;
+        return boardNumber;
     }
 
     public void updateMoves(int moves){
@@ -131,8 +128,8 @@ public class GameController implements Initializable {
 
                 startClock();
                 movements = new NumberMov(this, player, clock,timeLabel, numberBoard, nTiles, nSortedTiles);
-                barMov = new BarMov(this,player, this.board);
-                resetButton.setOnAction(barMov);
+                resetMov = new ResetMov(this,player, this.boardNumber);
+                resetButton.setOnAction(resetMov);
 
                 for (int i = 0; i < player.getLevel(); i++) {
                     for (int j = 0; j < player.getLevel(); j++) {

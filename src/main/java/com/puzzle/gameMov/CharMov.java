@@ -37,6 +37,7 @@ public class CharMov extends Movements{
                 getNullButton()[getRowN()][getColN()].setText(character);
 
                 clickedButton.setText("");
+                getGameController().setGButtonStyle(clickedButton);
                 getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color:  linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
                 cTiles[getRowN()][getColN()] = character.charAt(0);

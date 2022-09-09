@@ -12,17 +12,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BarMov implements EventHandler<ActionEvent> {
+public class ResetMov implements EventHandler<ActionEvent> {
     private GameController gameController;
     private Player player;
     private Stage stage;
     private Scene scene;
-    private int board;
+    private int boardNumber;
 
-    public BarMov(GameController gameController, Player player,int board){
+    public ResetMov(GameController gameController, Player player, int boardNumber){
         this.gameController = gameController;
         this.player = player;
-        this.board = board;
+        this.boardNumber = boardNumber;
     }
     @Override
     public void handle(ActionEvent event) {
@@ -40,8 +40,8 @@ public class BarMov implements EventHandler<ActionEvent> {
         GameController gameController = loader.getController();
 
         gameController.setPlayer(player);
-        gameController.setBoardNumber(board);
-        gameController.setBoardClass(board);
+        gameController.setBoardNumber(boardNumber);
+        gameController.setBoardClass(boardNumber);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
