@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'Orbitron';
+    src: url('../orbitron/Orbitron-Bold.ttf');
+}
+.root{
+    -fx-background-image: url('../images/background/WinnerBG.JPG');
+    -fx-background-size: contain;
+}
+.label{
+    -fx-font-family: Orbitron;
+
+}
+#title
+{
+    -fx-background-image: url('../images/YellowLabel.PNG');
+    -fx-background-size: contain;
+}
+.button
+{
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%,#dc8f00 0%,#903b12 100%),
+            #ffb22e,
+            #ffb22e,
+            linear-gradient(to bottom , #ffec87 3%,#ffb22e );
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+    -fx-font-family: Orbitron;
+    -fx-font-size: 25px;
+}
+
+.button:hover
+{
+
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%,#dc8f00 0%,#903b12 100),
+            #ffb22e,
+            #ffb22e,
+            linear-gradient(to bottom , #ffec87 3%,#ffb22e);
+}
+
+.button:pressed
+{
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0,2 0 4 0,2 0 5 0;
+
+}
+

@@ -1,0 +1,95 @@
+package com.puzzle.controller;
+
+import com.puzzle.model.Player;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
+import java.util.Optional;
+
+public class WinnerController {
+    @FXML
+    private AnchorPane mainPane;
+
+    @FXML
+    private Button backToMenu;
+
+    @FXML
+    private Button exitButton;
+    @FXML
+    private Label winLabel;
+    @FXML
+    private Label playerLabel;
+    private Parent root;
+    private Stage stage;
+    private Scene scene;
+    private Player player;
+
+    public void setPlayer(Player player){
+        this.player = player;
+        playerLabel.setText("Muito bem "+player.getPlayerName()+"!");
+        winLabel.setText("você ganhou com:\n" +player.getMoves()+
+                " movimentos \n no tempo: "+ player.getTime());
+    }
+    public void handleBackToMenu(ActionEvent event) throws IOException{
+        root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/Menu.fxml"));
+        scene = new Scene(root);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void exit(ActionEvent event)throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
+        DialogPane root = loader.load();
+
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane(root);
+        dialog.initStyle(StageStyle.TRANSPARENT);
+        dialog.setX(575);
+        dialog.setY(300);
+
+        Optional<ButtonType> clickedButton = dialog.showAndWait();
+        if(clickedButton.get() == ButtonType.OK){
+            stage = (Stage) mainPane.getScene().getWindow();
+            stage.close();
+        }
+    }
+
+
+    @FXML
+    public void close(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
+        DialogPane root = loader.load();
+
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane(root);
+        dialog.initStyle(StageStyle.TRANSPARENT);
+        dialog.setX(575);
+        dialog.setY(300);
+
+        Optional<ButtonType> clickedButton = dialog.showAndWait();
+        if(clickedButton.get() == ButtonType.OK){
+            stage = (Stage) mainPane.getScene().getWindow();
+            stage.close();
+        }
+
+    }
+    @FXML
+    public void min(MouseEvent event) {
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+
+    }
+}

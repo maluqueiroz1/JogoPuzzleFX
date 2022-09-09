@@ -1,0 +1,85 @@
+@font-face {
+    font-family: 'Orbitron';
+    src: url('../orbitron/Orbitron-Bold.ttf');
+}
+.root{
+    -fx-background-image: url('../images/background/UserInputBG.JPG');
+    -fx-background-size: cover;
+}
+
+.label{
+    -fx-font-family: Orbitron;
+}
+
+#name
+{
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #7900dc 0%, #4a0c8c 100%),
+            #cb2eff,
+            #cb2eff,
+            linear-gradient(to bottom , #d387ff 3%, #ab2eff);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+    -fx-font-family: Orbitron;
+    -fx-font-size: 31px;
+}
+
+.radio-button
+{
+    -fx-font-family: Orbitron;
+    -fx-border-radius: 5px ;
+    -fx-border-color: #ab2eff;
+    -fx-padding: 10px 5px;
+}
+.radio-button .radio{
+    -fx-background-color: #ab2eff;
+    -fx-background-radius: 25px;
+}
+
+.radio-button:selected {
+    -fx-background-radius: 5px;
+    -fx-background-color: #ab2eff;
+    -fx-padding: 10px 5px;
+}
+#back{
+    -fx-font-size: 10px;
+}
+
+.button
+{
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%,#dc8f00 0%,#903b12 100%),
+            #ffb22e,
+            #ffb22e,
+            linear-gradient(to bottom , #ffec87 3%,#ffb22e );
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+    -fx-font-family: Orbitron;
+    -fx-font-size: 28px;
+}
+
+.button:hover
+{
+
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%,#dc8f00 0%,#903b12 100),
+            #ffb22e,
+            #ffb22e,
+            linear-gradient(to bottom , #ffec87 3%,#ffb22e);
+}
+
+.button:pressed
+{
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0,2 0 4 0,2 0 5 0;
+
+}
+
+.text-field
+{
+-fx-font-family: Orbitron;
+}

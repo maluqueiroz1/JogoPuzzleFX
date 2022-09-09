@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="700.0" styleClass="root" stylesheets="@../styles/GameModesStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.puzzle.controller.GameModesController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="58.0" layoutY="63.0" text="ESCOLHA UM MODO PARA JOGAR" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="numberButton" alignment="CENTER" contentDisplay="CENTER" layoutX="107.0" layoutY="184.0" mnemonicParsing="false" onAction="#numberView" prefHeight="84.0" prefWidth="185.0" text="números">
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.7962085308056872" startX="0.5924170616113744">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6299999952316284" green="0.07559999823570251" blue="0.5257200002670288" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9700000286102295" green="0.048500001430511475" blue="0.7944762110710144" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button fx:id="charButton" alignment="CENTER" contentDisplay="CENTER" layoutX="415.0" layoutY="184.0" mnemonicParsing="false" onAction="#charView" prefHeight="84.0" prefWidth="185.0" text="letras">
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.7962085308056872" startX="0.5924170616113744">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6313725709915161" green="0.07450980693101883" blue="0.5254902243614197" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9686274528503418" green="0.0470588244497776" blue="0.7960784435272217" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button fx:id="imgButton" alignment="CENTER" contentDisplay="CENTER" layoutX="107.0" layoutY="341.0" mnemonicParsing="false" onAction="#imgView" prefHeight="84.0" prefWidth="185.0" text="imagem">
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.7962085308056872" startX="0.5924170616113744">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6299999952316284" green="0.07559999823570251" blue="0.5257200002670288" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9700000286102295" green="0.048500001430511475" blue="0.7944762110710144" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button fx:id="crazyButton" alignment="CENTER" contentDisplay="CENTER" layoutX="415.0" layoutY="341.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="185.0" text="maluco">
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.7962085308056872" startX="0.5924170616113744">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6299999952316284" green="0.07559999823570251" blue="0.5257200002670288" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9700000286102295" green="0.048500001430511475" blue="0.7944762110710144" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="270.0" layoutY="531.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="67.0" prefWidth="161.0" text="voltar">
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.7962085308056872" startX="0.5924170616113744">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6299999952316284" green="0.07559999823570251" blue="0.5257200002670288" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9700000286102295" green="0.048500001430511475" blue="0.7944762110710144" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Label id="exit" layoutX="666.0" layoutY="14.0" onMouseClicked="#close" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0" />
+      <Label id="mini" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="629.0" layoutY="14.0" onMouseClicked="#min" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="2.0" />
+   </children>
+</AnchorPane>
