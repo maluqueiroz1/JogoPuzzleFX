@@ -45,6 +45,7 @@ public class NumberMov extends Movements {
 
                 if (nTiles[getRowN()][getColN()] == nSortedTiles[getRowN()][getColN()]) {
                     getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08");
+
                 }
 
                 boolean check = numberBoard.win(nTiles);
