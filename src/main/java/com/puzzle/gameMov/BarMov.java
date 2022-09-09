@@ -38,8 +38,9 @@ public class BarMov implements EventHandler<ActionEvent> {
         scene = new Scene(root);
 
         GameController gameController = loader.getController();
-        gameController.setPlayer(player);
 
+        gameController.setPlayer(player);
+        gameController.setBoardNumber(board);
         gameController.setBoardClass(board);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

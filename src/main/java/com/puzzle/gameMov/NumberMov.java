@@ -34,16 +34,17 @@ public class NumberMov extends Movements {
         if (!number.equals("0")) {
             if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
                 getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
+
                 getNullButton()[getRowN()][getColN()].setText(number);
 
                 clickedButton.setText("");
+                clickedButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
                 nTiles[getRowN()][getColN()] = Integer.parseInt(number);
                 nTiles[i][j] = 0;
 
                 if (nTiles[getRowN()][getColN()] == nSortedTiles[getRowN()][getColN()]) {
                     getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08");
-
                 }
 
                 boolean check = numberBoard.win(nTiles);
