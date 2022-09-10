@@ -117,6 +117,15 @@ public class NumberBoard {
         return won;
     }
 
+    public int getR() {
+        return r;
+    }
+
+    public int getC() {
+        return c;
+    }
+
+
 }
 
 

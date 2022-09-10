@@ -10,22 +10,22 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@../styles/Winner.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.puzzle.controller.WinnerController">
    <children>
-      <Label id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="-65.0" prefHeight="453.0" prefWidth="470.0" textFill="WHITE">
+      <Label id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="-45.0" prefHeight="477.0" prefWidth="470.0" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="playerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="194.0" layoutY="108.0" prefHeight="88.0" prefWidth="298.0" text="Muito bem !" textFill="WHITE">
+      <Label fx:id="playerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="134.0" prefHeight="88.0" prefWidth="298.0" text="Muito bem !" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="winLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="228.0" prefHeight="88.0" prefWidth="426.0" text="você ganhou com:&#10; 0 movimentos&#10; em 0 segundos" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+      <Label fx:id="winLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="138.0" layoutY="262.0" prefHeight="88.0" prefWidth="426.0" text="você ganhou com:&#10; 0 movimentos&#10; em 0 segundos" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="255.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleBackToMenu" prefHeight="88.0" prefWidth="191.0" text="voltar para&#10; o menu" textAlignment="CENTER">
+      <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleBackToMenu" prefHeight="88.0" prefWidth="199.0" text="voltar para &#10;o menu" textAlignment="CENTER">
          <textFill>
             <LinearGradient endX="0.9146919431279621" endY="0.9004739336492891" startX="0.46919431279620855" startY="0.27488151658767773">
                <stops>
@@ -43,7 +43,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="255.0" layoutY="501.0" mnemonicParsing="false" onAction="#exit" prefHeight="88.0" prefWidth="191.0" text="sair&#10;" textAlignment="CENTER">
+      <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="535.0" mnemonicParsing="false" onAction="#exit" prefHeight="88.0" prefWidth="199.0" text="sair&#10;" textAlignment="CENTER">
          <textFill>
             <LinearGradient endX="0.9146919431279621" endY="0.9004739336492891" startX="0.46919431279620855" startY="0.27488151658767773">
                <stops>
