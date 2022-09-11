@@ -22,13 +22,10 @@ public abstract class Movements implements EventHandler<ActionEvent> {
     private Player player;
     private Stage stage;
     private Scene scene;
-
     private int rowN, colN;
     private Button[][] nullButton;
-
     private Timeline clock;
     private Label timeLabel;
-
 
     public Movements(GameController g, Player player, Timeline clock,Label timeLabel) {
         this.gameController = g;
@@ -41,7 +38,6 @@ public abstract class Movements implements EventHandler<ActionEvent> {
     public GameController getGameController() {
         return gameController;
     }
-
 
     public Player getPlayer() {
         return player;
@@ -70,6 +66,7 @@ public abstract class Movements implements EventHandler<ActionEvent> {
     public void setNullButton(Button[][] nullButton) {
         this.nullButton = nullButton;
     }
+
     public Timeline getClock() {
         return clock;
     }
@@ -86,12 +83,10 @@ public abstract class Movements implements EventHandler<ActionEvent> {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Winner.fxml"));
         Parent root = loader.load();
-
         scene = new Scene(root);
 
         WinnerController winnerController = loader.getController();
         winnerController.setPlayer(player);
-
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);

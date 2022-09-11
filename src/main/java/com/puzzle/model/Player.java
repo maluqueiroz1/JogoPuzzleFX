@@ -3,7 +3,6 @@ package com.puzzle.model;
 public class Player {
 
     private String playerName;
-
     private String time;
     private Boolean winner = false;
     private int moves;
@@ -20,9 +19,11 @@ public class Player {
     public String getPlayerName(){
         return playerName;
     }
+
     public void setLevel(int level){
         this.level = level;
     }
+
     public int getLevel(){
         return level;
     }
@@ -34,6 +35,7 @@ public class Player {
     public int getMoves() {
         return moves;
     }
+
     public String getTime() {
         return time;
     }
@@ -45,6 +47,7 @@ public class Player {
     public Boolean getWinner() {
         return winner;
     }
+
     public void setWinner(Boolean winner) {
         this.winner = winner;
     }

@@ -10,11 +10,10 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 
-
 public class NumberMov extends Movements {
+
     private NumberBoard numberBoard;
     private int[][] nTiles, nSortedTiles;
-
 
     public NumberMov(GameController gameController, Player player, Timeline clock, Label timeLabel, NumberBoard numberBoard, int[][] nTiles, int[][] nSortedTiles){
         super(gameController,player,clock,timeLabel);
@@ -24,6 +23,7 @@ public class NumberMov extends Movements {
     }
     @Override
     public void handle(ActionEvent actionEvent) {
+
             Button clickedButton = (Button) actionEvent.getSource();
             String number = (clickedButton.getText());
             String location = clickedButton.getAccessibleText();
@@ -33,11 +33,12 @@ public class NumberMov extends Movements {
 
         if (!number.equals("0")) {
             if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
-                getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
 
+                getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
                 getNullButton()[getRowN()][getColN()].setText(number);
 
                 clickedButton.setText("");
+                getGameController().setGButtonStyle(clickedButton);
                 clickedButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
                 nTiles[getRowN()][getColN()] = Integer.parseInt(number);
@@ -45,7 +46,6 @@ public class NumberMov extends Movements {
 
                 if (nTiles[getRowN()][getColN()] == nSortedTiles[getRowN()][getColN()]) {
                     getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08");
-
                 }
 
                 boolean check = numberBoard.win(nTiles);

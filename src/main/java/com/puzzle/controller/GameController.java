@@ -1,32 +1,28 @@
 package com.puzzle.controller;
 
-import com.puzzle.gameMov.BarMov;
-import com.puzzle.gameMov.CharMov;
-import com.puzzle.gameMov.Movements;
-import com.puzzle.gameMov.NumberMov;
+import com.puzzle.gameMov.*;
 import com.puzzle.model.CharBoard;
 import com.puzzle.model.ImgBoard;
 import com.puzzle.model.NumberBoard;
 import com.puzzle.model.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import javafx.scene.image.ImageView;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -37,51 +33,41 @@ public class GameController implements Initializable {
 
     @FXML
     private AnchorPane mainPane;
-
     @FXML
-    private Pane barPane;
-
-    public GridPane getGrid() {
-        return grid;
-    }
-
+    private AnchorPane barPane;
     @FXML
     private GridPane grid;
-
     @FXML
     private Label moveLabel;
-
     @FXML
     private Label playerLabel;
-
     @FXML
     private Button resetButton;
-
     @FXML
     private Label timeLabel;
-
-    private Player player;
-    private int board;
     private Stage stage;
-    private Scene scene;
-
-
+    private Player player;
+    private int boardNumber;
     private Button[][] gButton;
     private Label[][] gLabel;
-
+    private Button helpButton;
     private NumberBoard numberBoard;
-
     private int[][] nTiles, nSortedTiles;
     private CharBoard charBoard;
     private char[][] cTiles,cSortedTiles;
     private ImgBoard imgBoard;
-    private File[][] Itiles,IsortedTiles;
-
+    private File[][] iTiles;
     private Movements movements;
-    private BarMov barMov;
-
+    private ResetMov resetMov;
     private Timeline clock;
     private int mil = 0, sec = 0, min = 0, hr = 0;
+
+    public void setBoardNumber(int boardNumber){
+        this.boardNumber = boardNumber;
+    }
+    public int getBoardNumber(){
+        return boardNumber;
+    }
 
     public void setPlayer(Player player){
         this.player = player;
@@ -89,11 +75,30 @@ public class GameController implements Initializable {
         moveLabel.setText("Movimentos: "+ this.player.getMoves());
     }
 
-    public void setBoardNumber(int board){
-        this.board = board;
+    public void startClock(){
+
+        clock = new Timeline(new KeyFrame(Duration.millis(1), actionEvent -> updateClock(timeLabel)));
+        clock.setCycleCount(Timeline.INDEFINITE);
+        clock.setAutoReverse(false);
+        clock.play();
+
     }
-    public int getBoardNumber(){
-        return board;
+    public void updateClock(Label timeLabel){
+        if(mil == 1000){
+            sec++;
+            mil = 0;
+        }
+        if(sec == 60){
+            min++;
+            sec = 0;
+        }
+        if(min == 60){
+            hr++;
+            min = 0;
+        }
+        timeLabel.setText("Tempo: "+ hr + ":" + (((min/10)== 0) ? "0":"")
+                + min + ":" + (((sec/10)== 0) ? "0":"") + sec + ":"
+                + (((mil/10)== 0) ? "00": (((mil/100)== 0) ? "0":""))+ mil++);
     }
 
     public void updateMoves(int moves){
@@ -107,12 +112,42 @@ public class GameController implements Initializable {
             gButton.setStyle("-fx-font-size: 80px");
         }
         else if(player.getLevel()==4){
-            gButton.setPrefSize(145,145);
+            gButton.setPrefSize(142,142);
             gButton.setStyle("-fx-font-size: 50px");
         }
-        else if(player.getLevel()>4){
+        else {
             gButton.setPrefSize(112,112);
         }
+
+    }
+    public void setImageSize(ImageView imageView){
+        if(player.getLevel()<4){
+            imageView.setFitHeight(185);
+            imageView.setFitWidth(185);
+        }
+        else if(player.getLevel()==4){
+            imageView.setFitHeight(132);
+            imageView.setFitWidth(132);
+        }
+        else {
+            imageView.setFitHeight(102);
+            imageView.setFitWidth(102);
+        }
+    }
+
+    public void InsertBarButtons(){
+
+        helpButton = new Button("?");
+        helpButton.setId("barButtons");
+        HelpMov helpMov = new HelpMov();
+        helpButton.setOnAction(helpMov);
+
+        barPane.getChildren().add(helpButton);
+        AnchorPane.setRightAnchor(helpButton,125.0);
+        AnchorPane.setTopAnchor(helpButton,25.0);
+
+        resetMov = new ResetMov(this,player, this.boardNumber);
+        resetButton.setOnAction(resetMov);
     }
 
     public void setBoardClass(int board) {
@@ -131,8 +166,8 @@ public class GameController implements Initializable {
 
                 startClock();
                 movements = new NumberMov(this, player, clock,timeLabel, numberBoard, nTiles, nSortedTiles);
-                barMov = new BarMov(this,player, this.board);
-                resetButton.setOnAction(barMov);
+                resetMov = new ResetMov(this,player, this.boardNumber);
+                resetButton.setOnAction(resetMov);
 
                 for (int i = 0; i < player.getLevel(); i++) {
                     for (int j = 0; j < player.getLevel(); j++) {
@@ -147,7 +182,7 @@ public class GameController implements Initializable {
                             }
 
                             gButton[i][j].setOnAction(movements);
-                            getGrid().add(gButton[i][j], j, i);
+                            grid.add(gButton[i][j], j, i);
 
                         } else {
 
@@ -160,7 +195,7 @@ public class GameController implements Initializable {
                             movements.setRowN(i);
                             movements.setColN(j);
                             gButton[i][j].setOnAction(movements);
-                            getGrid().add(gButton[i][j], j, i);
+                            grid.add(gButton[i][j], j, i);
 
                         }
                     }
@@ -176,6 +211,8 @@ public class GameController implements Initializable {
                 while(!charBoard.solvable(cTiles));
                 startClock();
                 movements = new CharMov(this, player, clock,timeLabel, charBoard, cTiles, cSortedTiles);
+                resetMov = new ResetMov(this,player, this.boardNumber);
+                resetButton.setOnAction(resetMov);
 
                 for(int i = 0; i < player.getLevel(); i++){
                     for(int j = 0; j < player.getLevel(); j++) {
@@ -210,28 +247,52 @@ public class GameController implements Initializable {
                 break;
             case 3:
                 imgBoard = new ImgBoard(player.getLevel(), player.getLevel());
-                Itiles= imgBoard.tilesAmount();
-                IsortedTiles = imgBoard.tilesAmount();
+                iTiles= imgBoard.iTilesAmount();
+                nTiles = imgBoard.tilesAmount();
+                nSortedTiles = imgBoard.tilesAmount();
+
+                do {
+                    imgBoard.iRandomize(nTiles,iTiles);
+                }
+                while (!imgBoard.solvable(nTiles));
+
+                movements = new ImgMov(this, player, clock,timeLabel, imgBoard,iTiles, nTiles, nSortedTiles);
+                ImageView[][] imageViews = new ImageView[player.getLevel()][player.getLevel()];
+                InsertBarButtons();
+                startClock();
 
                 for(int i = 0; i < player.getLevel(); i++){
                     for(int j = 0; j < player.getLevel(); j++) {
-                        if(! String.valueOf(Itiles[i][j]).equals("!")){
-                            gButton[i][j] = new Button(String.valueOf(Itiles[i][j]));
+                        if(! String.valueOf(nTiles[i][j]).equals("0")){
+
+                            imageViews[i][j] = new ImageView(String.valueOf(iTiles[i][j]));
+                            setImageSize(imageViews[i][j]);
+
+                            gLabel[i][j] = new Label(i + "," + j);
+                            gButton[i][j] = new Button(String.valueOf(nTiles[i][j]));
+                            gButton[i][j].setGraphic(imageViews[i][j]);
+                            gButton[i][j].setAccessibleText(gLabel[i][j].getText());
                             setGButtonStyle(gButton[i][j]);
+                            gButton[i][j].setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                            gButton[i][j].setStyle("-fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
 
-                            gButton[i][j].setStyle("-fx-text-fill: TRANSPARENT; -fx-background-image: c; -fx-background-size: contain");
+                            if (nTiles[i][j]== nSortedTiles[i][j])
+                                gButton[i][j].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
 
-                            if (Itiles[i][j]== IsortedTiles[i][j])
-                                gButton[i][j].setStyle("-fx-background-color: #c9ff08");
-
-                            grid.add(gButton[i][j],i,j);
-
+                            gButton[i][j].setOnAction(movements);
+                            grid.add(gButton[i][j],j,i);
 
                         }else{
-                            gButton[i][j] = new Button(String.valueOf(Itiles[i][j]));
+                            gLabel[i][j] = new Label(i + "," + j);
+                            gButton[i][j] = new Button(String.valueOf(nTiles[i][j]));
+                            gButton[i][j].setAccessibleText(gLabel[i][j].getText());
                             setGButtonStyle(gButton[i][j]);
                             gButton[i][j].setStyle("-fx-text-fill: TRANSPARENT");
-                            grid.add(gButton[i][j],i,j);
+                            movements.setNullButton(gButton);
+                            movements.setRowN(i);
+                            movements.setColN(j);
+                            gButton[i][j].setOnAction(movements);
+                            grid.add(gButton[i][j], j, i);
                         }
                     }
                 }
@@ -243,36 +304,6 @@ public class GameController implements Initializable {
 
 
     }
-
-    public void startClock(){
-
-        clock = new Timeline(new KeyFrame(Duration.millis(1), actionEvent -> updateClock(timeLabel)));
-        clock.setCycleCount(Timeline.INDEFINITE);
-        clock.setAutoReverse(false);
-        clock.play();
-
-    }
-    public void updateClock(Label timeLabel){
-        if(mil == 1000){
-            sec++;
-            mil = 0;
-        }
-        if(sec == 60){
-            min++;
-            sec = 0;
-        }
-        if(min == 60){
-            hr++;
-            min = 0;
-        }
-        timeLabel.setText("Tempo: "+ hr + ":" + (((min/10)== 0) ? "0":"")
-                + min + ":" + (((sec/10)== 0) ? "0":"") + sec + ":"
-                + (((mil/10)== 0) ? "00": (((mil/100)== 0) ? "0":""))+ mil++);
-    }
-
-
-
-
 
     @FXML
     public void close(MouseEvent event) throws IOException {

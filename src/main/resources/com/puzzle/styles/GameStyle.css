@@ -19,7 +19,6 @@
     -fx-text-fill: white;
 }
 
-
 #barButtons
 {
     -fx-padding: 8 15 15 15;
@@ -38,7 +37,6 @@
 
 #barButtons:hover
 {
-
     -fx-background-color:
             linear-gradient(from 0% 93% to 0% 100%,#dc8f00 0%,#903b12 100),
             #ffb22e,
@@ -50,7 +48,6 @@
 {
     -fx-padding: 10 15 13 15;
     -fx-background-insets: 2 0 0 0,2 0 3 0,2 0 4 0,2 0 5 0;
-
 }
 
 

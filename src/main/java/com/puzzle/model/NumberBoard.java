@@ -14,6 +14,7 @@ public class NumberBoard {
         this.r = i;
         this.c = j;
     }
+
     public int[][] tilesAmount(){
         tile= new int[r][c];
 
@@ -116,6 +117,15 @@ public class NumberBoard {
         }
         return won;
     }
+
+    public int getR() {
+        return r;
+    }
+
+    public int getC() {
+        return c;
+    }
+
 
 }
 
