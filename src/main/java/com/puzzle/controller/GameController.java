@@ -32,8 +32,6 @@ import java.util.ResourceBundle;
 public class GameController implements Initializable {
 
     @FXML
-    private AnchorPane mainPane;
-    @FXML
     private AnchorPane barPane;
     @FXML
     private GridPane grid;
@@ -52,11 +50,11 @@ public class GameController implements Initializable {
     private Label[][] gLabel;
     private Button helpButton;
     private NumberBoard numberBoard;
-    private int[][] nTiles, nSortedTiles;
+    private int[][] numberTiles, numberSortedTiles;
     private CharBoard charBoard;
-    private char[][] cTiles,cSortedTiles;
+    private char[][] charTiles, charSortedTiles;
     private ImgBoard imgBoard;
-    private File[][] iTiles;
+    private File[][] imgTiles, imgSortedTiles;
     private Movements movements;
     private ResetMov resetMov;
     private Timeline clock;
@@ -64,9 +62,6 @@ public class GameController implements Initializable {
 
     public void setBoardNumber(int boardNumber){
         this.boardNumber = boardNumber;
-    }
-    public int getBoardNumber(){
-        return boardNumber;
     }
 
     public void setPlayer(Player player){
@@ -135,16 +130,16 @@ public class GameController implements Initializable {
         }
     }
 
-    public void InsertBarButtons(){
+    public void InsertBarButtons(File[][] imgSortedTiles, ImageView[][] helpView){
 
         helpButton = new Button("?");
         helpButton.setId("barButtons");
-        HelpMov helpMov = new HelpMov();
+        HelpMov helpMov = new HelpMov(imgSortedTiles,helpView);
         helpButton.setOnAction(helpMov);
 
         barPane.getChildren().add(helpButton);
-        AnchorPane.setRightAnchor(helpButton,125.0);
-        AnchorPane.setTopAnchor(helpButton,25.0);
+        AnchorPane.setRightAnchor(helpButton,14.0);
+        AnchorPane.setTopAnchor(helpButton,30.0);
 
         resetMov = new ResetMov(this,player, this.boardNumber);
         resetButton.setOnAction(resetMov);
@@ -157,27 +152,27 @@ public class GameController implements Initializable {
         switch (board) {
             case 1:
                 numberBoard = new NumberBoard(player.getLevel(), player.getLevel());
-                nTiles = numberBoard.tilesAmount();
-                nSortedTiles = numberBoard.tilesAmount();
+                numberTiles = numberBoard.tilesAmount();
+                numberSortedTiles = numberBoard.tilesAmount();
                 do {
-                    numberBoard.randomize(nTiles);
+                    numberBoard.randomize(numberTiles);
                 }
-                while (!numberBoard.solvable(nTiles));
+                while (!numberBoard.solvable(numberTiles));
 
                 startClock();
-                movements = new NumberMov(this, player, clock,timeLabel, numberBoard, nTiles, nSortedTiles);
+                movements = new NumberMov(this, player, clock,timeLabel, numberBoard, numberTiles, numberSortedTiles);
                 resetMov = new ResetMov(this,player, this.boardNumber);
                 resetButton.setOnAction(resetMov);
 
                 for (int i = 0; i < player.getLevel(); i++) {
                     for (int j = 0; j < player.getLevel(); j++) {
-                        if (!String.valueOf(nTiles[i][j]).equals("0")) {
+                        if (!String.valueOf(numberTiles[i][j]).equals("0")) {
                             gLabel[i][j] = new Label(i + "," + j);
-                            gButton[i][j] = new Button(String.valueOf(nTiles[i][j]));
+                            gButton[i][j] = new Button(String.valueOf(numberTiles[i][j]));
                             gButton[i][j].setAccessibleText(gLabel[i][j].getText());
                             setGButtonStyle(gButton[i][j]);
 
-                            if (nTiles[i][j] == nSortedTiles[i][j]) {
+                            if (numberTiles[i][j] == numberSortedTiles[i][j]) {
                                 gButton[i][j].setStyle("-fx-background-color: #c9ff08");
                             }
 
@@ -187,7 +182,7 @@ public class GameController implements Initializable {
                         } else {
 
                             gLabel[i][j] = new Label(i + "," + j);
-                            gButton[i][j] = new Button(String.valueOf(nTiles[i][j]));
+                            gButton[i][j] = new Button(String.valueOf(numberTiles[i][j]));
                             gButton[i][j].setAccessibleText(gLabel[i][j].getText());
                             setGButtonStyle(gButton[i][j]);
                             gButton[i][j].setStyle("-fx-text-fill: TRANSPARENT");
@@ -203,26 +198,26 @@ public class GameController implements Initializable {
                 break;
             case 2:
                 charBoard = new CharBoard(player.getLevel(), player.getLevel());
-                cTiles= charBoard.tilesAmount();
-                cSortedTiles = charBoard.tilesAmount();
+                charTiles = charBoard.tilesAmount();
+                charSortedTiles = charBoard.tilesAmount();
                 do{
-                    charBoard.randomize(cTiles);
+                    charBoard.randomize(charTiles);
                 }
-                while(!charBoard.solvable(cTiles));
+                while(!charBoard.solvable(charTiles));
                 startClock();
-                movements = new CharMov(this, player, clock,timeLabel, charBoard, cTiles, cSortedTiles);
+                movements = new CharMov(this, player, clock,timeLabel, charBoard, charTiles, charSortedTiles);
                 resetMov = new ResetMov(this,player, this.boardNumber);
                 resetButton.setOnAction(resetMov);
 
                 for(int i = 0; i < player.getLevel(); i++){
                     for(int j = 0; j < player.getLevel(); j++) {
-                        if( cTiles[i][j] !='!'){
+                        if( charTiles[i][j] !='!'){
                             gLabel[i][j] = new Label(i+","+j);
-                            gButton[i][j] = new Button(String.valueOf(cTiles[i][j]));
+                            gButton[i][j] = new Button(String.valueOf(charTiles[i][j]));
                             gButton[i][j].setAccessibleText(gLabel[i][j].getText());
                             setGButtonStyle(gButton[i][j]);
 
-                            if (cTiles[i][j] == cSortedTiles[i][j]) {
+                            if (charTiles[i][j] == charSortedTiles[i][j]) {
                                 gButton[i][j].setStyle("-fx-background-color: #c9ff08");
                             }
 
@@ -232,7 +227,7 @@ public class GameController implements Initializable {
                         }else{
 
                             gLabel[i][j] = new Label(i+","+j);
-                            gButton[i][j] = new Button(String.valueOf(cTiles[i][j]));
+                            gButton[i][j] = new Button(String.valueOf(charTiles[i][j]));
                             gButton[i][j].setAccessibleText(gLabel[i][j].getText());
                             setGButtonStyle(gButton[i][j]);
                             gButton[i][j].setStyle("-fx-text-fill: TRANSPARENT");
@@ -247,36 +242,38 @@ public class GameController implements Initializable {
                 break;
             case 3:
                 imgBoard = new ImgBoard(player.getLevel(), player.getLevel());
-                iTiles= imgBoard.iTilesAmount();
-                nTiles = imgBoard.tilesAmount();
-                nSortedTiles = imgBoard.tilesAmount();
+                imgTiles = imgBoard.iTilesAmount();
+                imgSortedTiles = imgBoard.iTilesAmount();
+                numberTiles = imgBoard.tilesAmount();
+                numberSortedTiles = imgBoard.tilesAmount();
 
                 do {
-                    imgBoard.iRandomize(nTiles,iTiles);
+                    imgBoard.iRandomize(numberTiles, imgTiles);
                 }
-                while (!imgBoard.solvable(nTiles));
+                while (!imgBoard.solvable(numberTiles));
 
-                movements = new ImgMov(this, player, clock,timeLabel, imgBoard,iTiles, nTiles, nSortedTiles);
+                movements = new ImgMov(this, player, clock,timeLabel, imgBoard, numberTiles, numberSortedTiles);
                 ImageView[][] imageViews = new ImageView[player.getLevel()][player.getLevel()];
-                InsertBarButtons();
+                ImageView[][] helpView = new ImageView[player.getLevel()][player.getLevel()];
+                InsertBarButtons(imgSortedTiles, helpView);
                 startClock();
 
                 for(int i = 0; i < player.getLevel(); i++){
                     for(int j = 0; j < player.getLevel(); j++) {
-                        if(! String.valueOf(nTiles[i][j]).equals("0")){
+                        if(! String.valueOf(numberTiles[i][j]).equals("0")){
 
-                            imageViews[i][j] = new ImageView(String.valueOf(iTiles[i][j]));
+                            imageViews[i][j] = new ImageView(String.valueOf(imgTiles[i][j]));
                             setImageSize(imageViews[i][j]);
 
                             gLabel[i][j] = new Label(i + "," + j);
-                            gButton[i][j] = new Button(String.valueOf(nTiles[i][j]));
+                            gButton[i][j] = new Button(String.valueOf(numberTiles[i][j]));
                             gButton[i][j].setGraphic(imageViews[i][j]);
                             gButton[i][j].setAccessibleText(gLabel[i][j].getText());
                             setGButtonStyle(gButton[i][j]);
                             gButton[i][j].setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                             gButton[i][j].setStyle("-fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
 
-                            if (nTiles[i][j]== nSortedTiles[i][j])
+                            if (numberTiles[i][j]== numberSortedTiles[i][j])
                                 gButton[i][j].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
 
                             gButton[i][j].setOnAction(movements);
@@ -284,7 +281,7 @@ public class GameController implements Initializable {
 
                         }else{
                             gLabel[i][j] = new Label(i + "," + j);
-                            gButton[i][j] = new Button(String.valueOf(nTiles[i][j]));
+                            gButton[i][j] = new Button(String.valueOf(numberTiles[i][j]));
                             gButton[i][j].setAccessibleText(gLabel[i][j].getText());
                             setGButtonStyle(gButton[i][j]);
                             gButton[i][j].setStyle("-fx-text-fill: TRANSPARENT");
@@ -318,8 +315,8 @@ public class GameController implements Initializable {
         dialog.setY(300);
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
-        if(clickedButton.get() == ButtonType.OK){
-            stage = (Stage) mainPane.getScene().getWindow();
+        if(clickedButton.orElse(null) == ButtonType.OK){
+            stage =  (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
 

@@ -12,7 +12,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -23,8 +22,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GameModesController implements Initializable {
-    @FXML
-    private AnchorPane mainPane;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -130,8 +128,8 @@ public class GameModesController implements Initializable {
         dialog.setY(300);
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
-        if(clickedButton.get() == ButtonType.OK){
-            stage = (Stage) mainPane.getScene().getWindow();
+        if(clickedButton.orElse(null) == ButtonType.OK){
+            stage =  (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
 

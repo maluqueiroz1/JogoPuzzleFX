@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -25,8 +24,6 @@ public class UserInputController  implements Initializable {
 
     private Stage stage;
     private Scene scene;
-    @FXML
-    private AnchorPane mainPane;
     @FXML
     private Label choiceLabel;
     @FXML
@@ -132,8 +129,8 @@ public class UserInputController  implements Initializable {
         dialog.setY(300);
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
-        if(clickedButton.get() == ButtonType.OK){
-            stage = (Stage) mainPane.getScene().getWindow();
+        if(clickedButton.orElse(null) == ButtonType.OK){
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
 

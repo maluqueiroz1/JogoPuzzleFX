@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.input.MouseEvent;
@@ -21,14 +20,12 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class MenuController {
-    @FXML
-    private AnchorPane mainPane;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    public void gameModes(ActionEvent event) throws IOException, InterruptedException {
+    public void gameModes(ActionEvent event) throws IOException {
 
         root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/GameModes.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -66,8 +63,8 @@ public class MenuController {
         dialog.setY(300);
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
-        if(clickedButton.get() == ButtonType.OK){
-            stage = (Stage) mainPane.getScene().getWindow();
+        if(clickedButton.orElse(null) == ButtonType.OK){
+            stage =  (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
     }
@@ -84,8 +81,8 @@ public class MenuController {
         dialog.setY(300);
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
-        if(clickedButton.get() == ButtonType.OK){
-            stage = (Stage) mainPane.getScene().getWindow();
+        if(clickedButton.orElse(null) == ButtonType.OK){
+            stage =  (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
 
