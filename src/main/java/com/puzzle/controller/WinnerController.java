@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -19,14 +18,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class WinnerController {
-    @FXML
-    private AnchorPane mainPane;
 
-    @FXML
-    private Button backToMenu;
-
-    @FXML
-    private Button exitButton;
     @FXML
     private Label winLabel;
     @FXML
@@ -69,14 +61,15 @@ public class WinnerController {
         dialog.setY(300);
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
-        if(clickedButton.get() == ButtonType.OK){
-            stage = (Stage) mainPane.getScene().getWindow();
+        if(clickedButton.orElse(null) == ButtonType.OK){
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
     }
 
     @FXML
     public void close(MouseEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
         DialogPane root = loader.load();
@@ -88,16 +81,15 @@ public class WinnerController {
         dialog.setY(300);
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
-        if(clickedButton.get() == ButtonType.OK){
-            stage = (Stage) mainPane.getScene().getWindow();
+        if(clickedButton.orElse(null)== ButtonType.OK){
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
-
     }
     @FXML
     public void min(MouseEvent event) {
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setIconified(true);
-
     }
 }

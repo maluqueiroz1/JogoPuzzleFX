@@ -71,13 +71,8 @@ public abstract class Movements implements EventHandler<ActionEvent> {
         return clock;
     }
 
-    public void setClock(Timeline clock) {
-        this.clock = clock;
-    }
-
     public String getTimeLabelText(){
-        String time = timeLabel.getText().split(" ")[1];
-        return time;
+        return timeLabel.getText().split(" ")[1];
     }
     public void winScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();

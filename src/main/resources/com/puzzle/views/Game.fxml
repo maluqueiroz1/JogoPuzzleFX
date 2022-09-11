@@ -31,7 +31,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button id="barButtons" fx:id="resetButton" alignment="CENTER" contentDisplay="CENTER" layoutX="587.0" layoutY="25.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" text="RESET" textFill="WHITE">
+            <Button id="barButtons" fx:id="resetButton" alignment="CENTER" contentDisplay="CENTER" layoutX="587.0" layoutY="25.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" text="RESET" textFill="WHITE" AnchorPane.rightAnchor="73.0" AnchorPane.topAnchor="30.0">
                <font>
                   <Font size="5.0" />
                </font>

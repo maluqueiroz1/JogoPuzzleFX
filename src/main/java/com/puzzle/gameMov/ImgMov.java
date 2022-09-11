@@ -10,19 +10,16 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-import java.io.File;
 import java.io.IOException;
 
 public class ImgMov extends Movements{
 
         private ImgBoard imgBoard;
-        private File[][] iTiles;
         private int[][] nTiles, nSortedTiles;
 
-        public ImgMov(GameController gameController, Player player, Timeline clock, Label timeLabel, ImgBoard imgBoard, File[][] iTiles, int[][] nTiles, int[][] nSortedTiles){
+        public ImgMov(GameController gameController, Player player, Timeline clock, Label timeLabel, ImgBoard imgBoard, int[][] nTiles, int[][] nSortedTiles){
             super(gameController,player,clock,timeLabel);
             this.imgBoard = imgBoard;
-            this.iTiles = iTiles;
             this.nTiles = nTiles;
             this.nSortedTiles = nSortedTiles;
         }
