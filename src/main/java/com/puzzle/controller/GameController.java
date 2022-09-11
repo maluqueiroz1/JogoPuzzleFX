@@ -204,6 +204,7 @@ public class GameController implements Initializable {
                     charBoard.randomize(charTiles);
                 }
                 while(!charBoard.solvable(charTiles));
+
                 startClock();
                 movements = new CharMov(this, player, clock,timeLabel, charBoard, charTiles, charSortedTiles);
                 resetMov = new ResetMov(this,player, this.boardNumber);
@@ -252,11 +253,11 @@ public class GameController implements Initializable {
                 }
                 while (!imgBoard.solvable(numberTiles));
 
-                movements = new ImgMov(this, player, clock,timeLabel, imgBoard, numberTiles, numberSortedTiles);
                 ImageView[][] imageViews = new ImageView[player.getLevel()][player.getLevel()];
                 ImageView[][] helpView = new ImageView[player.getLevel()][player.getLevel()];
                 InsertBarButtons(imgSortedTiles, helpView);
                 startClock();
+                movements = new ImgMov(this, player, clock,timeLabel, imgBoard, numberTiles, numberSortedTiles);
 
                 for(int i = 0; i < player.getLevel(); i++){
                     for(int j = 0; j < player.getLevel(); j++) {
