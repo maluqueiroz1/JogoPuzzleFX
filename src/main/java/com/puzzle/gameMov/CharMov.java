@@ -24,21 +24,22 @@ public class CharMov extends Movements{
 
     @Override
     public void handle(ActionEvent actionEvent) {
+
         Button clickedButton = (Button) actionEvent.getSource();
         String character = (clickedButton.getText());
         String location = clickedButton.getAccessibleText();
         int i = Integer.parseInt(location.split(",")[0]);
         int j = Integer.parseInt(location.split(",")[1]);
 
-
         if (!character.equals("!")) {
             if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
+
                 getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
                 getNullButton()[getRowN()][getColN()].setText(character);
 
                 clickedButton.setText("");
                 getGameController().setGButtonStyle(clickedButton);
-                getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color:  linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
+                clickedButton.setStyle("-fx-background-color:  linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
                 cTiles[getRowN()][getColN()] = character.charAt(0);
                 cTiles[i][j] = '!';
@@ -49,6 +50,7 @@ public class CharMov extends Movements{
 
                 boolean check = charBoard.win(cTiles);
                 if (check) {
+
                     getPlayer().setWinner(true);
                     getClock().stop();
                     getPlayer().setTime(getTimeLabelText());

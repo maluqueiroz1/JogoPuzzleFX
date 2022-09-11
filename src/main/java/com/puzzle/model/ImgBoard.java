@@ -11,6 +11,7 @@ public class ImgBoard extends NumberBoard{
     public ImgBoard(int r, int c){
         super(r,c);
     }
+
     public File[] imgAmount(){
         tile = new File[getR()*getC()];
         if(getR()*getC() < 16){
@@ -25,6 +26,7 @@ public class ImgBoard extends NumberBoard{
         }
         return tile;
     }
+
     public File[][] iTilesAmount(){
         tiles = new File[getR()][getC()];
         File[] general = imgAmount();
@@ -36,6 +38,7 @@ public class ImgBoard extends NumberBoard{
         }
         return tiles;
     }
+
     public void iRandomize( int[][] nTiles, File[][] iTiles ){
         Random random = new Random();
 

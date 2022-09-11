@@ -10,11 +10,10 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 
-
 public class NumberMov extends Movements {
+
     private NumberBoard numberBoard;
     private int[][] nTiles, nSortedTiles;
-
 
     public NumberMov(GameController gameController, Player player, Timeline clock, Label timeLabel, NumberBoard numberBoard, int[][] nTiles, int[][] nSortedTiles){
         super(gameController,player,clock,timeLabel);
@@ -24,6 +23,7 @@ public class NumberMov extends Movements {
     }
     @Override
     public void handle(ActionEvent actionEvent) {
+
             Button clickedButton = (Button) actionEvent.getSource();
             String number = (clickedButton.getText());
             String location = clickedButton.getAccessibleText();
@@ -46,7 +46,6 @@ public class NumberMov extends Movements {
 
                 if (nTiles[getRowN()][getColN()] == nSortedTiles[getRowN()][getColN()]) {
                     getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08");
-
                 }
 
                 boolean check = numberBoard.win(nTiles);

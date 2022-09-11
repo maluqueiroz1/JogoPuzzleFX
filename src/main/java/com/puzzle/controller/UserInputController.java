@@ -1,6 +1,7 @@
 package com.puzzle.controller;
 
 import com.puzzle.model.Player;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,27 +44,18 @@ public class UserInputController  implements Initializable {
          this.boardNumber = boardNumber;
     }
 
-    public void backToGameModes(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/GameModes.fxml"));
-        scene = new Scene(root);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void handlePlayButton(ActionEvent event) throws IOException {
 
         if(nameTextField.getText() == null|| nameTextField.getText().isEmpty() || nameTextField.getText().length() > 12){
             nameTextField.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
             new animatefx.animation.Shake(nameTextField).play();
-
         } else{
             nameTextField.setStyle(null);
             player=new Player(nameTextField.getText());
             System.out.println(player.getPlayerName());
         }
 
-        int r=0;
+        int r;
         if(level.getSelectedToggle() == null){
             easyLevel.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
             new animatefx.animation.Shake(easyLevel).play();
@@ -70,25 +63,24 @@ public class UserInputController  implements Initializable {
             new animatefx.animation.Shake(mediumLevel).play();
             hardLevel.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
             new animatefx.animation.Shake(hardLevel).play();
-        }
-         else if(level.getSelectedToggle() == easyLevel) {
+        } else {
             easyLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
             mediumLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
             hardLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
+        }
+
+        if(level.getSelectedToggle() == easyLevel) {
+
             r=3;
             player.setLevel(r);
             System.out.println(player.getLevel());
         }else if(level.getSelectedToggle() == mediumLevel){
-            easyLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
-            mediumLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
-            hardLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
+
             r=4;
             player.setLevel(r);
             System.out.println(player.getLevel());
         } else if (level.getSelectedToggle() == hardLevel) {
-            easyLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
-            mediumLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
-            hardLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
+
             r=5;
             player.setLevel(r);
             System.out.println(player.getLevel());
@@ -97,22 +89,38 @@ public class UserInputController  implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
         Parent root = loader.load();
-
         scene = new Scene(root);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         GameController gameController = loader.getController();
         gameController.setPlayer(player);
         gameController.setBoardNumber(boardNumber);
         gameController.setBoardClass(boardNumber);
 
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        PauseTransition pause = new PauseTransition(Duration.millis(250));
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();
+        });
+        pause.play();
 
+    }
+
+    public void backToGameModes(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/GameModes.fxml"));
+        scene = new Scene(root);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        PauseTransition pause = new PauseTransition(Duration.millis(250));
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();});
+        pause.play();
     }
 
     @FXML
     public void close(MouseEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
         DialogPane root = loader.load();
@@ -132,9 +140,9 @@ public class UserInputController  implements Initializable {
     }
     @FXML
     public void min(MouseEvent event) {
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setIconified(true);
-
     }
 
 

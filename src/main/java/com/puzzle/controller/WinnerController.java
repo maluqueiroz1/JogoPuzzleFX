@@ -1,6 +1,7 @@
 package com.puzzle.controller;
 
 import com.puzzle.model.Player;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -35,17 +37,24 @@ public class WinnerController {
     private Player player;
 
     public void setPlayer(Player player){
+
         this.player = player;
         playerLabel.setText("Muito bem "+player.getPlayerName()+"!");
         winLabel.setText("você ganhou com:\n" +player.getMoves()+
                 " movimentos \n no tempo: "+ player.getTime());
     }
     public void handleBackToMenu(ActionEvent event) throws IOException{
+
         root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/Menu.fxml"));
         scene = new Scene(root);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        PauseTransition pause = new PauseTransition(Duration.millis(250));
+        pause.setOnFinished(e ->{
         stage.setScene(scene);
         stage.show();
+        });
+        pause.play();
     }
 
     public void exit(ActionEvent event)throws IOException {
@@ -65,7 +74,6 @@ public class WinnerController {
             stage.close();
         }
     }
-
 
     @FXML
     public void close(MouseEvent event) throws IOException {

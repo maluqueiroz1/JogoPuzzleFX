@@ -19,7 +19,6 @@ public class ImgMov extends Movements{
         private File[][] iTiles;
         private int[][] nTiles, nSortedTiles;
 
-
         public ImgMov(GameController gameController, Player player, Timeline clock, Label timeLabel, ImgBoard imgBoard, File[][] iTiles, int[][] nTiles, int[][] nSortedTiles){
             super(gameController,player,clock,timeLabel);
             this.imgBoard = imgBoard;
@@ -27,6 +26,7 @@ public class ImgMov extends Movements{
             this.nTiles = nTiles;
             this.nSortedTiles = nSortedTiles;
         }
+
         @Override
         public void handle(ActionEvent actionEvent) {
             Button clickedButton = (Button) actionEvent.getSource();
@@ -36,7 +36,6 @@ public class ImgMov extends Movements{
             int i = Integer.parseInt(location.split(",")[0]);
             int j = Integer.parseInt(location.split(",")[1]);
 
-
             if (!number.equals("0")) {
                 if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
 
@@ -45,8 +44,9 @@ public class ImgMov extends Movements{
                     getGameController().setGButtonStyle(clickedButton);
                     clickedButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
-                    getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
+
                     getNullButton()[getRowN()][getColN()].setText(number);
+                    getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
                     getGameController().setImageSize(imageView);
                     getNullButton()[getRowN()][getColN()].setStyle("-fx-text-fill: TRANSPARENT; -fx-padding: 0px;");
                     getNullButton()[getRowN()][getColN()].setGraphic(imageView);
@@ -57,7 +57,6 @@ public class ImgMov extends Movements{
 
                     if (nTiles[getRowN()][getColN()] == nSortedTiles[getRowN()][getColN()]) {
                         getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px;");
-
                     }
 
                     boolean check = imgBoard.win(nTiles);

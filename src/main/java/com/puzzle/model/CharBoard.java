@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class CharBoard {
+
     private int r,c;
     private char[][] sortedTiles;
     private char [][] tile;
@@ -21,6 +22,7 @@ public class CharBoard {
                 .collect(Collectors.joining())
                 .toCharArray();
     }
+
     public char[][] tilesAmount(){
         tile = new char[r][c];
         char[] general = charAmount();
@@ -33,6 +35,7 @@ public class CharBoard {
         tile[r-1][c-1]='!';
         return tile;
     }
+
     public void randomize(char[][] tiles ){
         Random random = new Random();
 
@@ -45,6 +48,7 @@ public class CharBoard {
             }
         }
     }
+
     public int inversion(char[] tiles){
         int count = 0;
         for (int i = 0; i < r*r; i++){
@@ -58,6 +62,7 @@ public class CharBoard {
         return count;
 
     }
+
     public int zeroPosition(char[][] tiles){
         int position=0;
         for (int i =r - 1; i >= 0; i--){
@@ -71,6 +76,7 @@ public class CharBoard {
         return position;
 
     }
+
     public boolean solvable(char [][] tiles){
         boolean solvableBoard = false;
 
@@ -105,6 +111,7 @@ public class CharBoard {
         return solvableBoard;
 
     }
+
     public boolean win(char[][] tiles){
         this.sortedTiles = tilesAmount();
 

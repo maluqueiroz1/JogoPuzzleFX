@@ -2,6 +2,7 @@ package com.puzzle.gameMov;
 
 import com.puzzle.controller.GameController;
 import com.puzzle.model.Player;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +10,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
 public class ResetMov implements EventHandler<ActionEvent> {
+
     private GameController gameController;
     private Player player;
     private Stage stage;
@@ -24,6 +27,7 @@ public class ResetMov implements EventHandler<ActionEvent> {
         this.player = player;
         this.boardNumber = boardNumber;
     }
+
     @Override
     public void handle(ActionEvent event) {
         gameController.updateMoves(0);
@@ -38,13 +42,17 @@ public class ResetMov implements EventHandler<ActionEvent> {
         scene = new Scene(root);
 
         GameController gameController = loader.getController();
-
         gameController.setPlayer(player);
         gameController.setBoardNumber(boardNumber);
         gameController.setBoardClass(boardNumber);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+
+        PauseTransition pause = new PauseTransition(Duration.millis(250));
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();
+        });
+        pause.play();
     }
 }

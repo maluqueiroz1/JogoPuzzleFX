@@ -27,7 +27,6 @@
 
 .button:hover
 {
-
     -fx-background-color:
             linear-gradient(from 0% 93% to 0% 100%,#dc8f00 0%,#903b12 100),
             #ffb22e,

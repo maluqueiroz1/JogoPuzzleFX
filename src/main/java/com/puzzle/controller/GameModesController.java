@@ -1,5 +1,6 @@
 package com.puzzle.controller;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,77 +30,95 @@ public class GameModesController implements Initializable {
     private Parent root;
 
     public void numberView(ActionEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/UserInput.fxml"));
         root = loader.load();
-
         scene = new Scene(root);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         UserInputController user = loader.getController();
         user.setChoice(1,"Números");
 
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
+        PauseTransition pause = new PauseTransition(Duration.millis(100));
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();
+        });
+        pause.play();
     }
 
     public void charView(ActionEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/UserInput.fxml"));
         root = loader.load();
-
         scene = new Scene(root);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         UserInputController user = loader.getController();
         user.setChoice(2,"Letras");
 
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
+        PauseTransition pause = new PauseTransition(Duration.millis(100));
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();
+        });
+        pause.play();
     }
     public void imgView(ActionEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/UserInput.fxml"));
         root = loader.load();
-
         scene = new Scene(root);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         UserInputController user = loader.getController();
         user.setChoice(3,"Imagem");
 
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
+        PauseTransition pause = new PauseTransition(Duration.millis(100));
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();
+        });
+        pause.play();
     }
     public void crazyView(ActionEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/UserInput.fxml"));
         root = loader.load();
-
         scene = new Scene(root);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         UserInputController user = loader.getController();
         user.setChoice(4,"Imagem");
 
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
+        PauseTransition pause = new PauseTransition(Duration.millis(100));
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();
+        });
+        pause.play();
     }
 
     public void backToMenu(ActionEvent event) throws IOException {
+
         root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/Menu.fxml"));
         scene = new Scene(root);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        PauseTransition pause = new PauseTransition(Duration.millis(250));
+
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();});
+        pause.play();
     }
 
     @FXML
     public void close(MouseEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
         DialogPane root = loader.load();
@@ -118,9 +138,9 @@ public class GameModesController implements Initializable {
     }
     @FXML
     public void min(MouseEvent event) {
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setIconified(true);
-
     }
 
     @Override

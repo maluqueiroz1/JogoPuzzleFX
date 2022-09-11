@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
@@ -19,7 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -35,50 +33,41 @@ public class GameController implements Initializable {
 
     @FXML
     private AnchorPane mainPane;
-
     @FXML
-    private Pane barPane;
-
-    public GridPane getGrid() {
-        return grid;
-    }
-
+    private AnchorPane barPane;
     @FXML
     private GridPane grid;
-
     @FXML
     private Label moveLabel;
-
     @FXML
     private Label playerLabel;
-
     @FXML
     private Button resetButton;
-
     @FXML
     private Label timeLabel;
-
+    private Stage stage;
     private Player player;
     private int boardNumber;
-    private Stage stage;
-    private Scene scene;
-
-
     private Button[][] gButton;
     private Label[][] gLabel;
-
+    private Button helpButton;
     private NumberBoard numberBoard;
     private int[][] nTiles, nSortedTiles;
     private CharBoard charBoard;
     private char[][] cTiles,cSortedTiles;
     private ImgBoard imgBoard;
     private File[][] iTiles;
-
     private Movements movements;
     private ResetMov resetMov;
-
     private Timeline clock;
     private int mil = 0, sec = 0, min = 0, hr = 0;
+
+    public void setBoardNumber(int boardNumber){
+        this.boardNumber = boardNumber;
+    }
+    public int getBoardNumber(){
+        return boardNumber;
+    }
 
     public void setPlayer(Player player){
         this.player = player;
@@ -86,11 +75,30 @@ public class GameController implements Initializable {
         moveLabel.setText("Movimentos: "+ this.player.getMoves());
     }
 
-    public void setBoardNumber(int boardNumber){
-        this.boardNumber = boardNumber;
+    public void startClock(){
+
+        clock = new Timeline(new KeyFrame(Duration.millis(1), actionEvent -> updateClock(timeLabel)));
+        clock.setCycleCount(Timeline.INDEFINITE);
+        clock.setAutoReverse(false);
+        clock.play();
+
     }
-    public int getBoardNumber(){
-        return boardNumber;
+    public void updateClock(Label timeLabel){
+        if(mil == 1000){
+            sec++;
+            mil = 0;
+        }
+        if(sec == 60){
+            min++;
+            sec = 0;
+        }
+        if(min == 60){
+            hr++;
+            min = 0;
+        }
+        timeLabel.setText("Tempo: "+ hr + ":" + (((min/10)== 0) ? "0":"")
+                + min + ":" + (((sec/10)== 0) ? "0":"") + sec + ":"
+                + (((mil/10)== 0) ? "00": (((mil/100)== 0) ? "0":""))+ mil++);
     }
 
     public void updateMoves(int moves){
@@ -126,6 +134,22 @@ public class GameController implements Initializable {
             imageView.setFitWidth(102);
         }
     }
+
+    public void InsertBarButtons(){
+
+        helpButton = new Button("?");
+        helpButton.setId("barButtons");
+        HelpMov helpMov = new HelpMov();
+        helpButton.setOnAction(helpMov);
+
+        barPane.getChildren().add(helpButton);
+        AnchorPane.setRightAnchor(helpButton,125.0);
+        AnchorPane.setTopAnchor(helpButton,25.0);
+
+        resetMov = new ResetMov(this,player, this.boardNumber);
+        resetButton.setOnAction(resetMov);
+    }
+
     public void setBoardClass(int board) {
 
         gButton = new Button[player.getLevel()][player.getLevel()];
@@ -158,7 +182,7 @@ public class GameController implements Initializable {
                             }
 
                             gButton[i][j].setOnAction(movements);
-                            getGrid().add(gButton[i][j], j, i);
+                            grid.add(gButton[i][j], j, i);
 
                         } else {
 
@@ -187,6 +211,8 @@ public class GameController implements Initializable {
                 while(!charBoard.solvable(cTiles));
                 startClock();
                 movements = new CharMov(this, player, clock,timeLabel, charBoard, cTiles, cSortedTiles);
+                resetMov = new ResetMov(this,player, this.boardNumber);
+                resetButton.setOnAction(resetMov);
 
                 for(int i = 0; i < player.getLevel(); i++){
                     for(int j = 0; j < player.getLevel(); j++) {
@@ -225,17 +251,15 @@ public class GameController implements Initializable {
                 nTiles = imgBoard.tilesAmount();
                 nSortedTiles = imgBoard.tilesAmount();
 
-                ImageView[][] imageViews = new ImageView[player.getLevel()][player.getLevel()];
-
                 do {
                     imgBoard.iRandomize(nTiles,iTiles);
                 }
                 while (!imgBoard.solvable(nTiles));
 
-                startClock();
                 movements = new ImgMov(this, player, clock,timeLabel, imgBoard,iTiles, nTiles, nSortedTiles);
-                resetMov = new ResetMov(this,player, this.boardNumber);
-                resetButton.setOnAction(resetMov);
+                ImageView[][] imageViews = new ImageView[player.getLevel()][player.getLevel()];
+                InsertBarButtons();
+                startClock();
 
                 for(int i = 0; i < player.getLevel(); i++){
                     for(int j = 0; j < player.getLevel(); j++) {
@@ -280,36 +304,6 @@ public class GameController implements Initializable {
 
 
     }
-
-    public void startClock(){
-
-        clock = new Timeline(new KeyFrame(Duration.millis(1), actionEvent -> updateClock(timeLabel)));
-        clock.setCycleCount(Timeline.INDEFINITE);
-        clock.setAutoReverse(false);
-        clock.play();
-
-    }
-    public void updateClock(Label timeLabel){
-        if(mil == 1000){
-            sec++;
-            mil = 0;
-        }
-        if(sec == 60){
-            min++;
-            sec = 0;
-        }
-        if(min == 60){
-            hr++;
-            min = 0;
-        }
-        timeLabel.setText("Tempo: "+ hr + ":" + (((min/10)== 0) ? "0":"")
-                + min + ":" + (((sec/10)== 0) ? "0":"") + sec + ":"
-                + (((mil/10)== 0) ? "00": (((mil/100)== 0) ? "0":""))+ mil++);
-    }
-
-
-
-
 
     @FXML
     public void close(MouseEvent event) throws IOException {

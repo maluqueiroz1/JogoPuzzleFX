@@ -14,6 +14,7 @@ public class NumberBoard {
         this.r = i;
         this.c = j;
     }
+
     public int[][] tilesAmount(){
         tile= new int[r][c];
 

@@ -1,6 +1,7 @@
 package com.puzzle.controller;
 
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -26,19 +28,30 @@ public class MenuController {
     private Scene scene;
     private Parent root;
 
-    public void gameModes(ActionEvent event) throws IOException {
+    public void gameModes(ActionEvent event) throws IOException, InterruptedException {
+
         root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/GameModes.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+        PauseTransition pause = new PauseTransition(Duration.millis(100));
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();
+        });
+        pause.play();
     }
     public void ranking(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/Ranking.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+        PauseTransition pause = new PauseTransition(Duration.millis(100));
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();
+        });
+        pause.play();
     }
 
     public void exitButton(ActionEvent event) throws IOException {
