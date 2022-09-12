@@ -1,4 +1,4 @@
-package com.puzzle.controller;
+package com.puzzle.gameController;
 
 import com.puzzle.gameMov.*;
 import com.puzzle.model.CharBoard;
@@ -40,6 +40,10 @@ public class GameController implements Initializable {
     @FXML
     private Label playerLabel;
     @FXML
+    private Label exit;
+    @FXML
+    private Label mini;
+    @FXML
     private Button resetButton;
     @FXML
     private Label timeLabel;
@@ -68,6 +72,11 @@ public class GameController implements Initializable {
         this.player = player;
         playerLabel.setText("Jogador: "+this.player.getPlayerName());
         moveLabel.setText("Movimentos: "+ this.player.getMoves());
+    }
+
+    public void labelEvents(){
+        exit.setOnMouseClicked(this::close);
+        mini.setOnMouseClicked(this::min);
     }
 
     public void startClock(){
@@ -304,10 +313,15 @@ public class GameController implements Initializable {
     }
 
     @FXML
-    public void close(MouseEvent event) throws IOException {
+    public void close(MouseEvent event)  {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
-        DialogPane root = loader.load();
+        DialogPane root;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         javafx.scene.control.Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane(root);

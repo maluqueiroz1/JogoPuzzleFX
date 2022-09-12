@@ -1,6 +1,6 @@
 package com.puzzle.gameMov;
 
-import com.puzzle.controller.GameController;
+import com.puzzle.gameController.GameController;
 import com.puzzle.model.NumberBoard;
 import com.puzzle.model.Player;
 import javafx.animation.Timeline;

@@ -1,6 +1,6 @@
 package com.puzzle.gameMov;
 
-import com.puzzle.controller.GameController;
+import com.puzzle.gameController.GameController;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -33,6 +33,8 @@ public class ResetMov implements EventHandler<ActionEvent> {
         gameController.updateMoves(0);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
+        GameController gameController = new GameController();
+        loader.setController(gameController);
         Parent root;
         try {
             root = loader.load();
@@ -41,8 +43,8 @@ public class ResetMov implements EventHandler<ActionEvent> {
         }
         scene = new Scene(root);
 
-        GameController gameController = loader.getController();
         gameController.setPlayer(player);
+        gameController.labelEvents();
         gameController.setBoardNumber(boardNumber);
         gameController.setBoardClass(boardNumber);
 

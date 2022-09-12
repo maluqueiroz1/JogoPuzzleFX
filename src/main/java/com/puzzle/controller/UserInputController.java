@@ -1,5 +1,6 @@
 package com.puzzle.controller;
 
+import com.puzzle.gameController.GameController;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -83,14 +84,16 @@ public class UserInputController  implements Initializable {
             System.out.println(player.getLevel());
         }
 
+        GameController gameController = new GameController();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
+        loader.setController(gameController);
         Parent root = loader.load();
         scene = new Scene(root);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        GameController gameController = loader.getController();
         gameController.setPlayer(player);
+        gameController.labelEvents();
         gameController.setBoardNumber(boardNumber);
         gameController.setBoardClass(boardNumber);
 

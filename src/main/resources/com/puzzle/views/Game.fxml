@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@../styles/GameStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.puzzle.controller.GameController">
+<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@../styles/GameStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane fx:id="grid" alignment="CENTER" hgap="10.0" prefHeight="600.0" prefWidth="600.0" vgap="10.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
         <columnConstraints>
@@ -38,7 +38,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <Label id="exit" layoutX="666.0" layoutY="14.0" onMouseClicked="#close" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0" />
-      <Label id="mini" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="629.0" layoutY="14.0" onMouseClicked="#min" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="2.0" />
+      <Label id="exit" fx:id="exit" layoutX="666.0" layoutY="14.0" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0" />
+      <Label id="mini" fx:id="mini" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="629.0" layoutY="14.0" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="2.0" />
    </children>
 </AnchorPane>
