@@ -121,6 +121,7 @@ public class GameController implements Initializable {
         }
         else {
             gButton.setPrefSize(112,112);
+            gButton.setStyle("-fx-font-size: 30px");
         }
 
     }
