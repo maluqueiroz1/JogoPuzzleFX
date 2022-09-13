@@ -40,88 +40,101 @@ public class UserInputController  implements Initializable {
     private int boardNumber;
     private Player player;
 
-
     public void setChoice(int boardNumber, String title){
         choiceLabel.setText(title);
          this.boardNumber = boardNumber;
     }
 
-    public void handlePlayButton(ActionEvent event) throws IOException {
+    public boolean handleTextField(){
+        if(nameTextField.getText().length() == 0 || nameTextField.getText().length() > 12){
 
-        if(nameTextField.getText() == null|| nameTextField.getText().isEmpty() || nameTextField.getText().length() > 12){
             nameTextField.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
             new animatefx.animation.Shake(nameTextField).play();
+            return false;
         } else{
+
             nameTextField.setStyle(null);
             player=new Player(nameTextField.getText());
             System.out.println(player.getPlayerName());
+            return true;
         }
+    }
 
+    public boolean handleLevelToggleGroup(){
         int r;
         if(level.getSelectedToggle() == null){
+
             easyLevel.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
             new animatefx.animation.Shake(easyLevel).play();
             mediumLevel.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
             new animatefx.animation.Shake(mediumLevel).play();
             hardLevel.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
             new animatefx.animation.Shake(hardLevel).play();
+            return false;
         } else {
+
             easyLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
             mediumLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
             hardLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
+            if(level.getSelectedToggle() == easyLevel) {
+
+                r=3;
+                player.setLevel(r);
+                System.out.println(player.getLevel());
+            }else if(level.getSelectedToggle() == mediumLevel){
+
+                r=4;
+                player.setLevel(r);
+                System.out.println(player.getLevel());
+            } else if (level.getSelectedToggle() == hardLevel) {
+
+                r=5;
+                player.setLevel(r);
+                System.out.println(player.getLevel());
+            }
+            return true;
         }
+    }
+
+    public boolean handleTypeToggleGroup(){
         if(type.getSelectedToggle() == null){
+
             normal.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
             new animatefx.animation.Shake(normal).play();
             crazy.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
             new animatefx.animation.Shake(crazy).play();
+            return false;
         } else {
+
             normal.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
             crazy.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
+            player.setCrazyFeature(type.getSelectedToggle() == crazy);
+            return true;
         }
+    }
+    public void handlePlayButton(ActionEvent event) throws IOException {
+        if(handleTextField() & handleLevelToggleGroup() & handleTypeToggleGroup()) {
 
-        if(level.getSelectedToggle() == easyLevel) {
+            GameController gameController = new GameController();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
+            loader.setController(gameController);
+            Parent root = loader.load();
+            scene = new Scene(root);
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            r=3;
-            player.setLevel(r);
-            System.out.println(player.getLevel());
-        }else if(level.getSelectedToggle() == mediumLevel){
+            gameController.setPlayer(player);
+            gameController.labelEvents();
+            gameController.setBoardNumber(boardNumber);
+            gameController.setBoardClass();
 
-            r=4;
-            player.setLevel(r);
-            System.out.println(player.getLevel());
-        } else if (level.getSelectedToggle() == hardLevel) {
-
-            r=5;
-            player.setLevel(r);
-            System.out.println(player.getLevel());
+            PauseTransition pause = new PauseTransition(Duration.millis(250));
+            pause.setOnFinished(e -> {
+                stage.setScene(scene);
+                stage.show();
+            });
+            pause.play();
         }
-
-        if(type.getSelectedToggle() == crazy){
-            player.setCrazyFeature(true);
-        } else {
-            player.setCrazyFeature(false);
-        }
-        GameController gameController = new GameController();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
-        loader.setController(gameController);
-        Parent root = loader.load();
-        scene = new Scene(root);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        gameController.setPlayer(player);
-        gameController.labelEvents();
-        gameController.setBoardNumber(boardNumber);
-        gameController.setBoardClass(boardNumber);
-
-        PauseTransition pause = new PauseTransition(Duration.millis(250));
-        pause.setOnFinished(e ->{
-            stage.setScene(scene);
-            stage.show();
-        });
-        pause.play();
-
     }
 
     public void backToGameModes(ActionEvent event) throws IOException {

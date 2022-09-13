@@ -155,11 +155,11 @@ public class GameController implements Initializable {
         resetButton.setOnAction(resetMov);
     }
 
-    public void setBoardClass(int board) {
+    public void setBoardClass() {
 
         gButton = new Button[player.getLevel()][player.getLevel()];
         gLabel = new Label[player.getLevel()][player.getLevel()];
-        switch (board) {
+        switch (boardNumber) {
             case 1:
                 numberBoard = new NumberBoard(player.getLevel(), player.getLevel());
                 numberTiles = numberBoard.tilesAmount();

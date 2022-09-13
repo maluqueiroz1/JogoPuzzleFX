@@ -46,7 +46,7 @@ public class ResetMov implements EventHandler<ActionEvent> {
         gameController.setPlayer(player);
         gameController.labelEvents();
         gameController.setBoardNumber(boardNumber);
-        gameController.setBoardClass(boardNumber);
+        gameController.setBoardClass();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
