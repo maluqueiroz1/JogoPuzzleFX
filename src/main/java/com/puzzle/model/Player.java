@@ -4,9 +4,11 @@ public class Player {
 
     private String playerName;
     private String time;
-    private Boolean winner = false;
+    private boolean winner;
     private int moves;
     private int level;
+
+    private boolean crazyFeature;
 
     public Player(String playerName){
         setPlayerName(playerName);
@@ -44,11 +46,19 @@ public class Player {
         this.time = time;
     }
 
-    public Boolean getWinner() {
+    public boolean getWinner() {
         return winner;
     }
 
-    public void setWinner(Boolean winner) {
+    public void setWinner(boolean winner) {
         this.winner = winner;
+    }
+
+    public boolean getCrazyFeature() {
+        return crazyFeature;
+    }
+
+    public void setCrazyFeature(boolean crazyFeature) {
+        this.crazyFeature = crazyFeature;
     }
 }

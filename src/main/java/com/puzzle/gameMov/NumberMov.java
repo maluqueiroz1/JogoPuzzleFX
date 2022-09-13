@@ -61,6 +61,11 @@ public class NumberMov extends Movements {
                     }
 
                 }
+
+                if(getPlayer().getCrazyFeature()){
+                    /* fazer puzzle maluco */
+                }
+
                 setRowN(i);
                 setColN(j);
                 getGameController().updateMoves(getPlayer().getMoves()+1);

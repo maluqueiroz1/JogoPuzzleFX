@@ -32,6 +32,10 @@ public class UserInputController  implements Initializable {
     @FXML
     private RadioButton easyLevel,mediumLevel,hardLevel;
     @FXML
+    private ToggleGroup type;
+    @FXML
+    private RadioButton normal,crazy;
+    @FXML
     private TextField nameTextField;
     private int boardNumber;
     private Player player;
@@ -66,6 +70,15 @@ public class UserInputController  implements Initializable {
             mediumLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
             hardLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
         }
+        if(type.getSelectedToggle() == null){
+            normal.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
+            new animatefx.animation.Shake(normal).play();
+            crazy.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
+            new animatefx.animation.Shake(crazy).play();
+        } else {
+            normal.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
+            crazy.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
+        }
 
         if(level.getSelectedToggle() == easyLevel) {
 
@@ -84,6 +97,11 @@ public class UserInputController  implements Initializable {
             System.out.println(player.getLevel());
         }
 
+        if(type.getSelectedToggle() == crazy){
+            player.setCrazyFeature(true);
+        } else {
+            player.setCrazyFeature(false);
+        }
         GameController gameController = new GameController();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
