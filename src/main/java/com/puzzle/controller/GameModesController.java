@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
@@ -26,10 +27,15 @@ public class GameModesController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private Button numberButton,charButton,imgButton;
 
-    public void numberView(ActionEvent event) throws IOException {
+    public void handleChosenButton(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
+
+        if(event.getSource() == numberButton){
+
         loader.setLocation(getClass().getResource("/com/puzzle/views/UserInput.fxml"));
         root = loader.load();
         scene = new Scene(root);
@@ -44,61 +50,37 @@ public class GameModesController implements Initializable {
             stage.show();
         });
         pause.play();
-    }
+        } else if (event.getSource() == charButton) {
+            loader.setLocation(getClass().getResource("/com/puzzle/views/UserInput.fxml"));
+            root = loader.load();
+            scene = new Scene(root);
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-    public void charView(ActionEvent event) throws IOException {
+            UserInputController user = loader.getController();
+            user.setChoice(2,"Letras");
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/com/puzzle/views/UserInput.fxml"));
-        root = loader.load();
-        scene = new Scene(root);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            PauseTransition pause = new PauseTransition(Duration.millis(100));
+            pause.setOnFinished(e ->{
+                stage.setScene(scene);
+                stage.show();
+            });
+            pause.play();
+        } else {
+            loader.setLocation(getClass().getResource("/com/puzzle/views/UserInput.fxml"));
+            root = loader.load();
+            scene = new Scene(root);
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        UserInputController user = loader.getController();
-        user.setChoice(2,"Letras");
+            UserInputController user = loader.getController();
+            user.setChoice(3,"Imagem");
 
-        PauseTransition pause = new PauseTransition(Duration.millis(100));
-        pause.setOnFinished(e ->{
-            stage.setScene(scene);
-            stage.show();
-        });
-        pause.play();
-    }
-    public void imgView(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/com/puzzle/views/UserInput.fxml"));
-        root = loader.load();
-        scene = new Scene(root);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        UserInputController user = loader.getController();
-        user.setChoice(3,"Imagem");
-
-        PauseTransition pause = new PauseTransition(Duration.millis(100));
-        pause.setOnFinished(e ->{
-            stage.setScene(scene);
-            stage.show();
-        });
-        pause.play();
-    }
-    public void crazyView(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/com/puzzle/views/UserInput.fxml"));
-        root = loader.load();
-        scene = new Scene(root);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        UserInputController user = loader.getController();
-        user.setChoice(4,"Imagem");
-
-        PauseTransition pause = new PauseTransition(Duration.millis(100));
-        pause.setOnFinished(e ->{
-            stage.setScene(scene);
-            stage.show();
-        });
-        pause.play();
+            PauseTransition pause = new PauseTransition(Duration.millis(100));
+            pause.setOnFinished(e ->{
+                stage.setScene(scene);
+                stage.show();
+            });
+            pause.play();
+        }
     }
 
     public void backToMenu(ActionEvent event) throws IOException {
