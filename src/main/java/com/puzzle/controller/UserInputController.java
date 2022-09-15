@@ -1,6 +1,9 @@
 package com.puzzle.controller;
 
 import com.puzzle.gameController.GameController;
+import com.puzzle.gameController.charController;
+import com.puzzle.gameController.imgController;
+import com.puzzle.gameController.numberController;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -37,6 +40,7 @@ public class UserInputController  implements Initializable {
     private RadioButton normal,crazy;
     @FXML
     private TextField nameTextField;
+    private GameController gameController;
     private int boardNumber;
     private Player player;
 
@@ -114,8 +118,17 @@ public class UserInputController  implements Initializable {
     }
     public void handlePlayButton(ActionEvent event) throws IOException {
         if(handleTextField() & handleLevelToggleGroup() & handleTypeToggleGroup()) {
+            switch (boardNumber){
+                case 1:
+                    gameController = new numberController();
+                    break;
+                case 2:
+                    gameController = new charController();
+                    break;
+                case 3:
+                    gameController = new imgController();
+            }
 
-            GameController gameController = new GameController();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
             loader.setController(gameController);

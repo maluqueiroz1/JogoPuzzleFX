@@ -43,7 +43,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="535.0" mnemonicParsing="false" onAction="#exit" prefHeight="88.0" prefWidth="199.0" text="sair&#10;" textAlignment="CENTER">
+      <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="535.0" mnemonicParsing="false" onAction="#close" prefHeight="88.0" prefWidth="199.0" text="sair&#10;" textAlignment="CENTER">
          <textFill>
             <LinearGradient endX="0.9146919431279621" endY="0.9004739336492891" startX="0.46919431279620855" startY="0.27488151658767773">
                <stops>

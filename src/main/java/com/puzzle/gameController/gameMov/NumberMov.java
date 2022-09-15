@@ -1,4 +1,4 @@
-package com.puzzle.gameMov;
+package com.puzzle.gameController.gameMov;
 
 import com.puzzle.gameController.GameController;
 import com.puzzle.model.NumberBoard;

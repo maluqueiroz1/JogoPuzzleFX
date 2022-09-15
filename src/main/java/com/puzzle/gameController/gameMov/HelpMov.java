@@ -1,4 +1,4 @@
-package com.puzzle.gameMov;
+package com.puzzle.gameController.gameMov;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

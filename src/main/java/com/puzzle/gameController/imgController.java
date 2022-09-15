@@ -1,20 +1,12 @@
 package com.puzzle.gameController;
 
-import com.puzzle.gameMov.HelpMov;
-import com.puzzle.gameMov.ResetMov;
-import com.puzzle.gameMov.Movements;
-import com.puzzle.model.CharBoard;
+import com.puzzle.gameController.gameMov.HelpMov;
+import com.puzzle.gameController.gameMov.ImgMov;
 import com.puzzle.model.ImgBoard;
-import com.puzzle.model.NumberBoard;
-import com.puzzle.model.Player;
-import javafx.animation.Timeline;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 
 import javafx.scene.image.ImageView;
@@ -26,14 +18,8 @@ public class imgController extends GameController{
     private File[][] imgTiles, imgSortedTiles;
     private int[][] numberTiles, numberSortedTiles;
 
-    public imgController(AnchorPane mainPane, Pane barPane, GridPane grid, Label moveLabel, Label playerLabel, Button resetButton, Label timeLabel, Player player, int board, Stage stage, Scene scene, Button[][] gButton, Label[][] gLabel, NumberBoard numberBoard, int[][] nTiles, int[][] nSortedTiles, CharBoard charBoard, char[][] cTiles, char[][] cSortedTiles, ImgBoard imgBoard, File[][] itiles, File[][] isortedTiles, Movements movements, ResetMov resetMov, Timeline clock, int mil, int sec, int min, int hr) {
-        super(mainPane, barPane, grid, moveLabel, playerLabel, resetButton, timeLabel, player, board, stage, scene, gButton, gLabel, numberBoard, nTiles, nSortedTiles, charBoard, cTiles, cSortedTiles, imgBoard, itiles, isortedTiles, movements, resetMov, clock, mil, sec, min, hr);
-        this.imgBoard = imgBoard;
-        this.imgTiles = imgTiles;
-        this.imgSortedTiles = imgSortedTiles;
-    }
-
     public void InsertBarButtons(File[][] imgSortedTiles, ImageView[][] helpView){
+
 
         helpButton = new Button("?");
         helpButton.setId("barButtons");
@@ -44,28 +30,12 @@ public class imgController extends GameController{
         AnchorPane.setRightAnchor(helpButton,14.0);
         AnchorPane.setTopAnchor(helpButton,30.0);
 
-        setResetMov(new ResetMov(this, getPlayer(),getBoardNumber()));
-        getResetButton().setOnAction(getResetMov());
     }
 
-    public void setImageSize(ImageView imageView){
-        if(getPlayer().getLevel()<4){
-            imageView.setFitHeight(185);
-            imageView.setFitWidth(185);
-        }
-        else if(getPlayer().getLevel()==4){
-            imageView.setFitHeight(132);
-            imageView.setFitWidth(132);
-        }
-        else {
-            imageView.setFitHeight(102);
-            imageView.setFitWidth(102);
-        }
-    }
 
-    public void setBoardClass(int board){
-        setgButton(new Button[getPlayer().getLevel()][getPlayer().getLevel()]);
-        setgLabel(new Label[getPlayer().getLevel()][getPlayer().getLevel()]);
+    public void setBoardClass(){
+        setGButton( new Button[getPlayer().getLevel()][getPlayer().getLevel()]);
+        setGLabel(new Label[getPlayer().getLevel()][getPlayer().getLevel()]);
 
         imgBoard = new ImgBoard(getPlayer().getLevel(), getPlayer().getLevel());
         imgTiles = imgBoard.iTilesAmount();
@@ -81,29 +51,46 @@ public class imgController extends GameController{
         ImageView[][] imageViews = new ImageView[getPlayer().getLevel()][getPlayer().getLevel()];
         ImageView[][] helpView = new ImageView[getPlayer().getLevel()][getPlayer().getLevel()];
         InsertBarButtons(imgSortedTiles, helpView);
+        startClock();
+        setMovements(new ImgMov(this, getPlayer(), getClock(), getTimeLabel(), imgBoard, numberTiles, numberSortedTiles));
 
         for(int i = 0; i < getPlayer().getLevel(); i++){
             for(int j = 0; j < getPlayer().getLevel(); j++) {
-                if(! String.valueOf(imgTiles[i][j]).equals("!")){
-                    getgButton()[i][j] = new Button(String.valueOf(imgTiles[i][j]));
-                    setGButtonStyle(getgButton()[i][j]);
+                if(! String.valueOf(numberTiles[i][j]).equals("0")){
 
-                    getgButton()[i][j].setStyle("-fx-text-fill: TRANSPARENT; -fx-background-image: c; -fx-background-size: contain");
+                    imageViews[i][j] = new ImageView(String.valueOf(imgTiles[i][j]));
+                    setImageSize(imageViews[i][j]);
 
-                    if (imgTiles[i][j]== imgSortedTiles[i][j])
-                        getgButton()[i][j].setStyle("-fx-background-color: #c9ff08");
+                    getgLabel()[i][j] = new Label(i + "," + j);
+                    getGButton()[i][j] = new Button(String.valueOf(numberTiles[i][j]));
+                    getGButton()[i][j].setGraphic(imageViews[i][j]);
+                    getGButton()[i][j].setAccessibleText(getgLabel()[i][j].getText());
+                    setGButtonStyle(getGButton()[i][j]);
+                    getGButton()[i][j].setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                    getGButton()[i][j].setStyle("-fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
 
-                    getGrid().add(getgButton()[i][j],i,j);
+                    if (numberTiles[i][j]== numberSortedTiles[i][j])
+                        getGButton()[i][j].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
 
+                    getGButton()[i][j].setOnAction(getMovements());
+                    getGrid().add(getGButton()[i][j],j,i);
 
                 }else{
-                    getgButton()[i][j] = new Button(String.valueOf(imgTiles[i][j]));
-                    setGButtonStyle(getgButton()[i][j]);
-                    getgButton()[i][j].setStyle("-fx-text-fill: TRANSPARENT");
-                    getGrid().add(getgButton()[i][j],i,j);
+                    getgLabel()[i][j] = new Label(i + "," + j);
+                    getGButton()[i][j] = new Button(String.valueOf(numberTiles[i][j]));
+                    getGButton()[i][j].setAccessibleText(getgLabel()[i][j].getText());
+                    setGButtonStyle(getGButton()[i][j]);
+                    getGButton()[i][j].setStyle("-fx-text-fill: TRANSPARENT");
+                    getMovements().setNullButton(getGButton());
+                    getMovements().setRowN(i);
+                    getMovements().setColN(j);
+                    getGButton()[i][j].setOnAction(getMovements());
+                    getGrid().add(getGButton()[i][j], j, i);
                 }
             }
         }
+
+
 
 
     }

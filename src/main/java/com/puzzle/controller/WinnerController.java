@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -19,6 +20,8 @@ import java.util.Optional;
 
 public class WinnerController {
 
+    @FXML
+    private AnchorPane mainPane;
     @FXML
     private Label winLabel;
     @FXML
@@ -49,26 +52,8 @@ public class WinnerController {
         pause.play();
     }
 
-    public void exit(ActionEvent event)throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
-        DialogPane root = loader.load();
-
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane(root);
-        dialog.initStyle(StageStyle.TRANSPARENT);
-        dialog.setX(575);
-        dialog.setY(300);
-
-        Optional<ButtonType> clickedButton = dialog.showAndWait();
-        if(clickedButton.orElse(null) == ButtonType.OK){
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.close();
-        }
-    }
-
     @FXML
-    public void close(MouseEvent event) throws IOException {
+    public void close() throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
@@ -82,7 +67,7 @@ public class WinnerController {
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if(clickedButton.orElse(null)== ButtonType.OK){
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage = (Stage)mainPane.getScene().getWindow();
             stage.close();
         }
     }
