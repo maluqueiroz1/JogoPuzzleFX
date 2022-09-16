@@ -1,5 +1,6 @@
 package com.puzzle.gameController.gameMov;
 
+import com.puzzle.gameController.CharController;
 import com.puzzle.gameController.GameController;
 import com.puzzle.model.CharBoard;
 import com.puzzle.model.Player;
@@ -14,9 +15,11 @@ public class CharMov extends Movements{
 
     private CharBoard charBoard;
     private char[][] cTiles, cSortedTiles;
+    private CharController charController;
 
-    public CharMov(GameController gameController, Player player, Timeline clock,Label timeLabel, CharBoard charBoard, char[][] cTiles, char[][] cSortedTiles){
-        super(gameController,player,clock,timeLabel);
+    public CharMov(CharController charController, Player player, Timeline clock, Label timeLabel, CharBoard charBoard, char[][] cTiles, char[][] cSortedTiles){
+        super(player,clock,timeLabel);
+        this.charController = charController;
         this.charBoard = charBoard;
         this.cTiles = cTiles;
         this.cSortedTiles = cSortedTiles;
@@ -34,35 +37,24 @@ public class CharMov extends Movements{
         if (!character.equals("!")) {
             if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
 
-                getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
+                charController.setGButtonStyle(getNullButton()[getRowN()][getColN()]);
                 getNullButton()[getRowN()][getColN()].setText(character);
 
                 clickedButton.setText("");
-                getGameController().setGButtonStyle(clickedButton);
+                charController.setGButtonStyle(clickedButton);
                 clickedButton.setStyle("-fx-background-color:  linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
                 cTiles[getRowN()][getColN()] = character.charAt(0);
                 cTiles[i][j] = '!';
 
-                if (cTiles[getRowN()][getColN()] == cSortedTiles[getRowN()][getColN()]) {
-                    getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08");
-                }
+                if (cTiles[getRowN()][getColN()] == cSortedTiles[getRowN()][getColN()])
+                    setGreenStyle();
 
-                boolean check = charBoard.win(cTiles);
-                if (check) {
+                check(charBoard.win(cTiles),actionEvent);
 
-                    getPlayer().setWinner(true);
-                    getClock().stop();
-                    getPlayer().setTime(getTimeLabelText());
-                    try {
-                        winScreen(actionEvent);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
                 setRowN(i);
                 setColN(j);
-                getGameController().updateMoves(getPlayer().getMoves()+1);
+                charController.updateMoves(getPlayer().getMoves()+1);
             }
         }
     }

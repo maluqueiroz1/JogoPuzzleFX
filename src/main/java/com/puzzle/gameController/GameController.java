@@ -1,6 +1,6 @@
 package com.puzzle.gameController;
 
-import com.puzzle.gameController.gameMov.ResetMov;
+import com.puzzle.gameController.barMov.ResetMov;
 import com.puzzle.gameController.gameMov.Movements;
 import com.puzzle.model.Player;
 import javafx.animation.KeyFrame;
@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -165,21 +164,6 @@ public abstract class GameController implements Initializable {
             gButton.setStyle("-fx-font-size: 30px");
         }
 
-    }
-
-    public void setImageSize(ImageView imageView){
-        if(getPlayer().getLevel()<4){
-            imageView.setFitHeight(185);
-            imageView.setFitWidth(185);
-        }
-        else if(getPlayer().getLevel()==4){
-            imageView.setFitHeight(132);
-            imageView.setFitWidth(132);
-        }
-        else {
-            imageView.setFitHeight(102);
-            imageView.setFitWidth(102);
-        }
     }
 
     public abstract void setBoardClass();

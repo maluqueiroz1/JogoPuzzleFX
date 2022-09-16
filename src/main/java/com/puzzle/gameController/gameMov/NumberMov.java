@@ -1,6 +1,7 @@
 package com.puzzle.gameController.gameMov;
 
 import com.puzzle.gameController.GameController;
+import com.puzzle.gameController.NumberController;
 import com.puzzle.model.NumberBoard;
 import com.puzzle.model.Player;
 import javafx.animation.Timeline;
@@ -14,9 +15,11 @@ public class NumberMov extends Movements {
 
     private NumberBoard numberBoard;
     private int[][] nTiles, nSortedTiles;
+    private NumberController numberController;
 
-    public NumberMov(GameController gameController, Player player, Timeline clock, Label timeLabel, NumberBoard numberBoard, int[][] nTiles, int[][] nSortedTiles){
-        super(gameController,player,clock,timeLabel);
+    public NumberMov(NumberController numberController, Player player, Timeline clock, Label timeLabel, NumberBoard numberBoard, int[][] nTiles, int[][] nSortedTiles){
+        super(player,clock,timeLabel);
+        this.numberController = numberController;
         this.numberBoard = numberBoard;
         this.nTiles = nTiles;
         this.nSortedTiles = nSortedTiles;
@@ -34,33 +37,20 @@ public class NumberMov extends Movements {
         if (!number.equals("0")) {
             if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
 
-                getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
+                numberController.setGButtonStyle(getNullButton()[getRowN()][getColN()]);
                 getNullButton()[getRowN()][getColN()].setText(number);
 
                 clickedButton.setText("");
-                getGameController().setGButtonStyle(clickedButton);
+                numberController.setGButtonStyle(clickedButton);
                 clickedButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
                 nTiles[getRowN()][getColN()] = Integer.parseInt(number);
                 nTiles[i][j] = 0;
 
-                if (nTiles[getRowN()][getColN()] == nSortedTiles[getRowN()][getColN()]) {
-                    getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08");
-                }
+                if (nTiles[getRowN()][getColN()] == nSortedTiles[getRowN()][getColN()])
+                    setGreenStyle();
 
-                boolean check = numberBoard.win(nTiles);
-                if (check) {
-
-                    getPlayer().setWinner(true);
-                    getClock().stop();
-                    getPlayer().setTime(getTimeLabelText());
-                    try {
-                        winScreen(actionEvent);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                }
+                check(numberBoard.win(nTiles), actionEvent);
 
                 if(getPlayer().getCrazyFeature()){
                     /* fazer puzzle maluco */
@@ -68,7 +58,7 @@ public class NumberMov extends Movements {
 
                 setRowN(i);
                 setColN(j);
-                getGameController().updateMoves(getPlayer().getMoves()+1);
+                numberController.updateMoves(getPlayer().getMoves()+1);
             }
         }
     }

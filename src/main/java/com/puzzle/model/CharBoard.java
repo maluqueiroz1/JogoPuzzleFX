@@ -23,7 +23,7 @@ public class CharBoard {
                 .toCharArray();
     }
 
-    public char[][] tilesAmount(){
+    public char[][] charTilesAmount(){
         tile = new char[r][c];
         char[] general = charAmount();
         int k =0;
@@ -113,7 +113,7 @@ public class CharBoard {
     }
 
     public boolean win(char[][] tiles){
-        this.sortedTiles = tilesAmount();
+        this.sortedTiles = charTilesAmount();
 
         boolean won = false;
 

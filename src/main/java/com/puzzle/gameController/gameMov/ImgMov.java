@@ -1,6 +1,7 @@
 package com.puzzle.gameController.gameMov;
 
 import com.puzzle.gameController.GameController;
+import com.puzzle.gameController.ImgController;
 import com.puzzle.model.ImgBoard;
 import com.puzzle.model.Player;
 import javafx.animation.Timeline;
@@ -16,9 +17,11 @@ public class ImgMov extends Movements{
 
         private ImgBoard imgBoard;
         private int[][] nTiles, nSortedTiles;
+        private ImgController imgController;
 
-        public ImgMov(GameController gameController, Player player, Timeline clock, Label timeLabel, ImgBoard imgBoard, int[][] nTiles, int[][] nSortedTiles){
-            super(gameController,player,clock,timeLabel);
+        public ImgMov(ImgController imgController, Player player, Timeline clock, Label timeLabel, ImgBoard imgBoard, int[][] nTiles, int[][] nSortedTiles){
+            super(player,clock,timeLabel);
+            this.imgController = imgController;
             this.imgBoard = imgBoard;
             this.nTiles = nTiles;
             this.nSortedTiles = nSortedTiles;
@@ -38,13 +41,13 @@ public class ImgMov extends Movements{
 
                     clickedButton.setText("");
                     clickedButton.setGraphic(getNullButton()[getRowN()][getColN()].getGraphic());
-                    getGameController().setGButtonStyle(clickedButton);
+                    imgController.setGButtonStyle(clickedButton);
                     clickedButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
 
                     getNullButton()[getRowN()][getColN()].setText(number);
-                    getGameController().setGButtonStyle(getNullButton()[getRowN()][getColN()]);
-                    getGameController().setImageSize(imageView);
+                    imgController.setGButtonStyle(getNullButton()[getRowN()][getColN()]);
+                    imgController.setImageSize(imageView);
                     getNullButton()[getRowN()][getColN()].setStyle("-fx-text-fill: TRANSPARENT; -fx-padding: 0px;");
                     getNullButton()[getRowN()][getColN()].setGraphic(imageView);
                     getNullButton()[getRowN()][getColN()].setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -56,22 +59,11 @@ public class ImgMov extends Movements{
                         getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px;");
                     }
 
-                    boolean check = imgBoard.win(nTiles);
-                    if (check) {
+                    check(imgBoard.win(nTiles), actionEvent);
 
-                        getPlayer().setWinner(true);
-                        getClock().stop();
-                        getPlayer().setTime(getTimeLabelText());
-                        try {
-                            winScreen(actionEvent);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                    }
                     setRowN(i);
                     setColN(j);
-                    getGameController().updateMoves(getPlayer().getMoves()+1);
+                    imgController.updateMoves(getPlayer().getMoves()+1);
                 }
             }
         }

@@ -1,9 +1,9 @@
 package com.puzzle.controller;
 
 import com.puzzle.gameController.GameController;
-import com.puzzle.gameController.charController;
-import com.puzzle.gameController.imgController;
-import com.puzzle.gameController.numberController;
+import com.puzzle.gameController.CharController;
+import com.puzzle.gameController.ImgController;
+import com.puzzle.gameController.NumberController;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -120,13 +120,13 @@ public class UserInputController  implements Initializable {
         if(handleTextField() & handleLevelToggleGroup() & handleTypeToggleGroup()) {
             switch (boardNumber){
                 case 1:
-                    gameController = new numberController();
+                    gameController = new NumberController();
                     break;
                 case 2:
-                    gameController = new charController();
+                    gameController = new CharController();
                     break;
                 case 3:
-                    gameController = new imgController();
+                    gameController = new ImgController();
             }
 
             FXMLLoader loader = new FXMLLoader();

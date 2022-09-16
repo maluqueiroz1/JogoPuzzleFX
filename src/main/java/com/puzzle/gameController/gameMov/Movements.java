@@ -2,9 +2,6 @@ package com.puzzle.gameController.gameMov;
 
 import com.puzzle.gameController.GameController;
 import com.puzzle.controller.WinnerController;
-import com.puzzle.gameController.charController;
-import com.puzzle.gameController.imgController;
-import com.puzzle.gameController.numberController;
 import com.puzzle.model.Player;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -21,7 +18,6 @@ import java.io.IOException;
 
 public abstract class Movements implements EventHandler<ActionEvent> {
 
-    private GameController gameController;
     private Player player;
     private Stage stage;
     private Scene scene;
@@ -30,16 +26,11 @@ public abstract class Movements implements EventHandler<ActionEvent> {
     private Timeline clock;
     private Label timeLabel;
 
-    public Movements(GameController g, Player player, Timeline clock,Label timeLabel) {
-        this.gameController = g;
+    public Movements (Player player, Timeline clock,Label timeLabel) {
         this.player = player;
         this.clock = clock;
         this.timeLabel = timeLabel;
 
-    }
-
-    public GameController getGameController() {
-        return gameController;
     }
 
     public Player getPlayer() {
@@ -76,6 +67,24 @@ public abstract class Movements implements EventHandler<ActionEvent> {
 
     public String getTimeLabelText(){
         return timeLabel.getText().split(" ")[1];
+    }
+
+    public void setGreenStyle(){
+        nullButton[rowN][colN].setStyle("-fx-background-color: #c9ff08");
+    }
+
+    public void check(boolean check, ActionEvent actionEvent){
+        if (check) {
+
+            player.setWinner(true);
+            clock.stop();
+            player.setTime(getTimeLabelText());
+            try {
+                winScreen(actionEvent);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
     public void winScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
