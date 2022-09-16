@@ -7,12 +7,8 @@ public class Player {
     private boolean winner;
     private int moves;
     private int level;
-
     private boolean crazyFeature;
 
-    public Player(String playerName){
-        setPlayerName(playerName);
-    }
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;

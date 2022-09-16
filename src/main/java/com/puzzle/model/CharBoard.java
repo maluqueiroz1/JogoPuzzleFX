@@ -5,15 +5,12 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class CharBoard {
+public class CharBoard extends Board <Character,Integer>{
 
-    private int r,c;
-    private char[][] sortedTiles;
-    private char [][] tile;
+    private Character[][] tile;
 
     public CharBoard(int r, int c){
-        this.r = r;
-        this.c = c;
+        super(r,c);
     }
 
     public char[] charAmount(){
@@ -23,25 +20,25 @@ public class CharBoard {
                 .toCharArray();
     }
 
-    public char[][] charTilesAmount(){
-        tile = new char[r][c];
+    public Character[][] tilesAmount(){
+        tile = new Character[getR()][getC()];
         char[] general = charAmount();
         int k =0;
-        for (int i = 0; i < r; i++){
-            for (int j = 0; j < c; j++){
+        for (int i = 0; i < getR(); i++){
+            for (int j = 0; j < getC(); j++){
                 tile[i][j] = general[k++];
             }
         }
-        tile[r-1][c-1]='!';
+        tile[getR()-1][getC()-1]='!';
         return tile;
     }
 
-    public void randomize(char[][] tiles ){
+    public void shuffle(Character[][] tiles ){
         Random random = new Random();
 
-        for(int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                int rand = random.nextInt(r);
+        for(int i = 0; i < getR(); i++) {
+            for (int j = 0; j < getC(); j++) {
+                int rand = random.nextInt(getR());
                 char prov = tiles[i][j];
                 tiles[i][j] = tiles[rand][rand];
                 tiles[rand][rand] = prov;
@@ -49,10 +46,10 @@ public class CharBoard {
         }
     }
 
-    public int inversion(char[] tiles){
-        int count = 0;
-        for (int i = 0; i < r*r; i++){
-            for(int j = i+1 ; j < c*c; j++) {
+    public Integer inversion(Character[] tiles){
+        Integer count = 0;
+        for (int i = 0; i < getR()*getR(); i++){
+            for(int j = i+1 ; j < getC()*getC(); j++) {
                 if (tiles[i] !='!' && tiles[j] != '!' && tiles[i] > tiles[j]) {
                     count++;
 
@@ -63,12 +60,12 @@ public class CharBoard {
 
     }
 
-    public int zeroPosition(char[][] tiles){
-        int position=0;
-        for (int i =r - 1; i >= 0; i--){
-            for (int j = c - 1; j >= 0; j--){
+    public Integer zeroPosition(Character[][] tiles){
+        Integer position=0;
+        for (int i = getR() - 1; i >= 0; i--){
+            for (int j = getC() - 1; j >= 0; j--){
                 if (tiles[i][j] == '!') {
-                    position = r - i;
+                    position = getR() - i;
                     break;
                 }
             }
@@ -77,14 +74,14 @@ public class CharBoard {
 
     }
 
-    public boolean solvable(char [][] tiles){
+    public boolean solvable(Character [][] tiles){
         boolean solvableBoard = false;
 
-        char[] linearTiles = new char[r*c];
+        Character[] linearTiles = new Character[getR()*getC()];
         int k=0;
 
-        for(int i=0; i<r; i++){
-            for(int j=0; j<c; j++){
+        for(int i=0; i < getR(); i++){
+            for(int j=0; j < getC(); j++){
                 linearTiles[k++] = tiles[i][j];
             }
         }
@@ -92,7 +89,7 @@ public class CharBoard {
         int invCount = inversion(linearTiles);
         System.out.println(invCount);
 
-        if(r % 2 != 0){
+        if(getR() % 2 != 0){
             if(invCount % 2 == 0){
                 solvableBoard= true;
             }
@@ -112,14 +109,14 @@ public class CharBoard {
 
     }
 
-    public boolean win(char[][] tiles){
-        this.sortedTiles = charTilesAmount();
+    public boolean win(Character[][] tiles){
+        Character[][] sortedTiles = tilesAmount();
 
         boolean won = false;
 
-        for(int i = 0; i < r; i++){
-            for(int j = 0; j < c; j++) {
-                if(  Arrays.deepEquals(tiles, this.sortedTiles)) {
+        for(int i = 0; i < getR(); i++){
+            for(int j = 0; j < getC(); j++) {
+                if(  Arrays.deepEquals(tiles, sortedTiles)) {
                     won = true;
                     System.out.print(tiles[i][j]);
 

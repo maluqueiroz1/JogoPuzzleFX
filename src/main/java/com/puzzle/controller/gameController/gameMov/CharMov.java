@@ -1,7 +1,6 @@
-package com.puzzle.gameController.gameMov;
+package com.puzzle.controller.gameController.gameMov;
 
-import com.puzzle.gameController.CharController;
-import com.puzzle.gameController.GameController;
+import com.puzzle.controller.gameController.CharController;
 import com.puzzle.model.CharBoard;
 import com.puzzle.model.Player;
 import javafx.animation.Timeline;
@@ -9,15 +8,14 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-import java.io.IOException;
 
 public class CharMov extends Movements{
 
     private CharBoard charBoard;
-    private char[][] cTiles, cSortedTiles;
+    private Character[][] cTiles, cSortedTiles;
     private CharController charController;
 
-    public CharMov(CharController charController, Player player, Timeline clock, Label timeLabel, CharBoard charBoard, char[][] cTiles, char[][] cSortedTiles){
+    public CharMov(CharController charController, Player player, Timeline clock, Label timeLabel, CharBoard charBoard, Character[][] cTiles, Character[][] cSortedTiles){
         super(player,clock,timeLabel);
         this.charController = charController;
         this.charBoard = charBoard;

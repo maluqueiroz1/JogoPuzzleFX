@@ -1,7 +1,7 @@
-package com.puzzle.gameController;
+package com.puzzle.controller.gameController;
 
-import com.puzzle.gameController.barMov.HelpMov;
-import com.puzzle.gameController.gameMov.ImgMov;
+import com.puzzle.controller.gameController.barMov.HelpMov;
+import com.puzzle.controller.gameController.gameMov.ImgMov;
 import com.puzzle.model.ImgBoard;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -16,7 +16,7 @@ public class ImgController extends GameController{
     private Button helpButton;
     private ImgBoard imgBoard;
     private File[][] imgTiles, imgSortedTiles;
-    private int[][] numberTiles, numberSortedTiles;
+    private Integer[][] numberTiles, numberSortedTiles;
 
     public void setImageSize(ImageView imageView){
         if(getPlayer().getLevel()<4){
@@ -59,7 +59,7 @@ public class ImgController extends GameController{
         numberSortedTiles = imgBoard.tilesAmount();
 
         do {
-            imgBoard.iRandomize(numberTiles, imgTiles);
+            imgBoard.imgShuffle(numberTiles, imgTiles);
         }
         while (!imgBoard.solvable(numberTiles));
 

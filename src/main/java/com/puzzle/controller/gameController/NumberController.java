@@ -1,6 +1,6 @@
-package com.puzzle.gameController;
+package com.puzzle.controller.gameController;
 
-import com.puzzle.gameController.gameMov.NumberMov;
+import com.puzzle.controller.gameController.gameMov.NumberMov;
 import com.puzzle.model.NumberBoard;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 public class NumberController extends GameController{
     private NumberBoard numberBoard;
 
-    private int[][] numberTiles, numberSortedTiles;
+    private Integer[][] numberTiles, numberSortedTiles;
 
 
     public void setBoardClass(){
@@ -19,7 +19,7 @@ public class NumberController extends GameController{
         numberTiles = numberBoard.tilesAmount();
         numberSortedTiles = numberBoard.tilesAmount();
         do {
-            numberBoard.randomize(numberTiles);
+            numberBoard.shuffle(numberTiles);
         }
         while (!numberBoard.solvable(numberTiles));
 

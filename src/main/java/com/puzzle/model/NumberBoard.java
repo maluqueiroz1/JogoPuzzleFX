@@ -1,50 +1,45 @@
 package com.puzzle.model;
 
-
 import java.util.Arrays;
 import java.util.Random;
 
-public class NumberBoard {
+public class NumberBoard extends Board <Integer,Integer>{
+    private Integer[][] tile;
 
-    private int r,c;
-    private int[][] tile;
-    int [][] sortedTiles;
-
-    public NumberBoard(int i, int j) {
-        this.r = i;
-        this.c = j;
+    public NumberBoard(int r, int c) {
+        super(r,c);
     }
 
-    public int[][] tilesAmount(){
-        tile= new int[r][c];
+    public Integer[][] tilesAmount(){
+        tile= new Integer[getR()][getC()];
 
-        for (int i = 0; i < r; i++){
-            for (int j = 0; j < c; j++){
+        for (int i = 0; i < getR(); i++){
+            for (int j = 0; j < getC(); j++){
 
-                tile[i][j] = i * r + j +1;
+                tile[i][j] = i * getR() + j +1;
 
             }
         }
-        tile[r-1][c-1]= 0;
+        tile[getR()-1][getC()-1]= 0;
         return tile;
     }
 
-    public void randomize(int[][] tiles){
+    public void shuffle(Integer[][] tiles){
         Random random = new Random();
 
-        for(int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                int rand = random.nextInt(r);
-                int prov = tiles[i][j];
+        for(int i = 0; i < getR(); i++) {
+            for (int j = 0; j < getC(); j++) {
+                int rand = random.nextInt(getR());
+                Integer prov = tiles[i][j];
                 tiles[i][j] = tiles[rand][rand];
                 tiles[rand][rand] = prov;
             }
         }
     }
-    public int inversion(int[] tiles){
-        int count = 0;
-        for (int i = 0; i < r*r; i++){
-            for(int j = i+1 ; j < c*c; j++) {
+    public Integer inversion(Integer[] tiles){
+        Integer count = 0;
+        for (int i = 0; i < getR()*getR(); i++){
+            for(int j = i+1 ; j < getC()*getC(); j++) {
                 if (tiles[i] > tiles[j] && tiles[j] > 0) {
                     count++;
 
@@ -54,34 +49,34 @@ public class NumberBoard {
         return count;
     }
 
-    public int zeroPosition(int[][] tiles){
-        int position=0;
-        for (int i =r - 1; i >= 0; i--){
-            for (int j = c - 1; j >= 0; j--){
+    public Integer zeroPosition(Integer[][] tiles){
+        Integer position=0;
+        for (int i =getR() - 1; i >= 0; i--){
+            for (int j = getC() - 1; j >= 0; j--){
                 if (tiles[i][j] == 0) {
-                    position = r - i;
+                    position = getR() - i;
                     break;
                 }
             }
         }
         return position;
     }
-    public boolean solvable(int [][] tiles){
+    public boolean solvable(Integer [][] tiles){
 
         boolean solvableBoard = false;
 
-        int[] linearTiles = new int[r*c];
+        Integer[] linearTiles = new Integer[getR()*getC()];
         int k=0;
 
-        for(int i=0; i<r; i++){
-            for(int j=0; j<c; j++){
+        for(int i=0; i < getR(); i++){
+            for(int j=0; j < getC(); j++){
                 linearTiles[k++] = tiles[i][j];
             }
         }
 
         int invCount = inversion(linearTiles);
 
-        if(!(r % 2 == 0)){
+        if(!(getR() % 2 == 0)){
             if(invCount % 2 == 0){
                 solvableBoard= true;
             }
@@ -99,14 +94,14 @@ public class NumberBoard {
         return solvableBoard;
     }
 
-    public boolean win(int[][] tiles){
-        sortedTiles = tilesAmount();
+    public boolean win(Integer[][] tiles){
+        Integer[][] sortedTiles = tilesAmount();
 
         boolean won = false;
 
-        for(int i = 0; i < r; i++){
-            for(int j = 0; j < c; j++) {
-                if(  Arrays.deepEquals(tiles, this.sortedTiles)) {
+        for(int i = 0; i < getR(); i++){
+            for(int j = 0; j < getC(); j++) {
+                if(  Arrays.deepEquals(tiles, sortedTiles)) {
                     won = true;
                     System.out.print(tiles[i][j]);
 
@@ -118,13 +113,6 @@ public class NumberBoard {
         return won;
     }
 
-    public int getR() {
-        return r;
-    }
-
-    public int getC() {
-        return c;
-    }
 
 
 }

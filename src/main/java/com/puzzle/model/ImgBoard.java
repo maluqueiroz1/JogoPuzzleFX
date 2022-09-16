@@ -5,9 +5,11 @@ import java.io.File;
 import java.util.Random;
 
 public class ImgBoard extends NumberBoard{
+
     private File folder;
-    private File [] tile;
-    private File [][] tiles;
+    private File[] tile;
+    private File[][] tiles;
+
     public ImgBoard(int r, int c){
         super(r,c);
     }
@@ -39,7 +41,7 @@ public class ImgBoard extends NumberBoard{
         return tiles;
     }
 
-    public void iRandomize( int[][] nTiles, File[][] iTiles ){
+    public void imgShuffle(Integer[][] nTiles, File[][] iTiles ){
         Random random = new Random();
 
         for(int i = 0; i < getR(); i++) {
@@ -50,7 +52,7 @@ public class ImgBoard extends NumberBoard{
                 iTiles[i][j] = iTiles[rand][rand];
                 iTiles[rand][rand] = prov;
 
-                int nProv = nTiles[i][j];
+                Integer nProv = nTiles[i][j];
                 nTiles[i][j]= nTiles[rand][rand];
                 nTiles[rand][rand] = nProv;
 

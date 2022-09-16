@@ -1,9 +1,9 @@
-package com.puzzle.gameController.barMov;
+package com.puzzle.controller.gameController.barMov;
 
-import com.puzzle.gameController.GameController;
-import com.puzzle.gameController.CharController;
-import com.puzzle.gameController.ImgController;
-import com.puzzle.gameController.NumberController;
+import com.puzzle.controller.gameController.GameController;
+import com.puzzle.controller.gameController.CharController;
+import com.puzzle.controller.gameController.ImgController;
+import com.puzzle.controller.gameController.NumberController;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;

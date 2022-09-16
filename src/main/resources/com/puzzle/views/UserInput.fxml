@@ -14,14 +14,14 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@../styles/UserInput.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.puzzle.controller.UserInputController">
    <children>
-      <Label layoutX="222.0" layoutY="96.0" text="DIGITE SEU NOME:" textFill="WHITE">
+      <Label layoutX="222.0" layoutY="87.0" text="DIGITE SEU NOME:" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
       <Label id="name" layoutX="218.0" layoutY="161.0" prefHeight="65.0" prefWidth="266.0" stylesheets="@../styles/UserInput.css" />
       <TextField fx:id="nameTextField" alignment="CENTER" layoutX="248.0" layoutY="178.0" prefHeight="32.0" prefWidth="216.0" promptText="Digite seu Nome" />
-      <Label layoutX="244.0" layoutY="128.0" stylesheets="@../styles/UserInput.css" text="(no máximo 12 letras)" textFill="#fffefe">
+      <Label layoutX="244.0" layoutY="119.0" stylesheets="@../styles/UserInput.css" text="(no máximo 12 letras)" textFill="#fffefe">
          <font>
             <Font size="18.0" />
          </font>
@@ -95,5 +95,8 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="crazy" layoutX="399.0" layoutY="447.0" mnemonicParsing="false" text="Maluco" textFill="WHITE" toggleGroup="$type" />
+      <Label fx:id="inputError" alignment="CENTER" contentDisplay="CENTER" layoutX="170.0" layoutY="234.0" prefHeight="23.0" prefWidth="360.0" textFill="WHITE" />
+      <Label fx:id="difError" alignment="CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="363.0" prefHeight="23.0" prefWidth="188.0" textFill="WHITE" />
+      <Label fx:id="typeError" alignment="CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="507.0" prefHeight="23.0" prefWidth="188.0" textFill="WHITE" />
    </children>
 </AnchorPane>

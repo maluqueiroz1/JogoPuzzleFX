@@ -1,7 +1,6 @@
-package com.puzzle.gameController.gameMov;
+package com.puzzle.controller.gameController.gameMov;
 
-import com.puzzle.gameController.GameController;
-import com.puzzle.gameController.ImgController;
+import com.puzzle.controller.gameController.ImgController;
 import com.puzzle.model.ImgBoard;
 import com.puzzle.model.Player;
 import javafx.animation.Timeline;
@@ -11,15 +10,13 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-import java.io.IOException;
-
 public class ImgMov extends Movements{
 
         private ImgBoard imgBoard;
-        private int[][] nTiles, nSortedTiles;
+        private Integer[][] nTiles, nSortedTiles;
         private ImgController imgController;
 
-        public ImgMov(ImgController imgController, Player player, Timeline clock, Label timeLabel, ImgBoard imgBoard, int[][] nTiles, int[][] nSortedTiles){
+        public ImgMov(ImgController imgController, Player player, Timeline clock, Label timeLabel, ImgBoard imgBoard, Integer[][] nTiles, Integer[][] nSortedTiles){
             super(player,clock,timeLabel);
             this.imgController = imgController;
             this.imgBoard = imgBoard;

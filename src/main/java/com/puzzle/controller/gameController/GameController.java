@@ -1,7 +1,8 @@
-package com.puzzle.gameController;
+package com.puzzle.controller.gameController;
 
-import com.puzzle.gameController.barMov.ResetMov;
-import com.puzzle.gameController.gameMov.Movements;
+import com.puzzle.controller.gameController.barMov.ResetMov;
+import com.puzzle.controller.gameController.gameMov.Movements;
+import com.puzzle.model.Board;
 import com.puzzle.model.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -49,6 +50,8 @@ public abstract class GameController implements Initializable {
     private Button helpButton;
 
     private Movements movements;
+
+    private Board board;
     private ResetMov resetMov;
     private Timeline clock;
     private int mil = 0, sec = 0, min = 0, hr = 0;
@@ -97,6 +100,14 @@ public abstract class GameController implements Initializable {
 
     public Timeline getClock() {
         return clock;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
     public void setPlayer(Player player){

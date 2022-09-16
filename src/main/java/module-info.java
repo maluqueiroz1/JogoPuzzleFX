@@ -17,7 +17,7 @@ module com.example.jogopuzzlefx {
     exports com.puzzle;
     exports com.puzzle.controller;
     opens com.puzzle.controller to javafx.fxml;
-    exports com.puzzle.gameController;
-    opens com.puzzle.gameController to javafx.fxml;
+    exports com.puzzle.controller.gameController;
+    opens com.puzzle.controller.gameController to javafx.fxml;
 
 }

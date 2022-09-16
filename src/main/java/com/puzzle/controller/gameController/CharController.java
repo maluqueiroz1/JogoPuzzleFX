@@ -1,23 +1,23 @@
-package com.puzzle.gameController;
+package com.puzzle.controller.gameController;
 
-import com.puzzle.gameController.gameMov.CharMov;
+import com.puzzle.controller.gameController.gameMov.CharMov;
 import com.puzzle.model.CharBoard;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class CharController extends GameController{
     private CharBoard charBoard;
-    private char[][] charTiles,charSortedTiles;
+    private Character[][] charTiles,charSortedTiles;
 
     public void setBoardClass(){
         setGButton( new Button[getPlayer().getLevel()][getPlayer().getLevel()]);
         setGLabel(new Label[getPlayer().getLevel()][getPlayer().getLevel()]);
 
         charBoard = new CharBoard(getPlayer().getLevel(), getPlayer().getLevel());
-        charTiles = charBoard.charTilesAmount();
-        charSortedTiles = charBoard.charTilesAmount();
+        charTiles = charBoard.tilesAmount();
+        charSortedTiles = charBoard.tilesAmount();
         do{
-            charBoard.randomize(charTiles);
+            charBoard.shuffle(charTiles);
         }
         while(!charBoard.solvable(charTiles));
 

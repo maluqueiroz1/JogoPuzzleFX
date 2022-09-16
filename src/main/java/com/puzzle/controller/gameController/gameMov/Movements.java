@@ -1,6 +1,5 @@
-package com.puzzle.gameController.gameMov;
+package com.puzzle.controller.gameController.gameMov;
 
-import com.puzzle.gameController.GameController;
 import com.puzzle.controller.WinnerController;
 import com.puzzle.model.Player;
 import javafx.animation.Timeline;
