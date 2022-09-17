@@ -1,8 +1,6 @@
 package com.puzzle.controller.gameController;
 
 import com.puzzle.controller.gameController.barMov.ResetMov;
-import com.puzzle.controller.gameController.gameMov.Movements;
-import com.puzzle.model.Board;
 import com.puzzle.model.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -47,12 +45,6 @@ public abstract class GameController implements Initializable {
     private int boardNumber;
     private Button[][] gButton;
     private Label[][] gLabel;
-    private Button helpButton;
-
-    private Movements movements;
-
-    private Board board;
-    private ResetMov resetMov;
     private Timeline clock;
     private int mil = 0, sec = 0, min = 0, hr = 0;
 
@@ -90,24 +82,8 @@ public abstract class GameController implements Initializable {
         return gLabel;
     }
 
-    public Movements getMovements() {
-        return movements;
-    }
-
-    public void setMovements(Movements movements) {
-        this.movements = movements;
-    }
-
     public Timeline getClock() {
         return clock;
-    }
-
-    public Board getBoard() {
-        return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
     }
 
     public void setPlayer(Player player){
@@ -120,14 +96,10 @@ public abstract class GameController implements Initializable {
         this.boardNumber = boardNumber;
     }
 
-    public int getBoardNumber(){
-        return boardNumber;
-    }
-
     public void labelEvents(){
         exit.setOnMouseClicked(this::close);
         mini.setOnMouseClicked(this::min);
-        resetMov = new ResetMov(this, player , boardNumber);
+        ResetMov resetMov = new ResetMov(this, player, boardNumber);
         resetButton.setOnAction(resetMov);
     }
 
@@ -164,15 +136,15 @@ public abstract class GameController implements Initializable {
     public void setGButtonStyle(Button gButton){
         if(player.getLevel()<4){
             gButton.setPrefSize(195,195);
-            gButton.setStyle("-fx-font-size: 80px");
+            gButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e ); -fx-font-size: 80px");
         }
         else if(player.getLevel()==4){
             gButton.setPrefSize(142,142);
-            gButton.setStyle("-fx-font-size: 50px");
+            gButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e ); -fx-font-size: 50px");
         }
         else {
             gButton.setPrefSize(112,112);
-            gButton.setStyle("-fx-font-size: 30px");
+            gButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e ); -fx-font-size: 30px");
         }
 
     }
@@ -198,6 +170,7 @@ public abstract class GameController implements Initializable {
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if(clickedButton.orElse(null) == ButtonType.OK){
+
             stage =  (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
@@ -206,9 +179,9 @@ public abstract class GameController implements Initializable {
 
     @FXML
     public void min(MouseEvent event) {
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setIconified(true);
-
     }
 
     @Override

@@ -1,28 +1,29 @@
 package com.puzzle.controller.gameController;
 
-import com.puzzle.controller.gameController.gameMov.CharMov;
+import com.puzzle.controller.gameController.gameMov.*;
 import com.puzzle.model.CharBoard;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.util.Objects;
+
 public class CharController extends GameController{
-    private CharBoard charBoard;
-    private Character[][] charTiles,charSortedTiles;
 
     public void setBoardClass(){
         setGButton( new Button[getPlayer().getLevel()][getPlayer().getLevel()]);
         setGLabel(new Label[getPlayer().getLevel()][getPlayer().getLevel()]);
 
-        charBoard = new CharBoard(getPlayer().getLevel(), getPlayer().getLevel());
-        charTiles = charBoard.tilesAmount();
-        charSortedTiles = charBoard.tilesAmount();
+        CharBoard charBoard = new CharBoard(getPlayer().getLevel(), getPlayer().getLevel());
+        Character[][] charTiles = charBoard.tilesAmount();
+        Character[][] charSortedTiles = charBoard.tilesAmount();
+        Character[] linearTiles = new Character[getPlayer().getLevel()*getPlayer().getLevel()];
         do{
             charBoard.shuffle(charTiles);
         }
-        while(!charBoard.solvable(charTiles));
+        while(!charBoard.solvable(linearTiles,charTiles));
 
         startClock();
-        setMovements(new CharMov(this, getPlayer(), getClock(), getTimeLabel(), charBoard, charTiles, charSortedTiles));
+        Movements<Character> movements = new CharMov(this, getPlayer(), getClock(), getTimeLabel(), charBoard, charTiles, charSortedTiles);
 
         for(int i = 0; i < getPlayer().getLevel(); i++){
             for(int j = 0; j < getPlayer().getLevel(); j++) {
@@ -35,18 +36,17 @@ public class CharController extends GameController{
                 if( charTiles[i][j] == '!'){
 
                     getGButton()[i][j].setStyle("-fx-text-fill: TRANSPARENT");
-                    getMovements().setNullButton(getGButton());
-                    getMovements().setRowN(i);
-                    getMovements().setColN(j);
+                    movements.setRowN(i);
+                    movements.setColN(j);
                 }else{
-                     if (charTiles[i][j] == charSortedTiles[i][j])
+                     if (Objects.equals(charTiles[i][j], charSortedTiles[i][j]))
                         getGButton()[i][j].setStyle("-fx-background-color: #c9ff08");
                 }
-                getGButton()[i][j].setOnAction(getMovements());
+                getGButton()[i][j].setOnAction(movements);
                 getGrid().add(getGButton()[i][j],j,i);
+                movements.setButtons(getGButton());
             }
         }
-
     }
 }
 

@@ -26,21 +26,19 @@ public class WinnerController {
     private Label winLabel;
     @FXML
     private Label playerLabel;
-    private Parent root;
     private Stage stage;
     private Scene scene;
     private Player player;
 
-    public void setPlayer(Player player){
-
-        this.player = player;
+    public void setPlayer(Player player){this.player = player;}
+    public void playerLabels(){
         playerLabel.setText("Muito bem "+player.getPlayerName()+"!");
         winLabel.setText("você ganhou com:\n" +player.getMoves()+
                 " movimentos \n no tempo: "+ player.getTime());
     }
     public void handleBackToMenu(ActionEvent event) throws IOException{
 
-        root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/Menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/Menu.fxml"));
         scene = new Scene(root);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 

@@ -10,7 +10,10 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class ImgMov extends Movements{
+import java.util.Objects;
+import java.util.Random;
+
+public class ImgMov extends Movements<Integer>{
 
         private ImgBoard imgBoard;
         private Integer[][] nTiles, nSortedTiles;
@@ -22,6 +25,44 @@ public class ImgMov extends Movements{
             this.imgBoard = imgBoard;
             this.nTiles = nTiles;
             this.nSortedTiles = nSortedTiles;
+        }
+        public void crazyMode(Integer[][] tiles, Integer[][] sortedTiles, Button[][] buttons){
+            Random random = new Random();
+            int rand = random.nextInt(getPlayer().getLevel());
+            int rand2 = random.nextInt(getPlayer().getLevel());
+            int rand3 = random.nextInt(getPlayer().getLevel());
+            int rand4 = random.nextInt(getPlayer().getLevel());
+
+            if (tiles[rand][rand2] != 0 && tiles[rand3][rand4] != 0 && (!Objects.equals(tiles[rand][rand2], tiles[rand3][rand4]))) {
+                Integer prov = tiles[rand][rand2];
+                tiles[rand][rand2] = tiles[rand3][rand4];
+                tiles[rand3][rand4] = prov;
+
+                String number = buttons[rand][rand2].getText();
+                ImageView imageView1 = (ImageView) buttons[rand][rand2].getGraphic();
+                ImageView imageView2 = (ImageView) buttons[rand3][rand4].getGraphic();
+
+                imgController.setGButtonStyle(buttons[rand][rand2]);
+                imgController.setGButtonStyle(buttons[rand3][rand4]);
+                imgController.setImageSize(imageView1);
+                imgController.setImageSize(imageView2);
+                buttons[rand][rand2].setStyle("-fx-text-fill: TRANSPARENT; -fx-padding: 0px;");
+                buttons[rand3][rand4].setStyle("-fx-text-fill: TRANSPARENT; -fx-padding: 0px;");
+
+                buttons[rand][rand2].setText(buttons[rand3][rand4].getText());
+                buttons[rand3][rand4].setText(number);
+
+                buttons[rand][rand2].setGraphic(imageView2);
+                buttons[rand3][rand4].setGraphic(imageView1);
+                buttons[rand][rand2].setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                buttons[rand3][rand4].setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+
+                if(Objects.equals(tiles[rand][rand2], sortedTiles[rand][rand2]))
+                    buttons[rand][rand2].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
+
+                if(Objects.equals(tiles[rand3][rand4], sortedTiles[rand3][rand4]))
+                    buttons[rand3][rand4].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
+            }
         }
 
         @Override
@@ -37,26 +78,25 @@ public class ImgMov extends Movements{
                 if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
 
                     clickedButton.setText("");
-                    clickedButton.setGraphic(getNullButton()[getRowN()][getColN()].getGraphic());
+                    clickedButton.setGraphic(getButtons()[getRowN()][getColN()].getGraphic());
                     imgController.setGButtonStyle(clickedButton);
-                    clickedButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
-
-                    getNullButton()[getRowN()][getColN()].setText(number);
-                    imgController.setGButtonStyle(getNullButton()[getRowN()][getColN()]);
+                    getButtons()[getRowN()][getColN()].setText(number);
+                    imgController.setGButtonStyle(getButtons()[getRowN()][getColN()]);
                     imgController.setImageSize(imageView);
-                    getNullButton()[getRowN()][getColN()].setStyle("-fx-text-fill: TRANSPARENT; -fx-padding: 0px;");
-                    getNullButton()[getRowN()][getColN()].setGraphic(imageView);
-                    getNullButton()[getRowN()][getColN()].setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                    getButtons()[getRowN()][getColN()].setStyle("-fx-text-fill: TRANSPARENT; -fx-padding: 0px;");
+                    getButtons()[getRowN()][getColN()].setGraphic(imageView);
+                    getButtons()[getRowN()][getColN()].setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
                     nTiles[getRowN()][getColN()] = Integer.parseInt(number);
                     nTiles[i][j] = 0;
 
-                    if (nTiles[getRowN()][getColN()] == nSortedTiles[getRowN()][getColN()]) {
-                        getNullButton()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px;");
-                    }
+                    checkIfCrazy(nTiles,nSortedTiles,getButtons());
 
-                    check(imgBoard.win(nTiles), actionEvent);
+                    if (Objects.equals(nTiles[getRowN()][getColN()], nSortedTiles[getRowN()][getColN()]))
+                        getButtons()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
+
+                    checkIfWon(imgBoard.win(nTiles), actionEvent);
 
                     setRowN(i);
                     setColN(j);

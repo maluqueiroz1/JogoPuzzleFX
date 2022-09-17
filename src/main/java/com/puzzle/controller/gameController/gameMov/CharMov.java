@@ -8,8 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.util.Objects;
+import java.util.Random;
 
-public class CharMov extends Movements{
+
+public class CharMov extends Movements <Character>{
 
     private CharBoard charBoard;
     private Character[][] cTiles, cSortedTiles;
@@ -21,6 +24,21 @@ public class CharMov extends Movements{
         this.charBoard = charBoard;
         this.cTiles = cTiles;
         this.cSortedTiles = cSortedTiles;
+    }
+
+    public void crazyMode(Character[][] tiles, Character[][] sortedTiles, Button[][] buttons){
+        Random random = new Random();
+        int rand = random.nextInt(getPlayer().getLevel());
+        int rand2 = random.nextInt(getPlayer().getLevel());
+        int rand3 = random.nextInt(getPlayer().getLevel());
+        int rand4 = random.nextInt(getPlayer().getLevel());
+
+        if (tiles[rand][rand2] != '!' && tiles[rand3][rand4] != '!' && (!Objects.equals(tiles[rand][rand2], tiles[rand3][rand4]))) {
+            charController.setGButtonStyle(buttons[rand][rand2]);
+            charController.setGButtonStyle(buttons[rand3][rand4]);
+
+            switchTiles(tiles,sortedTiles,buttons,rand,rand2,rand3,rand4);
+        }
     }
 
     @Override
@@ -35,20 +53,18 @@ public class CharMov extends Movements{
         if (!character.equals("!")) {
             if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
 
-                charController.setGButtonStyle(getNullButton()[getRowN()][getColN()]);
-                getNullButton()[getRowN()][getColN()].setText(character);
+                charController.setGButtonStyle(getButtons()[getRowN()][getColN()]);
+                getButtons()[getRowN()][getColN()].setText(character);
 
                 clickedButton.setText("");
                 charController.setGButtonStyle(clickedButton);
-                clickedButton.setStyle("-fx-background-color:  linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
                 cTiles[getRowN()][getColN()] = character.charAt(0);
                 cTiles[i][j] = '!';
 
-                if (cTiles[getRowN()][getColN()] == cSortedTiles[getRowN()][getColN()])
-                    setGreenStyle();
-
-                check(charBoard.win(cTiles),actionEvent);
+                checkIfCrazy(cTiles,cSortedTiles,getButtons());
+                checkIfGreen(cTiles[getRowN()][getColN()], cSortedTiles[getRowN()][getColN()]);
+                checkIfWon(charBoard.win(cTiles),actionEvent);
 
                 setRowN(i);
                 setColN(j);

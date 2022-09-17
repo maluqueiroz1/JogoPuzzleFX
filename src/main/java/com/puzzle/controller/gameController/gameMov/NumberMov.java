@@ -8,7 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class NumberMov extends Movements {
+import java.util.Objects;
+import java.util.Random;
+
+public class NumberMov extends Movements <Integer> {
 
     private NumberBoard numberBoard;
     private Integer[][] nTiles, nSortedTiles;
@@ -21,6 +24,22 @@ public class NumberMov extends Movements {
         this.nTiles = nTiles;
         this.nSortedTiles = nSortedTiles;
     }
+
+    public void crazyMode(Integer[][] tiles, Integer[][] sortedTiles ,Button[][] buttons){
+        Random random = new Random();
+        int rand = random.nextInt(getPlayer().getLevel());
+        int rand2 = random.nextInt(getPlayer().getLevel());
+        int rand3 = random.nextInt(getPlayer().getLevel());
+        int rand4 = random.nextInt(getPlayer().getLevel());
+
+        if (tiles[rand][rand2] != 0 && tiles[rand3][rand4] != 0 && (!Objects.equals(tiles[rand][rand2], tiles[rand3][rand4]))) {
+            numberController.setGButtonStyle(buttons[rand][rand2]);
+            numberController.setGButtonStyle(buttons[rand3][rand4]);
+
+            switchTiles(tiles,sortedTiles,buttons,rand,rand2,rand3,rand4);
+        }
+    }
+
     @Override
     public void handle(ActionEvent actionEvent) {
 
@@ -34,24 +53,20 @@ public class NumberMov extends Movements {
         if (!number.equals("0")) {
             if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
 
-                numberController.setGButtonStyle(getNullButton()[getRowN()][getColN()]);
-                getNullButton()[getRowN()][getColN()].setText(number);
+                numberController.setGButtonStyle(getButtons()[getRowN()][getColN()]);
+                getButtons()[getRowN()][getColN()].setText(number);
 
                 clickedButton.setText("");
                 numberController.setGButtonStyle(clickedButton);
-                clickedButton.setStyle("-fx-background-color: linear-gradient(to bottom , #ffec87 3%,#ffb22e );");
 
                 nTiles[getRowN()][getColN()] = Integer.parseInt(number);
                 nTiles[i][j] = 0;
 
-                if (nTiles[getRowN()][getColN()] == nSortedTiles[getRowN()][getColN()])
-                    setGreenStyle();
+                checkIfCrazy(nTiles,nSortedTiles,getButtons());
 
-                check(numberBoard.win(nTiles), actionEvent);
+                checkIfGreen(nTiles[getRowN()][getColN()], nSortedTiles[getRowN()][getColN()]);
 
-                if(getPlayer().getCrazyFeature()){
-                    /* fazer puzzle maluco */
-                }
+                checkIfWon(numberBoard.win(nTiles), actionEvent);
 
                 setRowN(i);
                 setColN(j);

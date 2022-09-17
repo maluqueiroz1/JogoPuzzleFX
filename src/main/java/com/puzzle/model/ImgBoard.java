@@ -6,16 +6,13 @@ import java.util.Random;
 
 public class ImgBoard extends NumberBoard{
 
-    private File folder;
-    private File[] tile;
-    private File[][] tiles;
-
     public ImgBoard(int r, int c){
         super(r,c);
     }
 
     public File[] imgAmount(){
-        tile = new File[getR()*getC()];
+        File[] tile;
+        File folder;
         if(getR()*getC() < 16){
             folder = new File("C:\\Users\\Lenovo\\Intellij\\JogoPuzzleFX12\\src\\main\\resources\\com\\puzzle\\images\\minions9");
             tile = folder.listFiles();
@@ -30,7 +27,7 @@ public class ImgBoard extends NumberBoard{
     }
 
     public File[][] iTilesAmount(){
-        tiles = new File[getR()][getC()];
+        File[][] tiles = new File[getR()][getC()];
         File[] general = imgAmount();
         int k =0;
         for (int i = 0; i < getR(); i++){

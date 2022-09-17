@@ -14,14 +14,14 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
+import java.util.Random;
 
-public abstract class Movements implements EventHandler<ActionEvent> {
+public abstract class Movements <T> implements EventHandler<ActionEvent> {
 
     private Player player;
-    private Stage stage;
-    private Scene scene;
     private int rowN, colN;
-    private Button[][] nullButton;
+    private Button[][] buttons;
     private Timeline clock;
     private Label timeLabel;
 
@@ -34,6 +34,14 @@ public abstract class Movements implements EventHandler<ActionEvent> {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void setButtons(Button[][] gButton) {
+        this.buttons = gButton;
+    }
+
+    public Button[][] getButtons(){
+        return buttons;
     }
 
     public int getRowN() {
@@ -52,27 +60,20 @@ public abstract class Movements implements EventHandler<ActionEvent> {
         this.colN = colN;
     }
 
-    public Button[][] getNullButton() {
-        return nullButton;
-    }
-
-    public void setNullButton(Button[][] nullButton) {
-        this.nullButton = nullButton;
-    }
-
-    public Timeline getClock() {
-        return clock;
-    }
-
     public String getTimeLabelText(){
         return timeLabel.getText().split(" ")[1];
     }
 
-    public void setGreenStyle(){
-        nullButton[rowN][colN].setStyle("-fx-background-color: #c9ff08");
+    public void setGreenStyle(Button button){
+        button.setStyle("-fx-background-color: #c9ff08");
     }
 
-    public void check(boolean check, ActionEvent actionEvent){
+    public void checkIfGreen(T tile1,T tile2){
+        if(tile1 == tile2)
+            setGreenStyle(buttons[rowN][colN]);
+    }
+
+    public void checkIfWon(boolean check, ActionEvent actionEvent){
         if (check) {
 
             player.setWinner(true);
@@ -85,20 +86,53 @@ public abstract class Movements implements EventHandler<ActionEvent> {
             }
         }
     }
+
+    public void checkIfCrazy(T[][] tiles, T[][] sortedTiles, Button[][] buttons){
+        if(player.getCrazyFeature()){
+            if(new Random().nextInt(10)==0)
+                crazyMode(tiles,sortedTiles,buttons);
+        }
+    }
+
+    public void switchTiles(T[][] tiles,T[][] sortedTiles, Button[][] buttons, int rand, int rand2, int rand3, int rand4){
+        T prov = tiles[rand][rand2];
+        tiles[rand][rand2] = tiles[rand3][rand4];
+        tiles[rand3][rand4] = prov;
+
+        String text = buttons[rand][rand2].getText();
+        buttons[rand][rand2].setText(buttons[rand3][rand4].getText());
+        buttons[rand3][rand4].setText(text);
+
+        if(Objects.equals(tiles[rand][rand2], sortedTiles[rand][rand2]))
+            setGreenStyle(buttons[rand][rand2]);
+        if(Objects.equals(tiles[rand3][rand4], sortedTiles[rand3][rand4]))
+            setGreenStyle(buttons[rand3][rand4]);
+    }
+
+    public abstract void crazyMode(T[][] tiles, T[][] sortedTiles, Button[][] buttons);
+
+    @Override
+    public abstract void handle(ActionEvent actionEvent);
+
     public void winScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Winner.fxml"));
         Parent root = loader.load();
-        scene = new Scene(root);
+        Scene scene = new Scene(root);
 
         WinnerController winnerController = loader.getController();
         winnerController.setPlayer(player);
+        winnerController.playerLabels();
 
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
 
-    @Override
-    public abstract void handle(ActionEvent actionEvent);
+
+
+
+
+
+
 }

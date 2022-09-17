@@ -28,7 +28,7 @@ public class GameModesController implements Initializable {
     private Scene scene;
     private Parent root;
     @FXML
-    private Button numberButton,charButton,imgButton;
+    private Button numberButton,charButton;
 
     public void handleChosenButton(ActionEvent event) throws IOException {
 
