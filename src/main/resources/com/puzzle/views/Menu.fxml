@@ -83,7 +83,7 @@
    </Button>
    <Label id="exit" layoutX="666.0" layoutY="14.0" onMouseClicked="#close" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0" />
    <Label id="mini" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="629.0" layoutY="14.0" onMouseClicked="#min" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="2.0" />
-   <Button id="howToPlay" alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="330.0" mnemonicParsing="false" onAction="#exitButton" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="como jogar" textOverrun="CENTER_ELLIPSIS" AnchorPane.topAnchor="330.0">
+   <Button id="howToPlay" alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="330.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="como jogar" textOverrun="CENTER_ELLIPSIS" AnchorPane.topAnchor="330.0">
       <textFill>
          <LinearGradient endY="0.8720379146919431" startX="0.5118483412322274">
             <stops>
