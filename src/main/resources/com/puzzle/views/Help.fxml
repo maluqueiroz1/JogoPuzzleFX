@@ -4,8 +4,7 @@
 <?import javafx.scene.control.DialogPane?>
 
 
-<DialogPane prefHeight="250.0" prefWidth="200.0" stylesheets="@../styles/HelpStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <buttonTypes>
-      <ButtonType fx:constant="CLOSE" />
-   </buttonTypes>
+<DialogPane prefHeight="250.0" prefWidth="200.0" stylesheets="@../styles/HelpStyle.css"
+            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <ButtonType fx:constant="CLOSE"/>
 </DialogPane>

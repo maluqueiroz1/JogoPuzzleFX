@@ -8,60 +8,73 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@../styles/Winner.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.puzzle.controller.WinnerController">
-   <children>
-      <Label id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="-45.0" prefHeight="477.0" prefWidth="470.0" textFill="WHITE">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="playerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="134.0" prefHeight="88.0" prefWidth="298.0" text="Muito bem !" textFill="WHITE">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="winLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="138.0" layoutY="262.0" prefHeight="88.0" prefWidth="426.0" text="você ganhou com:&#10; 0 movimentos&#10; em 0 segundos" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Button fx:id="backToMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleBackToMenu" prefHeight="88.0" prefWidth="199.0" text="voltar para &#10;o menu" textAlignment="CENTER">
-         <textFill>
-            <LinearGradient endX="0.9146919431279621" endY="0.9004739336492891" startX="0.46919431279620855" startY="0.27488151658767773">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.6313725709915161" green="0.07450980693101883" blue="0.5254902243614197" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.9686274528503418" green="0.0470588244497776" blue="0.7960784435272217" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="535.0" mnemonicParsing="false" onAction="#close" prefHeight="88.0" prefWidth="199.0" text="sair&#10;" textAlignment="CENTER">
-         <textFill>
-            <LinearGradient endX="0.9146919431279621" endY="0.9004739336492891" startX="0.46919431279620855" startY="0.27488151658767773">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.6313725709915161" green="0.07450980693101883" blue="0.5254902243614197" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.9686274528503418" green="0.0470588244497776" blue="0.7960784435272217" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Label id="exit" layoutX="666.0" layoutY="14.0" onMouseClicked="#close" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0" />
-      <Label id="mini" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="629.0" layoutY="14.0" onMouseClicked="#min" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="2.0" />
-   </children>
+<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@../styles/Winner.css"
+            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.puzzle.controller.WinnerController">
+   <Label id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="-45.0" prefHeight="477.0"
+          prefWidth="470.0" textFill="WHITE">
+      <font>
+         <Font size="22.0"/>
+      </font>
+   </Label>
+   <Label fx:id="playerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="134.0"
+          prefHeight="88.0" prefWidth="298.0" text="Muito bem !" textFill="WHITE">
+      <font>
+         <Font size="22.0"/>
+      </font>
+   </Label>
+   <Label fx:id="winLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="138.0" layoutY="262.0" prefHeight="88.0"
+          prefWidth="426.0" text="você ganhou com:&#10; 0 movimentos&#10; em 0 segundos" textAlignment="CENTER"
+          textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+      <font>
+         <Font size="22.0"/>
+      </font>
+   </Label>
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="388.0"
+           mnemonicParsing="false" onAction="#handleBackToMenu" prefHeight="88.0" prefWidth="199.0"
+           text="voltar para &#10;o menu" textAlignment="CENTER">
+      <textFill>
+         <LinearGradient endX="0.9146919431279621" endY="0.9004739336492891" startX="0.46919431279620855"
+                         startY="0.27488151658767773">
+            <stops>
+               <Stop>
+                  <color>
+                     <Color red="0.6313725709915161" green="0.07450980693101883" blue="0.5254902243614197"/>
+                  </color>
+               </Stop>
+               <Stop offset="1.0">
+                  <color>
+                     <Color red="0.9686274528503418" green="0.0470588244497776" blue="0.7960784435272217"/>
+                  </color>
+               </Stop>
+            </stops>
+         </LinearGradient>
+      </textFill>
+   </Button>
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="535.0"
+           mnemonicParsing="false" onAction="#close" prefHeight="88.0" prefWidth="199.0" text="sair&#10;"
+           textAlignment="CENTER">
+      <textFill>
+         <LinearGradient endX="0.9146919431279621" endY="0.9004739336492891" startX="0.46919431279620855"
+                         startY="0.27488151658767773">
+            <stops>
+               <Stop>
+                  <color>
+                     <Color red="0.6313725709915161" green="0.07450980693101883" blue="0.5254902243614197"/>
+                  </color>
+               </Stop>
+               <Stop offset="1.0">
+                  <color>
+                     <Color red="0.9686274528503418" green="0.0470588244497776" blue="0.7960784435272217"/>
+                  </color>
+               </Stop>
+            </stops>
+         </LinearGradient>
+      </textFill>
+   </Button>
+   <Label id="exit" layoutX="666.0" layoutY="14.0" onMouseClicked="#close" prefHeight="20.0" prefWidth="20.0"
+          stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0"/>
+   <Label id="mini" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="629.0" layoutY="14.0"
+          onMouseClicked="#min" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css"
+          AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="2.0"/>
 </AnchorPane>

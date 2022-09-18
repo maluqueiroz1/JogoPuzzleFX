@@ -12,93 +12,117 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="700.0" prefWidth="700.0" stylesheets="@../styles/UserInput.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.puzzle.controller.UserInputController">
-   <children>
-      <Label layoutX="222.0" layoutY="87.0" text="DIGITE SEU NOME:" textFill="WHITE">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label id="name" layoutX="218.0" layoutY="161.0" prefHeight="65.0" prefWidth="266.0" stylesheets="@../styles/UserInput.css" />
-      <TextField fx:id="nameTextField" alignment="CENTER" layoutX="248.0" layoutY="178.0" prefHeight="32.0" prefWidth="216.0" promptText="Digite seu Nome" />
-      <Label layoutX="244.0" layoutY="119.0" stylesheets="@../styles/UserInput.css" text="(no máximo 12 letras)" textFill="#fffefe">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="140.0" layoutY="262.0" text="ESCOLHA UMA DIFICULDADE:" textFill="WHITE">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <RadioButton fx:id="easyLevel" contentDisplay="CENTER" layoutX="140.0" layoutY="312.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="78.0" text="fácil" textAlignment="CENTER" textFill="WHITE">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <toggleGroup>
-            <ToggleGroup fx:id="level" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="mediumLevel" contentDisplay="CENTER" layoutX="311.0" layoutY="312.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="78.0" text="Médio" textAlignment="CENTER" textFill="WHITE" toggleGroup="$level" />
-      <RadioButton fx:id="hardLevel" contentDisplay="CENTER" layoutX="484.0" layoutY="312.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="78.0" text="Difícil" textAlignment="CENTER" textFill="WHITE" toggleGroup="$level" />
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="560.0" mnemonicParsing="false" onAction="#handlePlayButton" prefHeight="71.0" prefWidth="178.0" stylesheets="@../styles/UserInput.css" text="JOGAR">
-         <textFill>
-            <LinearGradient endX="1.0" endY="0.8767772511848342" startX="0.45023696682464454" startY="0.3175355450236967">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.6313725709915161" green="0.07450980693101883" blue="0.5254902243614197" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.9686274528503418" green="0.0470588244497776" blue="0.7960784435272217" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Label fx:id="choiceLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" prefHeight="81.0" prefWidth="435.0" text="Letras" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font size="56.0" />
-         </font>
-      </Label>
-      <Button id="back" layoutX="315.0" layoutY="650.0" mnemonicParsing="false" onAction="#backToGameModes" prefHeight="23.0" prefWidth="70.0" stylesheets="@../styles/UserInput.css" text="voltar">
-         <textFill>
-            <LinearGradient endX="1.0" endY="0.8767772511848342" startX="0.45023696682464454" startY="0.3175355450236967">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.6313725709915161" green="0.07450980693101883" blue="0.5254902243614197" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.9686274528503418" green="0.0470588244497776" blue="0.7960784435272217" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Label id="exit" layoutX="666.0" layoutY="14.0" onMouseClicked="#close" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0" />
-      <Label id="mini" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="629.0" layoutY="14.0" onMouseClicked="#min" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="2.0" />
-      <Label layoutX="217.0" layoutY="399.0" text="ESCOLHA UM TIPO" textFill="WHITE">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <RadioButton fx:id="normal" layoutX="81.0" layoutY="438.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="105.0" text="Normal" textFill="WHITE" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="514.0" AnchorPane.topAnchor="444.0">
-         <toggleGroup>
-            <ToggleGroup fx:id="type" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="insane" layoutX="412.0" layoutY="438.0" mnemonicParsing="false" text="Maluquice &#10;média" textFill="WHITE" toggleGroup="$type" AnchorPane.rightAnchor="224.0" AnchorPane.topAnchor="444.0" />
-      <Label fx:id="inputError" alignment="CENTER" contentDisplay="CENTER" layoutX="170.0" layoutY="234.0" prefHeight="23.0" prefWidth="360.0" textFill="WHITE" />
-      <Label fx:id="difError" alignment="CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="363.0" prefHeight="23.0" prefWidth="188.0" textFill="WHITE" />
-      <Label fx:id="typeError" alignment="CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="507.0" prefHeight="23.0" prefWidth="188.0" textFill="WHITE" />
-      <RadioButton fx:id="crazy" contentDisplay="CENTER" layoutX="186.0" layoutY="438.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="105.0" text="Maluquice &#10;baixa&#10;" textFill="WHITE" toggleGroup="$type" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="444.0" />
-      <RadioButton fx:id="extreme" layoutX="509.0" layoutY="438.0" mnemonicParsing="false" text="Maluquice &#10;alta" textFill="WHITE" toggleGroup="$type" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="444.0" />
-   </children>
+<AnchorPane prefHeight="700.0" prefWidth="700.0" stylesheets="@../styles/UserInput.css"
+            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.puzzle.controller.UserInputController">
+   <Label layoutX="222.0" layoutY="87.0" text="DIGITE SEU NOME:" textFill="WHITE">
+      <font>
+         <Font size="25.0"/>
+      </font>
+   </Label>
+   <Label id="name" layoutX="218.0" layoutY="161.0" prefHeight="65.0" prefWidth="266.0"
+          stylesheets="@../styles/UserInput.css"/>
+   <TextField fx:id="nameTextField" alignment="CENTER" layoutX="248.0" layoutY="178.0" prefHeight="32.0"
+              prefWidth="216.0" promptText="Digite seu Nome"/>
+   <Label layoutX="244.0" layoutY="119.0" stylesheets="@../styles/UserInput.css" text="(no máximo 12 letras)"
+          textFill="#fffefe">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <Label layoutX="140.0" layoutY="262.0" text="ESCOLHA UMA DIFICULDADE:" textFill="WHITE">
+      <font>
+         <Font size="25.0"/>
+      </font>
+   </Label>
+   <RadioButton fx:id="easyLevel" contentDisplay="CENTER" layoutX="140.0" layoutY="312.0" mnemonicParsing="false"
+                prefHeight="38.0" prefWidth="78.0" text="fácil" textAlignment="CENTER" textFill="WHITE">
+      <opaqueInsets>
+         <Insets/>
+      </opaqueInsets>
+      <toggleGroup>
+         <ToggleGroup fx:id="level"/>
+      </toggleGroup>
+   </RadioButton>
+   <RadioButton fx:id="mediumLevel" contentDisplay="CENTER" layoutX="311.0" layoutY="312.0" mnemonicParsing="false"
+                prefHeight="38.0" prefWidth="78.0" text="Médio" textAlignment="CENTER" textFill="WHITE"
+                toggleGroup="$level"/>
+   <RadioButton fx:id="hardLevel" contentDisplay="CENTER" layoutX="484.0" layoutY="312.0" mnemonicParsing="false"
+                prefHeight="38.0" prefWidth="78.0" text="Difícil" textAlignment="CENTER" textFill="WHITE"
+                toggleGroup="$level"/>
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="560.0" mnemonicParsing="false"
+           onAction="#handlePlayButton" prefHeight="71.0" prefWidth="178.0" stylesheets="@../styles/UserInput.css"
+           text="JOGAR">
+      <textFill>
+         <LinearGradient endY="0.8767772511848342" startX="0.45023696682464454" startY="0.3175355450236967">
+            <stops>
+               <Stop>
+                  <color>
+                     <Color red="0.6313725709915161" green="0.07450980693101883" blue="0.5254902243614197"/>
+                  </color>
+               </Stop>
+               <Stop offset="1.0">
+                  <color>
+                     <Color red="0.9686274528503418" green="0.0470588244497776" blue="0.7960784435272217"/>
+                  </color>
+               </Stop>
+            </stops>
+         </LinearGradient>
+      </textFill>
+   </Button>
+   <Label fx:id="choiceLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" prefHeight="81.0"
+          prefWidth="435.0" text="Letras" textAlignment="CENTER" textFill="WHITE">
+      <font>
+         <Font size="56.0"/>
+      </font>
+   </Label>
+   <Button id="back" layoutX="315.0" layoutY="650.0" mnemonicParsing="false" onAction="#backToGameModes"
+           prefHeight="23.0" prefWidth="70.0" stylesheets="@../styles/UserInput.css" text="voltar">
+      <textFill>
+         <LinearGradient endY="0.8767772511848342" startX="0.45023696682464454" startY="0.3175355450236967">
+            <stops>
+               <Stop>
+                  <color>
+                     <Color red="0.6313725709915161" green="0.07450980693101883" blue="0.5254902243614197"/>
+                  </color>
+               </Stop>
+               <Stop offset="1.0">
+                  <color>
+                     <Color red="0.9686274528503418" green="0.0470588244497776" blue="0.7960784435272217"/>
+                  </color>
+               </Stop>
+            </stops>
+         </LinearGradient>
+      </textFill>
+   </Button>
+   <Label id="exit" layoutX="666.0" layoutY="14.0" onMouseClicked="#close" prefHeight="20.0" prefWidth="20.0"
+          stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0"/>
+   <Label id="mini" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="629.0" layoutY="14.0"
+          onMouseClicked="#min" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css"
+          AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="2.0"/>
+   <Label layoutX="217.0" layoutY="399.0" text="ESCOLHA UM TIPO" textFill="WHITE">
+      <font>
+         <Font size="25.0"/>
+      </font>
+   </Label>
+   <RadioButton fx:id="normal" layoutX="81.0" layoutY="438.0" mnemonicParsing="false" prefHeight="52.0"
+                prefWidth="105.0" text="Normal" textFill="WHITE" AnchorPane.leftAnchor="81.0"
+                AnchorPane.rightAnchor="514.0" AnchorPane.topAnchor="444.0">
+      <toggleGroup>
+         <ToggleGroup fx:id="type"/>
+      </toggleGroup>
+   </RadioButton>
+   <RadioButton fx:id="insane" layoutX="412.0" layoutY="438.0" mnemonicParsing="false" text="Maluquice &#10;média"
+                textFill="WHITE" toggleGroup="$type" AnchorPane.rightAnchor="224.0" AnchorPane.topAnchor="444.0"/>
+   <Label fx:id="inputError" alignment="CENTER" contentDisplay="CENTER" layoutX="170.0" layoutY="234.0"
+          prefHeight="23.0" prefWidth="360.0" textFill="WHITE"/>
+   <Label fx:id="difError" alignment="CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="363.0" prefHeight="23.0"
+          prefWidth="188.0" textFill="WHITE"/>
+   <Label fx:id="typeError" alignment="CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="507.0" prefHeight="23.0"
+          prefWidth="188.0" textFill="WHITE"/>
+   <RadioButton fx:id="crazy" contentDisplay="CENTER" layoutX="186.0" layoutY="438.0" mnemonicParsing="false"
+                prefHeight="52.0" prefWidth="105.0" text="Maluquice &#10;baixa&#10;" textFill="WHITE"
+                toggleGroup="$type" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="444.0"/>
+   <RadioButton fx:id="extreme" layoutX="509.0" layoutY="438.0" mnemonicParsing="false" text="Maluquice &#10;alta"
+                textFill="WHITE" toggleGroup="$type" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="444.0"/>
 </AnchorPane>

@@ -6,16 +6,16 @@
 <?import javafx.scene.text.Font?>
 
 
-<DialogPane prefHeight="120.0" prefWidth="150.0" stylesheets="@../styles/ExitStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <buttonTypes>
-      <ButtonType fx:constant="OK" />
-      <ButtonType fx:constant="CANCEL" />
-   </buttonTypes>
+<DialogPane prefHeight="120.0" prefWidth="150.0" stylesheets="@../styles/ExitStyle.css"
+            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="50.0" prefWidth="150.0" text="Você deseja sair&#10; do jogo?" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="50.0" prefWidth="150.0"
+             text="Você deseja sair&#10; do jogo?" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font size="16.0"/>
          </font>
       </Label>
    </content>
+   <ButtonType fx:constant="OK"/>
+   <ButtonType fx:constant="CANCEL"/>
 </DialogPane>

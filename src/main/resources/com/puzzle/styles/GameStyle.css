@@ -50,4 +50,15 @@
     -fx-background-insets: 2 0 0 0,2 0 3 0,2 0 4 0,2 0 5 0;
 }
 
+#backToMenu{
+
+    -fx-font-size: 0px;
+    -fx-background-image: url('../images/backToMenu.png');
+    -fx-background-radius: 100;
+    -fx-background-size: cover;
+    -fx-background-color: #ffb22e;
+}
+#backToMenu:hover{
+    -fx-cursor: hand;
+}
 

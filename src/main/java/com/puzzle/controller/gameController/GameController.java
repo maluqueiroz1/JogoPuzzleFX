@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -36,6 +38,8 @@ public abstract class GameController implements Initializable {
     private Label exit;
     @FXML
     private Label mini;
+    @FXML
+    private Label back;
     @FXML
     private Button resetButton;
     @FXML
@@ -96,9 +100,11 @@ public abstract class GameController implements Initializable {
         this.boardNumber = boardNumber;
     }
 
-    public void labelEvents(){
+    public void labelEvents() {
         exit.setOnMouseClicked(this::close);
         mini.setOnMouseClicked(this::min);
+        back.setOnMouseClicked(this::backToMenu);
+
         ResetMov resetMov = new ResetMov(this, player, boardNumber);
         resetButton.setOnAction(resetMov);
     }
@@ -151,6 +157,12 @@ public abstract class GameController implements Initializable {
 
     public abstract void setBoardClass();
 
+    public void setDialog(Dialog<ButtonType> dialog ,DialogPane root) {
+        dialog.setDialogPane(root);
+        dialog.initStyle(StageStyle.TRANSPARENT);
+        dialog.setX(575);
+        dialog.setY(300);
+    }
     @FXML
     public void close(MouseEvent event)  {
         FXMLLoader loader = new FXMLLoader();
@@ -163,11 +175,7 @@ public abstract class GameController implements Initializable {
         }
 
         javafx.scene.control.Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setDialogPane(root);
-        dialog.initStyle(StageStyle.TRANSPARENT);
-        dialog.setX(575);
-        dialog.setY(300);
-
+        setDialog(dialog,root);
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if(clickedButton.orElse(null) == ButtonType.OK){
 
@@ -176,12 +184,41 @@ public abstract class GameController implements Initializable {
         }
 
     }
-
     @FXML
     public void min(MouseEvent event) {
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setIconified(true);
+    }
+    public void backToMenu(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
+        DialogPane root;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Label label= new Label("deseja voltar \n para o menu?");
+        label.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-alignment: center; -fx-text-alignment: center");
+        root.setContent(label);
+
+        javafx.scene.control.Dialog<ButtonType> dialog = new Dialog<>();
+        setDialog(dialog,root);
+        Optional<ButtonType> clickedButton = dialog.showAndWait();
+        if(clickedButton.orElse(null) == ButtonType.OK){
+            Parent root1;
+            try {
+                root1 = FXMLLoader.load(getClass().getResource("/com/puzzle/views/Menu.fxml"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Scene scene = new Scene(root1);
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     @Override
