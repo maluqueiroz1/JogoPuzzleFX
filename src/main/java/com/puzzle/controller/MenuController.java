@@ -28,8 +28,8 @@ public class MenuController {
     public void gameModes(ActionEvent event) throws IOException {
 
         root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/GameModes.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         PauseTransition pause = new PauseTransition(Duration.millis(100));
         pause.setOnFinished(e ->{

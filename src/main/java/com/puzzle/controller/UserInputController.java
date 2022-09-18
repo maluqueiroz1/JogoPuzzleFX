@@ -1,9 +1,9 @@
 package com.puzzle.controller;
 
-import com.puzzle.gameController.GameController;
-import com.puzzle.gameController.CharController;
-import com.puzzle.gameController.ImgController;
-import com.puzzle.gameController.NumberController;
+import com.puzzle.controller.gameController.GameController;
+import com.puzzle.controller.gameController.CharController;
+import com.puzzle.controller.gameController.ImgController;
+import com.puzzle.controller.gameController.NumberController;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -37,9 +37,11 @@ public class UserInputController  implements Initializable {
     @FXML
     private ToggleGroup type;
     @FXML
-    private RadioButton normal,crazy;
+    private RadioButton normal,crazy, insane, extreme;
     @FXML
     private TextField nameTextField;
+    @FXML
+    private Label inputError,difError,typeError;
     private GameController gameController;
     private int boardNumber;
     private Player player;
@@ -47,33 +49,37 @@ public class UserInputController  implements Initializable {
     public void setChoice(int boardNumber, String title){
         choiceLabel.setText(title);
          this.boardNumber = boardNumber;
+         player = new Player();
     }
 
-    public boolean handleTextField(){
+    public void errorAnimation(Node error,Label errorLabel){
+        error.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
+        new animatefx.animation.Shake(error).play();
+        errorLabel.setStyle("-fx-background-color: #ff0000");
+    }
+
+    public boolean handleTextField() {
         if(nameTextField.getText().length() == 0 || nameTextField.getText().length() > 12){
 
-            nameTextField.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
-            new animatefx.animation.Shake(nameTextField).play();
-            return false;
+           errorAnimation(nameTextField,inputError);
+           return false;
         } else{
 
             nameTextField.setStyle(null);
-            player=new Player(nameTextField.getText());
+            player.setPlayerName(nameTextField.getText());
             System.out.println(player.getPlayerName());
+            inputError.setStyle(null);
+            inputError.setText(null);
             return true;
         }
     }
 
-    public boolean handleLevelToggleGroup(){
-        int r;
-        if(level.getSelectedToggle() == null){
+    public boolean handleLevelToggleGroup() {
 
-            easyLevel.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
-            new animatefx.animation.Shake(easyLevel).play();
-            mediumLevel.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
-            new animatefx.animation.Shake(mediumLevel).play();
-            hardLevel.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
-            new animatefx.animation.Shake(hardLevel).play();
+        if(level.getSelectedToggle() == null){
+            errorAnimation(easyLevel,difError);
+            errorAnimation(mediumLevel,difError);
+            errorAnimation(hardLevel,difError);
             return false;
         } else {
 
@@ -82,51 +88,64 @@ public class UserInputController  implements Initializable {
             hardLevel.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
             if(level.getSelectedToggle() == easyLevel) {
 
-                r=3;
-                player.setLevel(r);
+                player.setLevel(3);
                 System.out.println(player.getLevel());
             }else if(level.getSelectedToggle() == mediumLevel){
 
-                r=4;
-                player.setLevel(r);
+                player.setLevel(4);
                 System.out.println(player.getLevel());
             } else if (level.getSelectedToggle() == hardLevel) {
 
-                r=5;
-                player.setLevel(r);
+                player.setLevel(5);
                 System.out.println(player.getLevel());
             }
+            difError.setStyle(null);
+            difError.setText(null);
             return true;
         }
     }
 
-    public boolean handleTypeToggleGroup(){
+    public boolean handleTypeToggleGroup() {
+
         if(type.getSelectedToggle() == null){
 
-            normal.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
-            new animatefx.animation.Shake(normal).play();
-            crazy.setStyle("-fx-border-color: red; -fx-border-windth: 2px;");
-            new animatefx.animation.Shake(crazy).play();
+            errorAnimation(normal,typeError);
+            errorAnimation(crazy,typeError);
+            errorAnimation(insane,typeError);
+            errorAnimation(extreme,typeError);
             return false;
         } else {
 
             normal.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
             crazy.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
-            player.setCrazyFeature(type.getSelectedToggle() == crazy);
+            insane.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
+            extreme.setStyle("-fx-border-color: #ab2eff; -fx-border-windth: 2px;");
+            if(type.getSelectedToggle() == crazy) {
+
+                player.setCrazyFeature(1);
+                System.out.println(player.getCrazyFeature());
+            }else if(level.getSelectedToggle() == insane){
+
+                player.setCrazyFeature(2);
+                System.out.println(player.getLevel());
+            } else if (level.getSelectedToggle() == extreme) {
+
+                player.setLevel(3);
+                System.out.println(player.getCrazyFeature());
+            }
+            typeError.setStyle(null);
+            typeError.setText(null);
             return true;
         }
+
     }
     public void handlePlayButton(ActionEvent event) throws IOException {
-        if(handleTextField() & handleLevelToggleGroup() & handleTypeToggleGroup()) {
-            switch (boardNumber){
-                case 1:
-                    gameController = new NumberController();
-                    break;
-                case 2:
-                    gameController = new CharController();
-                    break;
-                case 3:
-                    gameController = new ImgController();
+        if(handleTextField() & handleLevelToggleGroup() & handleTypeToggleGroup()){
+
+            switch (boardNumber) {
+                case 1 -> gameController = new NumberController();
+                case 2 -> gameController = new CharController();
+                case 3 -> gameController = new ImgController();
             }
 
             FXMLLoader loader = new FXMLLoader();

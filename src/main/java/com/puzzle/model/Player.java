@@ -7,7 +7,7 @@ public class Player {
     private boolean winner;
     private int moves;
     private int level;
-    private boolean crazyFeature;
+    private int crazyFeature;
 
 
     public void setPlayerName(String playerName) {
@@ -50,11 +50,11 @@ public class Player {
         this.winner = winner;
     }
 
-    public boolean getCrazyFeature() {
+    public int getCrazyFeature() {
         return crazyFeature;
     }
 
-    public void setCrazyFeature(boolean crazyFeature) {
+    public void setCrazyFeature(int crazyFeature) {
         this.crazyFeature = crazyFeature;
     }
 }

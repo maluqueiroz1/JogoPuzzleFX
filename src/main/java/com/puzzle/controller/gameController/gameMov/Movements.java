@@ -88,7 +88,13 @@ public abstract class Movements <T> implements EventHandler<ActionEvent> {
     }
 
     public void checkIfCrazy(T[][] tiles, T[][] sortedTiles, Button[][] buttons){
-        if(player.getCrazyFeature()){
+        if(player.getCrazyFeature() == 1){
+            if(new Random().nextInt(25)==0)
+                crazyMode(tiles,sortedTiles,buttons);
+        } else if (player.getCrazyFeature() == 2) {
+            if(new Random().nextInt(15)==0)
+                crazyMode(tiles,sortedTiles,buttons);
+        } else if( player.getCrazyFeature() == 3){
             if(new Random().nextInt(10)==0)
                 crazyMode(tiles,sortedTiles,buttons);
         }
