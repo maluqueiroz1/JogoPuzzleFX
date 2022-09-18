@@ -13,7 +13,7 @@
 
 .button
 {
-    -fx-padding: 8 15 15 15;
+    -fx-padding: 0 0 7 0;
     -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
     -fx-background-radius: 8;
     -fx-background-color:
@@ -23,7 +23,7 @@
             linear-gradient(to bottom , #ffec87 3%,#ffb22e );
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
     -fx-font-family: Orbitron;
-    -fx-font-size: 31px;
+    -fx-font-size: 32px;
 }
 
 .button:hover
@@ -37,8 +37,12 @@
 
 .button:pressed
 {
-    -fx-padding: 10 15 13 15;
+    -fx-padding: 0 0 2 0;
     -fx-background-insets: 2 0 0 0,2 0 3 0,2 0 4 0,2 0 5 0;
+}
+
+#howToPlay{
+    -fx-font-size: 27px;
 }
 
 #exit{
