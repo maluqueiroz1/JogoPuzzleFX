@@ -61,7 +61,14 @@ public abstract class Movements <T> implements EventHandler<ActionEvent> {
     }
 
     public String getTimeLabelText(){
-        return timeLabel.getText().split(" ")[1];
+        String time = timeLabel.getText().split(" ")[1];
+        int hour = Integer.parseInt(time.split(":")[0]);
+        int min = Integer.parseInt(time.split(":")[1]);
+        int sec = Integer.parseInt(time.split(":")[2]);
+        double millisec = Integer.parseInt(time.split(":")[3]);
+        double totalSec = hour*60*60 + min*60 + sec + (millisec/1000);
+        System.out.println(" "+totalSec);
+        return time;
     }
 
     public void setGreenStyle(Button button){

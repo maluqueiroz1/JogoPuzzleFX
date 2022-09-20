@@ -1,6 +1,8 @@
 package com.puzzle.controller.gameController;
 
+import com.puzzle.controller.IController;
 import com.puzzle.controller.gameController.barMov.ResetMov;
+import com.puzzle.controller.gameController.gameMov.Movements;
 import com.puzzle.model.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,7 +26,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public abstract class GameController implements Initializable {
+public abstract class GameController <T> implements Initializable, IController {
 
     @FXML
     private AnchorPane barPane;
@@ -49,10 +51,19 @@ public abstract class GameController implements Initializable {
     private int boardNumber;
     private Button[][] gButton;
     private Label[][] gLabel;
+    private Movements <T> movements;
     private Timeline clock;
-    private int mil = 0, sec = 0, min = 0, hr = 0;
+    private int mil, sec, min, hr;
 
 
+    public GameController( Player player, int boardNumber){
+        this.player = player;
+        this.boardNumber = boardNumber;
+        mil = 0;
+        sec = 0;
+        min = 0;
+        hr = 0;
+    }
     public Pane getBarPane() {
         return barPane;
     }
@@ -82,7 +93,7 @@ public abstract class GameController implements Initializable {
         this.gLabel = gLabel;
     }
 
-    public Label[][] getgLabel() {
+    public Label[][] getGLabel() {
         return gLabel;
     }
 
@@ -92,18 +103,23 @@ public abstract class GameController implements Initializable {
 
     public void setPlayer(Player player){
         this.player = player;
-        playerLabel.setText("Jogador: "+this.player.getPlayerName());
-        moveLabel.setText("Movimentos: "+ this.player.getMoves());
     }
 
-    public void setBoardNumber(int boardNumber){
-        this.boardNumber = boardNumber;
+    public Movements<T> getMovements() {
+        return movements;
+    }
+
+    public void setMovements(Movements<T> movements) {
+        this.movements = movements;
     }
 
     public void labelEvents() {
         exit.setOnMouseClicked(this::close);
         mini.setOnMouseClicked(this::min);
         back.setOnMouseClicked(this::backToMenu);
+
+        playerLabel.setText("Jogador: "+this.player.getPlayerName());
+        moveLabel.setText("Movimentos: "+ this.player.getMoves());
 
         ResetMov resetMov = new ResetMov(this, player, boardNumber);
         resetButton.setOnAction(resetMov);
@@ -179,7 +195,7 @@ public abstract class GameController implements Initializable {
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if(clickedButton.orElse(null) == ButtonType.OK){
 
-            stage =  (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
 

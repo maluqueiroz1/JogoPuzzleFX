@@ -39,7 +39,7 @@
          <Cursor fx:constant="DEFAULT" />
       </cursor>
    </Button>
-   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="398.0" mnemonicParsing="false" onAction="#exitButton" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="sair" textOverrun="CENTER_ELLIPSIS" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="258.0" AnchorPane.topAnchor="399.0">
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#close" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="sair" textOverrun="CENTER_ELLIPSIS" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="258.0" AnchorPane.topAnchor="399.0">
       <textFill>
          <LinearGradient endY="0.8720379146919431" startX="0.5118483412322274">
             <stops>

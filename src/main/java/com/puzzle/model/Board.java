@@ -2,7 +2,7 @@ package com.puzzle.model;
 
 import java.util.Arrays;
 
-public abstract class Board <T>{
+public abstract class Board <T> implements IBoard <T>{
     private int r,c;
 
     public Board(int r, int c) {
@@ -17,14 +17,6 @@ public abstract class Board <T>{
     public int getC() {
         return c;
     }
-
-    public abstract T[][] tilesAmount();
-
-    public abstract void shuffle(T[][] tiles);
-
-    public abstract int inversion(T[] tiles);
-
-    public abstract int zeroPosition(T[][] tiles);
 
     public boolean solvable(T[] linearTiles, T[][] tiles){
 

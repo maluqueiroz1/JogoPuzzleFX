@@ -22,7 +22,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class GameModesController implements Initializable {
+public class GameModesController implements Initializable, IController {
 
     private Stage stage;
     private Scene scene;

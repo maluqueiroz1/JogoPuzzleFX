@@ -38,13 +38,13 @@ public class ResetMov implements EventHandler<ActionEvent> {
         loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
         switch (boardNumber){
             case 1:
-                gameController = new NumberController();
+                gameController = new NumberController(player,boardNumber);
                 break;
             case 2:
-                gameController = new CharController();
+                gameController = new CharController(player,boardNumber);
                 break;
             case 3:
-                gameController = new ImgController();
+                gameController = new ImgController(player,boardNumber);
         }
         loader.setController(gameController);
         Parent root;
@@ -55,9 +55,7 @@ public class ResetMov implements EventHandler<ActionEvent> {
         }
         scene = new Scene(root);
 
-        gameController.setPlayer(player);
         gameController.labelEvents();
-        gameController.setBoardNumber(boardNumber);
         gameController.setBoardClass();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

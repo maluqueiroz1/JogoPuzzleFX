@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class UserInputController  implements Initializable {
+public class UserInputController  implements Initializable, IController {
 
     private Stage stage;
     private Scene scene;
@@ -143,9 +143,9 @@ public class UserInputController  implements Initializable {
         if(handleTextField() & handleLevelToggleGroup() & handleTypeToggleGroup()){
 
             switch (boardNumber) {
-                case 1 -> gameController = new NumberController();
-                case 2 -> gameController = new CharController();
-                case 3 -> gameController = new ImgController();
+                case 1 -> gameController = new NumberController(player,boardNumber);
+                case 2 -> gameController = new CharController(player,boardNumber);
+                case 3 -> gameController = new ImgController(player,boardNumber);
             }
 
             FXMLLoader loader = new FXMLLoader();
@@ -155,9 +155,7 @@ public class UserInputController  implements Initializable {
             scene = new Scene(root);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            gameController.setPlayer(player);
             gameController.labelEvents();
-            gameController.setBoardNumber(boardNumber);
             gameController.setBoardClass();
 
             PauseTransition pause = new PauseTransition(Duration.millis(250));
@@ -196,7 +194,7 @@ public class UserInputController  implements Initializable {
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if(clickedButton.orElse(null) == ButtonType.OK){
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
 
