@@ -4,6 +4,7 @@ import com.puzzle.controller.gameController.GameController;
 import com.puzzle.controller.gameController.CharController;
 import com.puzzle.controller.gameController.ImgController;
 import com.puzzle.controller.gameController.NumberController;
+import com.puzzle.exception.InvalidInputException;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -58,11 +59,9 @@ public class UserInputController  implements Initializable, IController {
         errorLabel.setStyle("-fx-background-color: #ff0000");
     }
 
-    public boolean handleTextField() {
+    public boolean handleTextField() throws InvalidInputException {
         if(nameTextField.getText().length() == 0 || nameTextField.getText().length() > 12){
-
-           errorAnimation(nameTextField,inputError);
-           return false;
+           throw new InvalidInputException(nameTextField.getText().length());
         } else{
 
             nameTextField.setStyle(null);
@@ -140,30 +139,35 @@ public class UserInputController  implements Initializable, IController {
 
     }
     public void handlePlayButton(ActionEvent event) throws IOException {
-        if(handleTextField() & handleLevelToggleGroup() & handleTypeToggleGroup()){
+        try {
+            if(handleLevelToggleGroup() & handleTypeToggleGroup() & handleTextField()){
 
-            switch (boardNumber) {
-                case 1 -> gameController = new NumberController(player,boardNumber);
-                case 2 -> gameController = new CharController(player,boardNumber);
-                case 3 -> gameController = new ImgController(player,boardNumber);
+                switch (boardNumber) {
+                    case 1 -> gameController = new NumberController(player,boardNumber);
+                    case 2 -> gameController = new CharController(player,boardNumber);
+                    case 3 -> gameController = new ImgController(player,boardNumber);
+                }
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
+                loader.setController(gameController);
+                Parent root = loader.load();
+                scene = new Scene(root);
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                gameController.labelEvents();
+                gameController.setBoardClass();
+
+                PauseTransition pause = new PauseTransition(Duration.millis(250));
+                pause.setOnFinished(e -> {
+                    stage.setScene(scene);
+                    stage.show();
+                });
+                pause.play();
             }
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
-            loader.setController(gameController);
-            Parent root = loader.load();
-            scene = new Scene(root);
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            gameController.labelEvents();
-            gameController.setBoardClass();
-
-            PauseTransition pause = new PauseTransition(Duration.millis(250));
-            pause.setOnFinished(e -> {
-                stage.setScene(scene);
-                stage.show();
-            });
-            pause.play();
+        } catch (InvalidInputException e) {
+            errorAnimation(nameTextField,inputError);
+            inputError.setText(e.getMessage());
         }
     }
 
