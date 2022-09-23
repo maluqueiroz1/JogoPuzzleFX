@@ -2,6 +2,7 @@ package com.puzzle.controller.gameController.gameMov;
 
 import com.puzzle.controller.WinnerController;
 import com.puzzle.model.Player;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -138,8 +140,12 @@ public abstract class Movements <T> implements EventHandler<ActionEvent> {
         winnerController.playerLabels();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        PauseTransition pause = new PauseTransition(Duration.millis(120));
+        pause.setOnFinished(e ->{
+            stage.setScene(scene);
+            stage.show();
+        });
+        pause.play();
     }
 
 
