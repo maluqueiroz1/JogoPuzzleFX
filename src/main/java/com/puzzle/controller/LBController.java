@@ -1,9 +1,7 @@
 package com.puzzle.controller;
 
-
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -12,9 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -22,39 +20,25 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class MenuController implements Initializable, IController {
+public class LBController implements Initializable,IController {
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    public void gameModes(ActionEvent event) throws IOException {
+    public void backToMenu(ActionEvent event) throws IOException {
 
-        root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/GameModes.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/Menu.fxml"));
         scene = new Scene(root);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        PauseTransition pause = new PauseTransition(Duration.millis(250));
 
-        PauseTransition pause = new PauseTransition(Duration.millis(100));
         pause.setOnFinished(e ->{
             stage.setScene(scene);
-            stage.show();
-        });
-        pause.play();
-    }
-    public void leaderBoard(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/LeaderBoard.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-
-        PauseTransition pause = new PauseTransition(Duration.millis(100));
-        pause.setOnFinished(e ->{
-            stage.setScene(scene);
-            stage.show();
-        });
+            stage.show();});
         pause.play();
     }
 
-    @FXML
     public void close(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
@@ -71,12 +55,11 @@ public class MenuController implements Initializable, IController {
             stage =  (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
-
     }
-    @FXML
+
     public void min(MouseEvent event) {
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setIconified(true);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
     }
 
     @Override

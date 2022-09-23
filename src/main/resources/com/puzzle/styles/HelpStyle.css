@@ -9,20 +9,21 @@
     -fx-background-color: #391680;
 
 }
-.button
-{
-    -fx-padding: 8 15 15 15;
-    -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
-    -fx-background-radius: 8;
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%,#dc8f00 0%,#903b12 100%),
-            #ffb22e,
-            #ffb22e,
-            linear-gradient(to bottom , #ffec87 3%,#ffb22e );
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
-    -fx-font-family: Orbitron;
-    -fx-font-size:8px;
-    -fx-text-fill: #7613c0;
+.button{
+-fx-pref-width: 30px;
+-fx-pref-height: 35px;
+-fx-padding: 0 0 7 0;
+-fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
+-fx-background-radius: 8;
+-fx-background-color:
+linear-gradient(from 0% 93% to 0% 100%,#dc8f00 0%,#903b12 100%),
+#ffb22e,
+#ffb22e,
+linear-gradient(to bottom , #ffec87 3%,#ffb22e );
+-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
+-fx-font-family: Orbitron;
+-fx-font-size:12px;
+-fx-text-fill: #7613c0;
 }
 
 .button:hover
@@ -37,7 +38,7 @@
 
 .button:pressed
 {
-    -fx-padding: 10 15 13 15;
+    -fx-padding: 0 0 2 0;
     -fx-background-insets: 2 0 0 0,2 0 3 0,2 0 4 0,2 0 5 0;
 
 }

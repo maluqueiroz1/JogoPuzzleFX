@@ -15,7 +15,7 @@
          <Font name="System Bold" size="70.0" />
       </font>
    </Label>
-   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="188.0" mnemonicParsing="false" onAction="#gameModes" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="jogar" textAlignment="CENTER" AnchorPane.topAnchor="188.0">
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="210.0" mnemonicParsing="false" onAction="#gameModes" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="jogar" textAlignment="CENTER" AnchorPane.topAnchor="210.0">
       <textFill>
          <LinearGradient endY="0.8199052132701422" startX="0.45023696682464454">
             <stops>
@@ -39,7 +39,7 @@
          <Cursor fx:constant="DEFAULT" />
       </cursor>
    </Button>
-   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#close" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="sair" textOverrun="CENTER_ELLIPSIS" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="258.0" AnchorPane.topAnchor="399.0">
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#close" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="sair" textOverrun="CENTER_ELLIPSIS" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="258.0" AnchorPane.topAnchor="380.0">
       <textFill>
          <LinearGradient endY="0.8720379146919431" startX="0.5118483412322274">
             <stops>
@@ -60,7 +60,7 @@
          <Font size="31.0" />
       </font>
    </Button>
-   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="260.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="ranking" textAlignment="CENTER" AnchorPane.topAnchor="260.0">
+   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="295.0" mnemonicParsing="false" onAction="#leaderBoard" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="ranking" textAlignment="CENTER" AnchorPane.topAnchor="295.0">
       <font>
          <Font size="29.0" />
       </font>
@@ -83,25 +83,4 @@
    </Button>
    <Label id="exit" layoutX="666.0" layoutY="14.0" onMouseClicked="#close" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0" />
    <Label id="mini" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="629.0" layoutY="14.0" onMouseClicked="#min" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="2.0" />
-   <Button id="howToPlay" alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="330.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="183.0" stylesheets="@../styles/MenuStyle.css" text="como jogar" textOverrun="CENTER_ELLIPSIS" AnchorPane.topAnchor="330.0">
-      <textFill>
-         <LinearGradient endY="0.8720379146919431" startX="0.5118483412322274">
-            <stops>
-               <Stop>
-                  <color>
-                     <Color red="0.572549045085907" green="0.04313725605607033" blue="0.6431372761726379" />
-                  </color>
-               </Stop>
-               <Stop offset="1.0">
-                  <color>
-                     <Color red="1.0" green="0.019999999552965164" blue="0.8926666378974915" />
-                  </color>
-               </Stop>
-            </stops>
-         </LinearGradient>
-      </textFill>
-      <font>
-         <Font size="31.0" />
-      </font>
-   </Button>
 </AnchorPane>

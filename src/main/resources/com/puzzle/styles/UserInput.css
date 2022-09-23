@@ -17,10 +17,10 @@
     -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
     -fx-background-radius: 8;
     -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #7900dc 0%, #4a0c8c 100%),
-            #cb2eff,
-            #cb2eff,
-            linear-gradient(to bottom , #d387ff 3%, #ab2eff);
+            linear-gradient(from 0% 93% to 0% 100%, #571883 0%, #190a4f 100%),
+            #5c1883,
+            #5c1883,
+            linear-gradient(to bottom , #a500dc 3%, #5c1883);
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
     -fx-font-family: Orbitron;
     -fx-font-size: 31px;
@@ -30,26 +30,26 @@
 {
     -fx-font-family: Orbitron;
     -fx-border-radius: 5px ;
-    -fx-border-color: #ab2eff;
+    -fx-border-color: #7714a8;
     -fx-padding: 10px 5px;
 }
 .radio-button .radio{
-    -fx-background-color: #ab2eff;
+    -fx-background-color: #7714a8;
     -fx-background-radius: 25px;
 }
 
 .radio-button:selected {
     -fx-background-radius: 5px;
-    -fx-background-color: #ab2eff;
+    -fx-background-color: #7714a8;
     -fx-padding: 10px 5px;
 }
 #back{
-    -fx-font-size: 10px;
+    -fx-font-size: 14px;
 }
 
 .button
 {
-    -fx-padding: 8 15 15 15;
+    -fx-padding: 0 0 7 0;
     -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
     -fx-background-radius: 8;
     -fx-background-color:
@@ -73,7 +73,7 @@
 
 .button:pressed
 {
-    -fx-padding: 10 15 13 15;
+    -fx-padding: 0 0 5 0;
     -fx-background-insets: 2 0 0 0,2 0 3 0,2 0 4 0,2 0 5 0;
 }
 
