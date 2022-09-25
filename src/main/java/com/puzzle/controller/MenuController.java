@@ -42,9 +42,17 @@ public class MenuController implements Initializable, IController {
         pause.play();
     }
     public void leaderBoard(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/puzzle/views/LeaderBoard.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        LBController controller = new LBController();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/com/puzzle/views/LeaderBoard.fxml"));
+        loader.setController(controller);
+        root = loader.load();
         scene = new Scene(root);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        controller.labelEvents();
+        controller.initTable();
 
         PauseTransition pause = new PauseTransition(Duration.millis(100));
         pause.setOnFinished(e ->{

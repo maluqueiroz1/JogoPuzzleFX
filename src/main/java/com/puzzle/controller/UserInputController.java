@@ -5,6 +5,7 @@ import com.puzzle.controller.gameController.CharController;
 import com.puzzle.controller.gameController.ImgController;
 import com.puzzle.controller.gameController.NumberController;
 import com.puzzle.exception.InvalidInputException;
+import com.puzzle.model.DAO.PlayerDAO;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -157,6 +158,8 @@ public class UserInputController  implements Initializable, IController {
 
                 gameController.labelEvents();
                 gameController.setBoardClass();
+                PlayerDAO playerDAO = new PlayerDAO();
+                playerDAO.add(player);
 
                 PauseTransition pause = new PauseTransition(Duration.millis(250));
                 pause.setOnFinished(e -> {

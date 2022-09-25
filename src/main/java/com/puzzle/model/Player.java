@@ -2,13 +2,17 @@ package com.puzzle.model;
 
 public class Player {
 
+    private Long id;
     private String playerName;
-    private String time;
+    private double time;
     private boolean winner;
     private int moves;
     private int level;
     private int crazyFeature;
 
+    public Long getId() {return id;}
+
+    public void setId(Long id) {this.id = id;}
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
@@ -34,11 +38,11 @@ public class Player {
         return moves;
     }
 
-    public String getTime() {
+    public double getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(double time) {
         this.time = time;
     }
 

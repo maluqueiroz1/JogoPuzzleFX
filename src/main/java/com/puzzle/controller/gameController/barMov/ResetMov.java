@@ -36,15 +36,10 @@ public class ResetMov implements EventHandler<ActionEvent> {
         gameController.updateMoves(0);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
-        switch (boardNumber){
-            case 1:
-                gameController = new NumberController(player,boardNumber);
-                break;
-            case 2:
-                gameController = new CharController(player,boardNumber);
-                break;
-            case 3:
-                gameController = new ImgController(player,boardNumber);
+        switch (boardNumber) {
+            case 1 -> gameController = new NumberController(player, boardNumber);
+            case 2 -> gameController = new CharController(player, boardNumber);
+            case 3 -> gameController = new ImgController(player, boardNumber);
         }
         loader.setController(gameController);
         Parent root;

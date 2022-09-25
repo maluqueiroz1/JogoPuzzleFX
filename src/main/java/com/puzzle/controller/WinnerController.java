@@ -34,7 +34,7 @@ public class WinnerController implements Initializable, IController {
     public void playerLabels(){
         playerLabel.setText("Muito bem "+player.getPlayerName()+"!");
         winLabel.setText("você ganhou com:\n" +player.getMoves()+
-                " movimentos \n no tempo: "+ player.getTime());
+                " movimentos \n no tempo: "+ player.getTime() +" segundos");
     }
     public void handleBackToMenu(ActionEvent event) throws IOException{
 

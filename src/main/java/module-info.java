@@ -12,6 +12,7 @@ module com.example.jogopuzzlefx {
     requires com.almasb.fxgl.all;
     requires AnimateFX;
     requires java.desktop;
+    requires java.sql;
 
     opens com.puzzle to javafx.fxml;
     exports com.puzzle;
@@ -19,5 +20,7 @@ module com.example.jogopuzzlefx {
     opens com.puzzle.controller to javafx.fxml;
     exports com.puzzle.controller.gameController;
     opens com.puzzle.controller.gameController to javafx.fxml;
+    opens com.puzzle.model to javafx.fxml;
+    exports com.puzzle.model;
 
 }

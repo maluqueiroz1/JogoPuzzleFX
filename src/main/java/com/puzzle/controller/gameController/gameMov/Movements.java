@@ -1,6 +1,7 @@
 package com.puzzle.controller.gameController.gameMov;
 
 import com.puzzle.controller.WinnerController;
+import com.puzzle.model.DAO.PlayerDAO;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
@@ -21,7 +22,7 @@ import java.util.Random;
 
 public abstract class Movements <T> implements EventHandler<ActionEvent> {
 
-    private Player player;
+    private Player player,player1;
     private int rowN, colN;
     private Button[][] buttons;
     private Timeline clock;
@@ -62,7 +63,7 @@ public abstract class Movements <T> implements EventHandler<ActionEvent> {
         this.colN = colN;
     }
 
-    public String getTimeLabelText(){
+    public double getTimeLabelText(){
         String time = timeLabel.getText().split(" ")[1];
         int hour = Integer.parseInt(time.split(":")[0]);
         int min = Integer.parseInt(time.split(":")[1]);
@@ -70,7 +71,7 @@ public abstract class Movements <T> implements EventHandler<ActionEvent> {
         double millisec = Integer.parseInt(time.split(":")[3]);
         double totalSec = hour*60*60 + min*60 + sec + (millisec/1000);
         System.out.println(" "+totalSec);
-        return time;
+        return totalSec;
     }
 
     public void setGreenStyle(Button button){
@@ -88,6 +89,8 @@ public abstract class Movements <T> implements EventHandler<ActionEvent> {
             player.setWinner(true);
             clock.stop();
             player.setTime(getTimeLabelText());
+            PlayerDAO playerDAO = new PlayerDAO();
+            playerDAO.update(player);
             try {
                 winScreen(actionEvent);
             } catch (IOException e) {
