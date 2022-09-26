@@ -75,7 +75,15 @@ public abstract class Movements <T> implements EventHandler<ActionEvent> {
     }
 
     public void setGreenStyle(Button button){
-        button.setStyle("-fx-background-color: #c9ff08");
+        if(player.getLevel()<4){
+            button.setStyle("-fx-background-color: #c9ff08; -fx-font-size: 80px");
+        }
+        else if(player.getLevel()==4){
+            button.setStyle("-fx-background-color: #c9ff08; -fx-font-size: 50px");
+        }
+        else {
+            button.setStyle("-fx-background-color: #c9ff08; -fx-font-size: 30px");
+        }
     }
 
     public void checkIfGreen(T tile1,T tile2){

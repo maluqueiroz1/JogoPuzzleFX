@@ -3,6 +3,7 @@ package com.puzzle.controller.gameController;
 import com.puzzle.controller.IController;
 import com.puzzle.controller.gameController.barMov.ResetMov;
 import com.puzzle.controller.gameController.gameMov.Movements;
+import com.puzzle.model.DAO.PlayerDAO;
 import com.puzzle.model.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -194,7 +195,8 @@ public abstract class GameController <T> implements Initializable, IController {
         setDialog(dialog,root);
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if(clickedButton.orElse(null) == ButtonType.OK){
-
+            PlayerDAO playerDAO = new PlayerDAO();
+            playerDAO.delete(player);
             stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
