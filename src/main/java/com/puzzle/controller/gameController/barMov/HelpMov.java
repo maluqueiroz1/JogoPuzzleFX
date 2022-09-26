@@ -10,25 +10,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.StageStyle;
 
-import java.io.File;
 import java.io.IOException;
 
 public class HelpMov implements EventHandler<ActionEvent> {
 
     private GridPane grid;
-    private File[][] imgSortedTiles;
     private ImageView[][] helpView;
 
-    public HelpMov(File[][] imgSortedTiles, ImageView[][] helpView){
-        this.imgSortedTiles = imgSortedTiles;
+    public HelpMov( ImageView[][] helpView){
         this.helpView = helpView;
+
     }
     public void placeImages(){
         grid = new GridPane();
         for (int i = 0; i < helpView.length; i++) {
             for (int j = 0; j < helpView.length; j++) {
 
-                helpView[i][j] = new ImageView(String.valueOf(imgSortedTiles[i][j]));
                 if(helpView.length < 4){
                     helpView[i][j].setFitHeight(60);
                     helpView[i][j].setFitWidth(60);

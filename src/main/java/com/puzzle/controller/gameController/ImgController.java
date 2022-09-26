@@ -7,16 +7,33 @@ import com.puzzle.model.Player;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.image.ImageView;
-import java.io.File;
 import java.util.Objects;
 
 public class ImgController extends GameController <Integer>{
 
     public ImgController(Player player, int boardNumber) {
         super(player, boardNumber);
+    }
+
+    public void addImages(ImageView[][] imageView){
+        for(int i = 0; i < getPlayer().getLevel(); i++){
+            for(int j = 0; j < getPlayer().getLevel(); j++) {
+                if(getPlayer().getLevel()*getPlayer().getLevel() < 16){
+                    Image image = new Image(getClass().getResourceAsStream("/com/puzzle/images/minions9/"+i+j+".jpg"));
+                    imageView[i][j] = new ImageView(image);
+                } else if (getPlayer().getLevel()*getPlayer().getLevel() == 16) {
+                    Image image = new Image(getClass().getResourceAsStream("/com/puzzle/images/minions16/"+i+j+".jpg"));
+                    imageView[i][j] = new ImageView(image);
+                } else if (getPlayer().getLevel()*getPlayer().getLevel() > 16) {
+                    Image image = new Image(getClass().getResourceAsStream("/com/puzzle/images/minions25/"+i+j+".jpg"));
+                    imageView[i][j] = new ImageView(image);
+                }
+            }
+        }
     }
 
     public void setImageSize(ImageView imageView){
@@ -34,11 +51,11 @@ public class ImgController extends GameController <Integer>{
         }
     }
 
-    public void InsertBarButtons(File[][] imgSortedTiles, ImageView[][] helpView){
+    public void InsertBarButtons(ImageView[][] helpView){
 
         Button helpButton = new Button("?");
         helpButton.setId("barButtons");
-        HelpMov helpMov = new HelpMov(imgSortedTiles,helpView);
+        HelpMov helpMov = new HelpMov(helpView);
         helpButton.setOnAction(helpMov);
 
         getBarPane().getChildren().add(helpButton);
@@ -51,20 +68,20 @@ public class ImgController extends GameController <Integer>{
         setGLabel(new Label[getPlayer().getLevel()][getPlayer().getLevel()]);
 
         ImgBoard imgBoard = new ImgBoard(getPlayer().getLevel(), getPlayer().getLevel());
-        File[][] imgTiles = imgBoard.iTilesAmount();
-        File[][] imgSortedTiles = imgBoard.iTilesAmount();
         Integer[][] numberTiles = imgBoard.tilesAmount();
         Integer[][] numberSortedTiles = imgBoard.tilesAmount();
         Integer[] linearTiles = new Integer[getPlayer().getLevel()*getPlayer().getLevel()];
+        ImageView[][] imageViews = new ImageView[getPlayer().getLevel()][getPlayer().getLevel()];
+        addImages(imageViews);
 
         do {
-            imgBoard.imgShuffle(numberTiles, imgTiles);
+            imgBoard.imgShuffle(numberTiles,imageViews);
         }
         while (!imgBoard.solvable(linearTiles,numberTiles));
 
-        ImageView[][] imageViews = new ImageView[getPlayer().getLevel()][getPlayer().getLevel()];
         ImageView[][] helpView = new ImageView[getPlayer().getLevel()][getPlayer().getLevel()];
-        InsertBarButtons(imgSortedTiles, helpView);
+        addImages(helpView);
+        InsertBarButtons(helpView);
         startClock();
         setMovements(new ImgMov(this, getPlayer(), getClock(), getTimeLabel(), imgBoard, numberTiles, numberSortedTiles));
 
@@ -82,7 +99,6 @@ public class ImgController extends GameController <Integer>{
                     getMovements().setRowN(i);
                     getMovements().setColN(j);
                 }else{
-                    imageViews[i][j] = new ImageView(String.valueOf(imgTiles[i][j]));
                     setImageSize(imageViews[i][j]);
                     getGButton()[i][j].setGraphic(imageViews[i][j]);
                     getGButton()[i][j].setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
