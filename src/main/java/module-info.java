@@ -13,6 +13,7 @@ module com.example.jogopuzzlefx {
     requires AnimateFX;
     requires java.desktop;
     requires java.sql;
+    requires org.postgresql.jdbc;
 
     opens com.puzzle to javafx.fxml;
     exports com.puzzle;
