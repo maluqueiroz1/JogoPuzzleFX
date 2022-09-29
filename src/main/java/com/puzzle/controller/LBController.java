@@ -22,7 +22,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -64,16 +63,18 @@ public class LBController implements Initializable,IController {
     }
 
     public ObservableList<Player> updateTable(){
+
         PlayerDAO playerDAO = new PlayerDAO();
         List<Player> players;
         players =playerDAO.getList();
-        Collections.sort(players,(a, b) -> (int) (a.getTime() - b.getTime()));
-        for(Long i=0L; i < players.size();i++){
-            players.get(Math.toIntExact(i)).setId(i + 1L);
+        players.sort((a, b) -> (int) (a.getTime() - b.getTime()));
+        for(long i = 0L; i < players.size(); i++){
+                players.get(Math.toIntExact(i)).setId(i + 1L);
         }
         ObservableList<Player> observableList = FXCollections.observableArrayList();
-        for (int i = 0; i < 10; i++) {
-            observableList.add(players.get(i));
+        for (int i = 0; i < players.size(); i++) {
+            if(players.get(i).getId() < 11)
+                observableList.add(players.get(i));
         }
         return observableList;
     }
@@ -104,7 +105,7 @@ public class LBController implements Initializable,IController {
     public void close(MouseEvent event) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
-        DialogPane root = null;
+        DialogPane root;
         try {
             root = loader.load();
         } catch (IOException e) {

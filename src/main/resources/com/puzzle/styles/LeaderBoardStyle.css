@@ -95,7 +95,22 @@
 
 .table-view .table-cell{
     -fx-border-radius: 10;
-    -fx-border-color: white;
+    -fx-border-color: #ff0cd9;
+    -fx-border-insets: 0 5 0 5;
+    -fx-border-width: 2px;
+}
+
+#rank{
+    -fx-border-radius: 100;
+    -fx-pref-width: 70px;
+}
+#names{
+    -fx-border-radius: 100;
+    -fx-pref-width: 197px;
+}
+#time{
+    -fx-border-radius: 100;
+    -fx-pref-width: 170px;
 }
 
 .table-view .column-header,

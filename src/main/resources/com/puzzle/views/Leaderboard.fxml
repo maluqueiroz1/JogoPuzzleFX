@@ -15,9 +15,9 @@
     <Pane id="pane" layoutX="125.0" layoutY="193.0" prefHeight="450.0" prefWidth="450.0">
         <TableView fx:id="ranking" layoutX="5.0" layoutY="30.0" prefHeight="420.0" prefWidth="440.0" stylesheets="@../styles/LeaderBoardStyle.css">
            <columns>
-               <TableColumn id="7" fx:id="position" editable="false" prefWidth="90.0" sortable="false" text="rank" />
-               <TableColumn fx:id="name" editable="false" maxWidth="4989.0" prefWidth="187.0" resizable="false" sortable="false" text="nome" />
-               <TableColumn fx:id="time" editable="false" prefWidth="160.0" sortable="false" text="tempo" />
+               <TableColumn id="rank" fx:id="position" editable="false" prefWidth="90.0" sortable="false" text="rank" />
+               <TableColumn id="names" fx:id="name" editable="false" maxWidth="4989.0" prefWidth="187.0" resizable="false" sortable="false" text="nome" />
+               <TableColumn id="time" fx:id="time" editable="false" prefWidth="160.0" sortable="false" text="tempo" />
            </columns>
         </TableView>
     </Pane>
@@ -43,5 +43,5 @@
       </textFill></Button>
     <Label id="exit" fx:id="exit" layoutX="666.0" layoutY="14.0" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="2.0" />
     <Label id="mini" fx:id="mini" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="629.0" layoutY="14.0" prefHeight="20.0" prefWidth="20.0" stylesheets="@../styles/MenuStyle.css" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="2.0" />
-   <Label id="crown" layoutX="186.0" layoutY="265.0" prefHeight="20.0" prefWidth="20.0" />
+   <Label id="crown" layoutX="186.0" layoutY="265.0" prefHeight="20.0" prefWidth="20.0" AnchorPane.leftAnchor="172.0" />
 </AnchorPane>
