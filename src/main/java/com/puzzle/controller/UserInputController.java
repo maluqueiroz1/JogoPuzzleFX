@@ -50,8 +50,8 @@ public class UserInputController  implements Initializable, IController {
 
     public void setChoice(int boardNumber, String title){
         choiceLabel.setText(title);
-         this.boardNumber = boardNumber;
-         player = new Player();
+        this.boardNumber = boardNumber;
+        player = new Player();
     }
 
     public void errorAnimation(Node error,Label errorLabel){
@@ -80,6 +80,7 @@ public class UserInputController  implements Initializable, IController {
             errorAnimation(easyLevel,difError);
             errorAnimation(mediumLevel,difError);
             errorAnimation(hardLevel,difError);
+            difError.setText("Erro: selecione uma opção");
             return false;
         } else {
 
@@ -113,6 +114,7 @@ public class UserInputController  implements Initializable, IController {
             errorAnimation(crazy,typeError);
             errorAnimation(insane,typeError);
             errorAnimation(extreme,typeError);
+            typeError.setText("Erro: selecione uma opção");
             return false;
         } else {
 
