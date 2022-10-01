@@ -22,7 +22,7 @@ import java.util.Random;
 
 public abstract class Movements <T> implements EventHandler<ActionEvent> {
 
-    private Player player,player1;
+    private Player player;
     private int rowN, colN;
     private Button[][] buttons;
     private Timeline clock;
@@ -70,8 +70,9 @@ public abstract class Movements <T> implements EventHandler<ActionEvent> {
         int sec = Integer.parseInt(time.split(":")[2]);
         double millisec = Integer.parseInt(time.split(":")[3]);
         double totalSec = hour*60*60 + min*60 + sec + (millisec/1000);
-        System.out.println(" "+totalSec);
-        return totalSec;
+        double t = Math.round(totalSec * 1000) / 1000.0;
+        System.out.println(" "+t);
+        return t;
     }
 
     public void setGreenStyle(Button button){

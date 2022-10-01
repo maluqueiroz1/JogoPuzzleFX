@@ -74,8 +74,12 @@
 
 }
 
+.table-view .label{
+    -fx-text-fill: transparent;
+}
+
 .table-view .column-header{
-    -fx-pref-height: 33px;
+    -fx-pref-height: 35px;
 
 }
 .table-view .column-header .label {
@@ -89,7 +93,7 @@
 .table-view .cell{
     -fx-background-color: transparent;
     -fx-text-fill: white;
-    -fx-padding: 5 0 4 0;
+    -fx-padding: 4 0 3 0;
     -fx-pref-height: 38px;
 }
 
@@ -101,15 +105,12 @@
 }
 
 #rank{
-    -fx-border-radius: 100;
     -fx-pref-width: 70px;
 }
 #names{
-    -fx-border-radius: 100;
     -fx-pref-width: 197px;
 }
 #time{
-    -fx-border-radius: 100;
     -fx-pref-width: 170px;
 }
 

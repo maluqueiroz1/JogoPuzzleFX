@@ -196,7 +196,7 @@ public abstract class GameController <T> implements Initializable, IController {
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if(clickedButton.orElse(null) == ButtonType.OK){
             PlayerDAO playerDAO = new PlayerDAO();
-            playerDAO.delete(player);
+            playerDAO.update(player);
             stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }

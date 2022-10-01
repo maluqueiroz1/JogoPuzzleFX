@@ -3,7 +3,7 @@
     src: url('../orbitron/Orbitron-Bold.ttf');
 }
 .root{
-    -fx-background-image: url('../images/background/WinnerBG.JPG');
+    -fx-background-image: url('../images/background/WinnerBG.gif');
     -fx-background-size: contain;
 }
 .label{
@@ -13,7 +13,7 @@
 #title
 {
     -fx-background-image: url('../images/YellowLabel.PNG');
-    -fx-background-size: contain;
+    -fx-background-size: cover;
 }
 .button
 {
