@@ -7,6 +7,7 @@ import com.puzzle.model.Player;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class NumberController extends GameController <Integer>{
@@ -22,12 +23,17 @@ public class NumberController extends GameController <Integer>{
         NumberBoard numberBoard = new NumberBoard(getPlayer().getLevel(), getPlayer().getLevel());
         Integer[][] numberTiles = numberBoard.tilesAmount();
         Integer[][] numberSortedTiles = numberBoard.tilesAmount();
-        Integer[] linearTiles = new Integer[getPlayer().getLevel()*getPlayer().getLevel()];
+        Integer[] linearTiles = new Integer[getPlayer().getLevel() * getPlayer().getLevel()];
         do {
             numberBoard.shuffle(numberTiles);
         }
-        while (!numberBoard.solvable(linearTiles,numberTiles));
+        while (!numberBoard.solvable(linearTiles, numberTiles));
 
+        System.out.println(Arrays.deepToString(getPlayer().get2DNTiles()));
+        if(getPlayer().get2DNTiles() != null)
+            numberTiles = getPlayer().get2DNTiles();
+
+        getPlayer().set2DNTiles(numberTiles);
         setMovements(new NumberMov(this,getPlayer(), getClock(), getTimeLabel(), numberBoard, numberTiles, numberSortedTiles));
 
         for (int i = 0; i < getPlayer().getLevel(); i++) {
@@ -45,7 +51,7 @@ public class NumberController extends GameController <Integer>{
                     getMovements().setColN(j);
                 } else {
                    if (Objects.equals(numberTiles[i][j], numberSortedTiles[i][j]))
-                        getGButton()[i][j].setStyle("-fx-background-color: #c9ff08");
+                       setGreenStyle(getGButton()[i][j]);
                 }
                 getGButton()[i][j].setOnAction(getMovements());
                 getGrid().add(getGButton()[i][j], j, i);

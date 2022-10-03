@@ -2,10 +2,7 @@ package com.puzzle.model.DAO;
 
 import com.puzzle.model.Player;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -47,8 +44,18 @@ public class PlayerDAO {
         }
     }
 
+    public Array convertToSQLArray(Integer[] array) throws SQLException {
+        return con.createArrayOf("INTEGER", array);
+    }
+
+    public Integer[] convertToJava(Array array) throws SQLException {
+        Integer[] a;
+        a = (Integer[]) array.getArray();
+        return a;
+    }
+
     public boolean update(Player player){
-        String sql = "UPDATE player SET time = ?,level = ?,moves = ?,winner = ?,playername = ?,crazyfeature = ?, choice = ? WHERE id = ?;";
+        String sql = "UPDATE player SET time = ?,level = ?,moves = ?,winner = ?,playername = ?,crazyfeature = ?, choice = ?, numberarray = ?  WHERE id = ?;";
 
         try {
             PreparedStatement statement = con.prepareStatement(sql);
@@ -59,7 +66,8 @@ public class PlayerDAO {
             statement.setString(5, player.getPlayerName());
             statement.setInt(6,player.getCrazyFeature());
             statement.setInt(7,player.getChoice());
-            statement.setLong(8,player.getId());
+            statement.setArray(8,convertToSQLArray(player.get1DNTiles()));
+            statement.setLong(9,player.getId());
             statement.execute();
             statement.close();
             con.close();
@@ -104,6 +112,8 @@ public class PlayerDAO {
                 player.setCrazyFeature(set.getInt("crazyfeature"));
                 player.setWinner(set.getBoolean("winner"));
                 player.setChoice(set.getInt("choice"));
+                if(set.getArray("numberarray") != null)
+                    player.set1DNTiles(convertToJava(set.getArray("numberarray")));
                 players.add(player);
             }
             statement.close();

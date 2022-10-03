@@ -49,7 +49,7 @@ public class MenuController implements Initializable, IController {
         scene = new Scene(root1);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        PauseTransition pause = new PauseTransition(Duration.millis(200));
+        PauseTransition pause = new PauseTransition(Duration.millis(50));
         pause.setOnFinished(e ->{
             stage.setScene(scene);
             stage.show();

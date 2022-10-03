@@ -66,11 +66,13 @@ public class NumberMov extends Movements <Integer> {
 
                 checkIfGreen(nTiles[getRowN()][getColN()], nSortedTiles[getRowN()][getColN()]);
 
+                getPlayer().set2DNTiles(nTiles);
+                numberController.updateMoves(getPlayer().getMoves()+1);
+
                 checkIfWon(numberBoard.win(nTiles), actionEvent);
 
                 setRowN(i);
                 setColN(j);
-                numberController.updateMoves(getPlayer().getMoves()+1);
             }
         }
     }

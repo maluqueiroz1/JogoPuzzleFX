@@ -177,6 +177,18 @@ public abstract class GameController <T> implements Initializable, IController {
         moveLabel.setText("Movimentos: "+ moves);
     }
 
+    public void setGreenStyle(Button button){
+        if(player.getLevel()<4){
+            button.setStyle("-fx-background-color: #c9ff08; -fx-font-size: 80px");
+        }
+        else if(player.getLevel()==4){
+            button.setStyle("-fx-background-color: #c9ff08; -fx-font-size: 50px");
+        }
+        else {
+            button.setStyle("-fx-background-color: #c9ff08; -fx-font-size: 30px");
+        }
+    }
+
     public void setGButtonStyle(Button gButton){
         if(player.getLevel()<4){
             gButton.setPrefSize(195,195);
