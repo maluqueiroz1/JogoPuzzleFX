@@ -15,8 +15,8 @@ import java.util.Objects;
 
 public class ImgController extends GameController <Integer>{
 
-    public ImgController(Player player, int boardNumber) {
-        super(player, boardNumber);
+    public ImgController(Player player) {
+        super(player);
     }
 
     public void addImages(ImageView[][] imageView){
@@ -82,7 +82,6 @@ public class ImgController extends GameController <Integer>{
         ImageView[][] helpView = new ImageView[getPlayer().getLevel()][getPlayer().getLevel()];
         addImages(helpView);
         InsertBarButtons(helpView);
-        startClock();
         setMovements(new ImgMov(this, getPlayer(), getClock(), getTimeLabel(), imgBoard, numberTiles, numberSortedTiles));
 
         for(int i = 0; i < getPlayer().getLevel(); i++){

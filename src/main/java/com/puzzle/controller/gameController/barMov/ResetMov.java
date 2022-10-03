@@ -23,23 +23,23 @@ public class ResetMov implements EventHandler<ActionEvent> {
     private Player player;
     private Stage stage;
     private Scene scene;
-    private int boardNumber;
 
-    public ResetMov(GameController gameController, Player player, int boardNumber){
+    public ResetMov(GameController gameController, Player player){
         this.gameController = gameController;
         this.player = player;
-        this.boardNumber = boardNumber;
     }
 
     @Override
     public void handle(ActionEvent event) {
         gameController.updateMoves(0);
+        player.setTime(0.0);
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
-        switch (boardNumber) {
-            case 1 -> gameController = new NumberController(player, boardNumber);
-            case 2 -> gameController = new CharController(player, boardNumber);
-            case 3 -> gameController = new ImgController(player, boardNumber);
+        switch (player.getChoice()) {
+            case 1 -> gameController = new NumberController(player);
+            case 2 -> gameController = new CharController(player);
+            case 3 -> gameController = new ImgController(player);
         }
         loader.setController(gameController);
         Parent root;

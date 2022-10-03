@@ -49,7 +49,6 @@ public abstract class GameController <T> implements Initializable, IController {
     private Label timeLabel;
     private Stage stage;
     private Player player;
-    private int boardNumber;
     private Button[][] gButton;
     private Label[][] gLabel;
     private Movements <T> movements;
@@ -57,13 +56,8 @@ public abstract class GameController <T> implements Initializable, IController {
     private int mil, sec, min, hr;
 
 
-    public GameController( Player player, int boardNumber){
+    public GameController( Player player){
         this.player = player;
-        this.boardNumber = boardNumber;
-        mil = 0;
-        sec = 0;
-        min = 0;
-        hr = 0;
     }
     public Pane getBarPane() {
         return barPane;
@@ -121,34 +115,61 @@ public abstract class GameController <T> implements Initializable, IController {
 
         playerLabel.setText("Jogador: "+this.player.getPlayerName());
         moveLabel.setText("Movimentos: "+ this.player.getMoves());
+        startClock();
 
-        ResetMov resetMov = new ResetMov(this, player, boardNumber);
+        ResetMov resetMov = new ResetMov(this, player);
         resetButton.setOnAction(resetMov);
     }
 
-    public void startClock(){
+    public void clockMath(){
+        sec += mil / 1000;
+        mil = mil % 1000;
 
+        min += sec / 60;
+        sec = sec % 60;
+
+        hr += min/60;
+        min = min % 60;
+    }
+
+    public void handlePlayerTime(){
+        System.out.println(player.getTime());
+        if(player.getTime() != 0.0){
+            mil = (int) (player.getTime() * 1000);
+            clockMath();
+        }
+        else{
+            mil = 0;
+            sec = 0;
+            min = 0;
+            hr = 0;
+        }
+    }
+
+    public void startClock(){
+        handlePlayerTime();
         clock = new Timeline(new KeyFrame(Duration.millis(1), actionEvent -> updateClock(timeLabel)));
         clock.setCycleCount(Timeline.INDEFINITE);
         clock.setAutoReverse(false);
         clock.play();
     }
     public void updateClock(Label timeLabel){
-        if(mil == 1000){
-            sec++;
-            mil = 0;
-        }
-        if(sec == 60){
-            min++;
-            sec = 0;
-        }
-        if(min == 60){
-            hr++;
-            min = 0;
-        }
+        clockMath();
         timeLabel.setText("Tempo: "+ hr + ":" + (((min/10)== 0) ? "0":"")
                 + min + ":" + (((sec/10)== 0) ? "0":"") + sec + ":"
                 + (((mil/10)== 0) ? "00": (((mil/100)== 0) ? "0":""))+ mil++);
+    }
+
+    public double getTimeLabelText(){
+        String time = timeLabel.getText().split(" ")[1];
+        int hour = Integer.parseInt(time.split(":")[0]);
+        int min = Integer.parseInt(time.split(":")[1]);
+        int sec = Integer.parseInt(time.split(":")[2]);
+        double millisec = Integer.parseInt(time.split(":")[3]);
+        double totalSec = hour*60*60 + min*60 + sec + (millisec/1000);
+        double t = Math.round(totalSec * 1000) / 1000.0;
+        System.out.println(" "+t);
+        return t;
     }
 
     public void updateMoves(int moves){
@@ -174,12 +195,20 @@ public abstract class GameController <T> implements Initializable, IController {
 
     public abstract void setBoardClass();
 
+    public void saveGame(){
+        clock.stop();
+        player.setTime(getTimeLabelText());
+        PlayerDAO playerDAO = new PlayerDAO();
+        playerDAO.update(player);
+    }
+
     public void setDialog(Dialog<ButtonType> dialog ,DialogPane root) {
         dialog.setDialogPane(root);
         dialog.initStyle(StageStyle.TRANSPARENT);
         dialog.setX(575);
         dialog.setY(300);
     }
+
     @FXML
     public void close(MouseEvent event)  {
         FXMLLoader loader = new FXMLLoader();
@@ -195,13 +224,13 @@ public abstract class GameController <T> implements Initializable, IController {
         setDialog(dialog,root);
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if(clickedButton.orElse(null) == ButtonType.OK){
-            PlayerDAO playerDAO = new PlayerDAO();
-            playerDAO.update(player);
+            saveGame();
             stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.close();
         }
 
     }
+
     @FXML
     public void min(MouseEvent event) {
 
@@ -232,6 +261,7 @@ public abstract class GameController <T> implements Initializable, IController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            saveGame();
             Scene scene = new Scene(root1);
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setScene(scene);

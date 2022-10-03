@@ -10,8 +10,8 @@ import java.util.Objects;
 
 public class CharController extends GameController <Character>{
 
-    public CharController(Player player, int boardNumber) {
-        super(player, boardNumber);
+    public CharController(Player player) {
+        super(player);
     }
 
     public void setBoardClass(){
@@ -27,7 +27,6 @@ public class CharController extends GameController <Character>{
         }
         while(!charBoard.solvable(linearTiles,charTiles));
 
-        startClock();
         setMovements(new CharMov(this, getPlayer(), getClock(), getTimeLabel(), charBoard, charTiles, charSortedTiles));
 
         for(int i = 0; i < getPlayer().getLevel(); i++){

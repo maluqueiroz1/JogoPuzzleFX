@@ -19,7 +19,7 @@ public class PlayerDAO {
     }
 
     public boolean add(Player player){
-        String sql = "INSERT INTO player(time,level,moves,winner,playerName,crazyFeature) VALUES (?,?,?,?,?,?) RETURNING id; ";
+        String sql = "INSERT INTO player(time,level,moves,winner,playerName,crazyFeature,choice) VALUES (?,?,?,?,?,?,?) RETURNING id; ";
 
         try {
             PreparedStatement statement = con.prepareStatement(sql);
@@ -29,6 +29,7 @@ public class PlayerDAO {
             statement.setBoolean(4,player.getWinner());
             statement.setString(5, player.getPlayerName());
             statement.setInt(6,player.getCrazyFeature());
+            statement.setInt(7,player.getChoice());
             statement.execute();
 
             ResultSet result = statement.getResultSet();
@@ -47,7 +48,7 @@ public class PlayerDAO {
     }
 
     public boolean update(Player player){
-        String sql = "UPDATE player SET time = ?,level = ?,moves = ?,winner = ?,playername = ?,crazyfeature = ? WHERE id = ?;";
+        String sql = "UPDATE player SET time = ?,level = ?,moves = ?,winner = ?,playername = ?,crazyfeature = ?, choice = ? WHERE id = ?;";
 
         try {
             PreparedStatement statement = con.prepareStatement(sql);
@@ -57,7 +58,8 @@ public class PlayerDAO {
             statement.setBoolean(4,player.getWinner());
             statement.setString(5, player.getPlayerName());
             statement.setInt(6,player.getCrazyFeature());
-            statement.setLong(7,player.getId());
+            statement.setInt(7,player.getChoice());
+            statement.setLong(8,player.getId());
             statement.execute();
             statement.close();
             con.close();
@@ -101,6 +103,7 @@ public class PlayerDAO {
                 player.setMoves(set.getInt("moves"));
                 player.setCrazyFeature(set.getInt("crazyfeature"));
                 player.setWinner(set.getBoolean("winner"));
+                player.setChoice(set.getInt("choice"));
                 players.add(player);
             }
             statement.close();

@@ -11,8 +11,8 @@ import java.util.Objects;
 
 public class NumberController extends GameController <Integer>{
 
-    public NumberController(Player player, int boardNumber) {
-        super(player, boardNumber);
+    public NumberController(Player player) {
+        super(player);
     }
 
     public void setBoardClass(){
@@ -28,7 +28,6 @@ public class NumberController extends GameController <Integer>{
         }
         while (!numberBoard.solvable(linearTiles,numberTiles));
 
-        startClock();
         setMovements(new NumberMov(this,getPlayer(), getClock(), getTimeLabel(), numberBoard, numberTiles, numberSortedTiles));
 
         for (int i = 0; i < getPlayer().getLevel(); i++) {

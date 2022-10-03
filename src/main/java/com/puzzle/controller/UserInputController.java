@@ -45,13 +45,11 @@ public class UserInputController  implements Initializable, IController {
     @FXML
     private Label inputError,difError,typeError;
     private GameController gameController;
-    private int boardNumber;
     private Player player;
 
-    public void setChoice(int boardNumber, String title){
+    public void setChoice(int choice, String title){
         choiceLabel.setText(title);
-        this.boardNumber = boardNumber;
-        player = new Player();
+        player = new Player(choice);
     }
 
     public void errorAnimation(Node error,Label errorLabel){
@@ -126,13 +124,13 @@ public class UserInputController  implements Initializable, IController {
 
                 player.setCrazyFeature(1);
                 System.out.println(player.getCrazyFeature());
-            }else if(level.getSelectedToggle() == insane){
+            }else if(type.getSelectedToggle() == insane){
 
                 player.setCrazyFeature(2);
                 System.out.println(player.getLevel());
-            } else if (level.getSelectedToggle() == extreme) {
+            } else if (type.getSelectedToggle() == extreme) {
 
-                player.setLevel(3);
+                player.setCrazyFeature(3);
                 System.out.println(player.getCrazyFeature());
             }
             typeError.setStyle(null);
@@ -145,10 +143,10 @@ public class UserInputController  implements Initializable, IController {
         try {
             if(handleLevelToggleGroup() & handleTypeToggleGroup() & handleTextField()){
 
-                switch (boardNumber) {
-                    case 1 -> gameController = new NumberController(player,boardNumber);
-                    case 2 -> gameController = new CharController(player,boardNumber);
-                    case 3 -> gameController = new ImgController(player,boardNumber);
+                switch (player.getChoice()) {
+                    case 1 -> gameController = new NumberController(player);
+                    case 2 -> gameController = new CharController(player);
+                    case 3 -> gameController = new ImgController(player);
                 }
 
                 FXMLLoader loader = new FXMLLoader();

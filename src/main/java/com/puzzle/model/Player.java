@@ -7,8 +7,15 @@ public class Player {
     private double time;
     private boolean winner;
     private int moves;
+    private int choice;
     private int level;
     private int crazyFeature;
+
+    public Player(){}
+
+    public Player(int choice){
+        this.choice = choice;
+    }
 
     public Long getId() {return id;}
 
@@ -28,6 +35,14 @@ public class Player {
 
     public int getLevel(){
         return level;
+    }
+
+    public void setChoice(int choice){
+        this.choice = choice;
+    }
+
+    public int getChoice(){
+        return choice;
     }
 
     public void setMoves(int moves){
