@@ -90,17 +90,20 @@ public class ImgMov extends Movements<Integer>{
 
                     nTiles[getRowN()][getColN()] = Integer.parseInt(number);
                     nTiles[i][j] = 0;
+                    imgController.setTemp(nTiles);
 
                     checkIfCrazy(nTiles,nSortedTiles,getButtons());
 
                     if (Objects.equals(nTiles[getRowN()][getColN()], nSortedTiles[getRowN()][getColN()]))
                         getButtons()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
 
+                    getPlayer().set2DNTiles(imgController.getTemp());
+                    imgController.updateMoves(getPlayer().getMoves()+1);
+
                     checkIfWon(imgBoard.win(nTiles), actionEvent);
 
                     setRowN(i);
                     setColN(j);
-                    imgController.updateMoves(getPlayer().getMoves()+1);
                 }
             }
         }

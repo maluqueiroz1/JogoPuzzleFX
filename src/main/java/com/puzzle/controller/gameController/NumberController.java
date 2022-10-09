@@ -7,7 +7,6 @@ import com.puzzle.model.Player;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class NumberController extends GameController <Integer>{
@@ -29,11 +28,15 @@ public class NumberController extends GameController <Integer>{
         }
         while (!numberBoard.solvable(linearTiles, numberTiles));
 
-        System.out.println(Arrays.deepToString(getPlayer().get2DNTiles()));
-        if(getPlayer().get2DNTiles() != null)
-            numberTiles = getPlayer().get2DNTiles();
-
-        getPlayer().set2DNTiles(numberTiles);
+        if(getPlayer().getChoice() == 1 && getPlayer().get2DNTiles() != null){
+            for (int i = 0; i < getPlayer().getLevel(); i++) {
+                for (int j = 0; j < getPlayer().getLevel(); j++) {
+                    numberTiles[i][j] = Integer.valueOf(getPlayer().get2DNTiles()[i][j]);
+                }
+            }
+        }
+        setTemp(numberTiles);
+        getPlayer().set2DNTiles(getTemp());
         setMovements(new NumberMov(this,getPlayer(), getClock(), getTimeLabel(), numberBoard, numberTiles, numberSortedTiles));
 
         for (int i = 0; i < getPlayer().getLevel(); i++) {

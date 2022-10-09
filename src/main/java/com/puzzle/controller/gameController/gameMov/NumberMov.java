@@ -49,7 +49,6 @@ public class NumberMov extends Movements <Integer> {
             int i = Integer.parseInt(location.split(",")[0]);
             int j = Integer.parseInt(location.split(",")[1]);
 
-
         if (!number.equals("0")) {
             if (i + 1 == getRowN() && j == getColN() || i - 1 == getRowN() && j == getColN() || i == getRowN() && j + 1 == getColN() || i == getRowN() && j - 1 == getColN() ) {
 
@@ -61,12 +60,14 @@ public class NumberMov extends Movements <Integer> {
 
                 nTiles[getRowN()][getColN()] = Integer.parseInt(number);
                 nTiles[i][j] = 0;
+                numberController.setTemp(nTiles);
 
                 checkIfCrazy(nTiles,nSortedTiles,getButtons());
 
                 checkIfGreen(nTiles[getRowN()][getColN()], nSortedTiles[getRowN()][getColN()]);
 
-                getPlayer().set2DNTiles(nTiles);
+
+                getPlayer().set2DNTiles(numberController.getTemp());
                 numberController.updateMoves(getPlayer().getMoves()+1);
 
                 checkIfWon(numberBoard.win(nTiles), actionEvent);

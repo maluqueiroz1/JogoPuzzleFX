@@ -55,6 +55,8 @@ public abstract class GameController <T> implements Initializable, IController {
     private Timeline clock;
     private int mil, sec, min, hr;
 
+    private String[][] temp;
+
 
     public GameController( Player player){
         this.player = player;
@@ -106,6 +108,19 @@ public abstract class GameController <T> implements Initializable, IController {
 
     public void setMovements(Movements<T> movements) {
         this.movements = movements;
+    }
+
+    public String[][] getTemp() {
+        return temp;
+    }
+
+    public void setTemp(Object[][] temp) {
+        this.temp = new String[player.getLevel()][player.getLevel()];
+        for (int i = 0; i < player.getLevel(); i++) {
+            for (int j = 0; j < player.getLevel(); j++) {
+                this.temp[i][j] = String.valueOf(temp[i][j]);
+            }
+        }
     }
 
     public void labelEvents() {

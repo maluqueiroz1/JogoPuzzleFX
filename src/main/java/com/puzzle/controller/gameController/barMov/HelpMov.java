@@ -25,22 +25,23 @@ public class HelpMov implements EventHandler<ActionEvent> {
         grid = new GridPane();
         for (int i = 0; i < helpView.length; i++) {
             for (int j = 0; j < helpView.length; j++) {
-
-                if(helpView.length < 4){
-                    helpView[i][j].setFitHeight(60);
-                    helpView[i][j].setFitWidth(60);
-                } else if (helpView.length == 4) {
-                    helpView[i][j].setFitHeight(45);
-                    helpView[i][j].setFitWidth(45);
-                } else {
-                    helpView[i][j].setFitHeight(35);
-                    helpView[i][j].setFitWidth(35);
+                if(helpView[i][j] != null){
+                    if(helpView.length < 4){
+                        helpView[i][j].setFitHeight(60);
+                        helpView[i][j].setFitWidth(60);
+                    } else if (helpView.length == 4) {
+                        helpView[i][j].setFitHeight(45);
+                        helpView[i][j].setFitWidth(45);
+                    } else {
+                        helpView[i][j].setFitHeight(35);
+                        helpView[i][j].setFitWidth(35);
+                    }
+                    grid.setHgap(3);
+                    grid.setVgap(3);
+                    grid.add(helpView[i][j],j,i);
+                    grid.setLayoutX(7.5);
+                    grid.setLayoutY(15);
                 }
-                grid.setHgap(3);
-                grid.setVgap(3);
-                grid.add(helpView[i][j],j,i);
-                grid.setLayoutX(7.5);
-                grid.setLayoutY(15);
             }
         }
     }

@@ -44,18 +44,18 @@ public class PlayerDAO {
         }
     }
 
-    public Array convertToSQLArray(Integer[] array) throws SQLException {
-        return con.createArrayOf("INTEGER", array);
+    public Array convertToSQLArray(String[] array) throws SQLException {
+        return con.createArrayOf("TEXT", array);
     }
 
-    public Integer[] convertToJava(Array array) throws SQLException {
-        Integer[] a;
-        a = (Integer[]) array.getArray();
+    public String[] convertToJava(Array array) throws SQLException {
+        String[] a;
+        a = (String[]) array.getArray();
         return a;
     }
 
     public boolean update(Player player){
-        String sql = "UPDATE player SET time = ?,level = ?,moves = ?,winner = ?,playername = ?,crazyfeature = ?, choice = ?, numberarray = ?  WHERE id = ?;";
+        String sql = "UPDATE player SET time = ?,level = ?,moves = ?,winner = ?,playername = ?,crazyfeature = ?, choice = ?, playerarray = ?  WHERE id = ?;";
 
         try {
             PreparedStatement statement = con.prepareStatement(sql);
@@ -112,8 +112,8 @@ public class PlayerDAO {
                 player.setCrazyFeature(set.getInt("crazyfeature"));
                 player.setWinner(set.getBoolean("winner"));
                 player.setChoice(set.getInt("choice"));
-                if(set.getArray("numberarray") != null)
-                    player.set1DNTiles(convertToJava(set.getArray("numberarray")));
+                if(set.getArray("playerarray") != null)
+                    player.set1DNTiles(convertToJava(set.getArray("playerarray")));
                 players.add(player);
             }
             statement.close();

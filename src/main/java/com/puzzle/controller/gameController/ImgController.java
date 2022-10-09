@@ -19,18 +19,20 @@ public class ImgController extends GameController <Integer>{
         super(player);
     }
 
-    public void addImages(ImageView[][] imageView){
+    public void addImages(ImageView[][] imageView, Integer[][] array){
         for(int i = 0; i < getPlayer().getLevel(); i++){
             for(int j = 0; j < getPlayer().getLevel(); j++) {
-                if(getPlayer().getLevel()*getPlayer().getLevel() < 16){
-                    Image image = new Image(getClass().getResourceAsStream("/com/puzzle/images/minions9/"+i+j+".jpg"));
-                    imageView[i][j] = new ImageView(image);
-                } else if (getPlayer().getLevel()*getPlayer().getLevel() == 16) {
-                    Image image = new Image(getClass().getResourceAsStream("/com/puzzle/images/minions16/"+i+j+".jpg"));
-                    imageView[i][j] = new ImageView(image);
-                } else if (getPlayer().getLevel()*getPlayer().getLevel() > 16) {
-                    Image image = new Image(getClass().getResourceAsStream("/com/puzzle/images/minions25/"+i+j+".jpg"));
-                    imageView[i][j] = new ImageView(image);
+                if(array[i][j] != 0){
+                    if(getPlayer().getLevel()*getPlayer().getLevel() < 16){
+                        Image image = new Image(getClass().getResourceAsStream("/com/puzzle/images/minions9/"+array[i][j]+".jpg"));
+                        imageView[i][j] = new ImageView(image);
+                    } else if (getPlayer().getLevel()*getPlayer().getLevel() == 16) {
+                        Image image = new Image(getClass().getResourceAsStream("/com/puzzle/images/minions16/"+array[i][j]+".jpg"));
+                        imageView[i][j] = new ImageView(image);
+                    } else if (getPlayer().getLevel()*getPlayer().getLevel() > 16) {
+                        Image image = new Image(getClass().getResourceAsStream("/com/puzzle/images/minions25/"+array[i][j]+".jpg"));
+                        imageView[i][j] = new ImageView(image);
+                    }
                 }
             }
         }
@@ -72,15 +74,27 @@ public class ImgController extends GameController <Integer>{
         Integer[][] numberSortedTiles = imgBoard.tilesAmount();
         Integer[] linearTiles = new Integer[getPlayer().getLevel()*getPlayer().getLevel()];
         ImageView[][] imageViews = new ImageView[getPlayer().getLevel()][getPlayer().getLevel()];
-        addImages(imageViews);
 
-        do {
-            imgBoard.imgShuffle(numberTiles,imageViews);
+        if(getPlayer().getChoice() == 3 && getPlayer().get2DNTiles() != null){
+            for (int i = 0; i < getPlayer().getLevel(); i++) {
+                for (int j = 0; j < getPlayer().getLevel(); j++) {
+                    numberTiles[i][j] = Integer.valueOf(getPlayer().get2DNTiles()[i][j]);
+                    addImages(imageViews,numberTiles);
+                }
+            }
+        } else {
+            addImages(imageViews,numberTiles);
+            do {
+                imgBoard.imgShuffle(numberTiles,imageViews);
+            }
+            while (!imgBoard.solvable(linearTiles,numberTiles));
         }
-        while (!imgBoard.solvable(linearTiles,numberTiles));
+
+        setTemp(numberTiles);
+        getPlayer().set2DNTiles(getTemp());
 
         ImageView[][] helpView = new ImageView[getPlayer().getLevel()][getPlayer().getLevel()];
-        addImages(helpView);
+        addImages(helpView,numberSortedTiles);
         InsertBarButtons(helpView);
         setMovements(new ImgMov(this, getPlayer(), getClock(), getTimeLabel(), imgBoard, numberTiles, numberSortedTiles));
 

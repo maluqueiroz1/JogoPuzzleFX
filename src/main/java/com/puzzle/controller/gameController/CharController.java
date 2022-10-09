@@ -27,6 +27,15 @@ public class CharController extends GameController <Character>{
         }
         while(!charBoard.solvable(linearTiles,charTiles));
 
+        if(getPlayer().getChoice() == 2 && getPlayer().get2DNTiles() != null){
+            for (int i = 0; i < getPlayer().getLevel(); i++) {
+                for (int j = 0; j < getPlayer().getLevel(); j++) {
+                    charTiles[i][j] = getPlayer().get2DNTiles()[i][j].charAt(0);
+                }
+            }
+        }
+        setTemp(charTiles);
+        getPlayer().set2DNTiles(getTemp());
         setMovements(new CharMov(this, getPlayer(), getClock(), getTimeLabel(), charBoard, charTiles, charSortedTiles));
 
         for(int i = 0; i < getPlayer().getLevel(); i++){
