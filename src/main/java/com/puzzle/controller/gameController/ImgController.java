@@ -20,6 +20,7 @@ public class ImgController extends GameController <Integer>{
     }
 
     public void addImages(ImageView[][] imageView, Integer[][] array){
+
         for(int i = 0; i < getPlayer().getLevel(); i++){
             for(int j = 0; j < getPlayer().getLevel(); j++) {
                 if(array[i][j] != 0){
@@ -79,9 +80,9 @@ public class ImgController extends GameController <Integer>{
             for (int i = 0; i < getPlayer().getLevel(); i++) {
                 for (int j = 0; j < getPlayer().getLevel(); j++) {
                     numberTiles[i][j] = Integer.valueOf(getPlayer().get2DNTiles()[i][j]);
-                    addImages(imageViews,numberTiles);
                 }
             }
+            addImages(imageViews,numberTiles);
         } else {
             addImages(imageViews,numberTiles);
             do {
