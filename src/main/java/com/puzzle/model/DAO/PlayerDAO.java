@@ -13,6 +13,27 @@ public class PlayerDAO {
 
     public PlayerDAO(){
         this.con = new ConnectionFactory().getConnection();
+        try {
+            DatabaseMetaData metaData = con.getMetaData();
+            ResultSet resultSet = metaData.getTables(null,null,"player",null);
+            if(!resultSet.next()){
+                System.out.println("no table");
+                String query = "CREATE TABLE player"+"(id serial," +
+                        "time double precision," +
+                        "level integer not null," +
+                        "moves integer not null," +
+                        "winner boolean not null ," +
+                        "playername varchar not null," +
+                        "crazyfeature integer not null," +
+                        "choice integer not null," +
+                        "playerarray text[])";
+                Statement statement = con.createStatement();
+                statement.executeUpdate(query);
+                statement.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public boolean add(Player player){

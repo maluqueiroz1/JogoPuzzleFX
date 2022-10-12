@@ -68,19 +68,18 @@ public class LBController implements Initializable,IController {
         List<Player> players;
         players = playerDAO.getList();
         ObservableList<Player> observableList = FXCollections.observableArrayList();
-        long j = 0L;
 
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getWinner()){
                 players.sort((a, b) -> (int) (a.getTime() - b.getTime()));
-                players.get(i).setId(j++);
+                players.get(i).setId(i+1L);
             }
 
             if(players.get(i).getId() < 11 && players.get(i).getId() != 0)
                 observableList.add(players.get(i));
         }
         return observableList;
-    }
+}
 
     public void labelEvents(){
         exit.setOnMouseClicked(this::close);
