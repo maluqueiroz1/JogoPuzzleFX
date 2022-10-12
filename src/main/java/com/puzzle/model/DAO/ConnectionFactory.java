@@ -6,7 +6,7 @@ public class ConnectionFactory {
     public Connection getConnection(){
             String username = "postgres";
             String password = "Fbmaya97";
-            String url = "jdbc:postgresql://localhost:5432/puzzleBD";
+            String url = "jdbc:postgresql://localhost:5432/";
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {

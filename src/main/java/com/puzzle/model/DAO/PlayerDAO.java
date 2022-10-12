@@ -14,6 +14,17 @@ public class PlayerDAO {
     public PlayerDAO(){
         this.con = new ConnectionFactory().getConnection();
         try {
+            Statement statement = con.createStatement();
+            statement.executeQuery("SELECT count(*)  FROM pg_database WHERE datname = 'puzzlebd'");
+            ResultSet rs = statement.getResultSet();
+            rs.next();
+            int count = rs.getInt(1);
+            if (count <= 0){
+                System.out.println("creating db");
+                statement.executeUpdate("CREATE DATABASE PUZZLEBD");
+            } else
+                System.out.println("db already exists");
+
             DatabaseMetaData metaData = con.getMetaData();
             ResultSet resultSet = metaData.getTables(null,null,"player",null);
             if(!resultSet.next()){
@@ -27,10 +38,9 @@ public class PlayerDAO {
                         "crazyfeature integer not null," +
                         "choice integer not null," +
                         "playerarray text[])";
-                Statement statement = con.createStatement();
                 statement.executeUpdate(query);
-                statement.close();
             }
+            statement.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

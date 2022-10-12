@@ -61,57 +61,61 @@ public class MenuController implements Initializable, IController {
 
         PlayerDAO playerDAO = new PlayerDAO();
         List<Player> players = playerDAO.getList();
-        players.sort((a, b) -> Boolean.compare(a.getWinner(), b.getWinner()));
-        for (int i = 0; i < players.size(); i++) {
-            if (!players.get(i).getWinner()){
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
-                DialogPane root;
-                try {
-                    root = loader.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-                Label label= new Label("deseja jogar \n o jogo salvo?");
-                label.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-alignment: center; -fx-text-alignment: center");
-                root.setContent(label);
-
-                javafx.scene.control.Dialog<ButtonType> dialog = new Dialog<>();
-                setDialog(dialog,root);
-                Optional<ButtonType> clickedButton = dialog.showAndWait();
-                if(clickedButton.orElse(null) == ButtonType.OK){
-
-                    switch (players.get(i).getChoice()) {
-                        case 1 -> gameController = new NumberController(players.get(i));
-                        case 2 -> gameController = new CharController(players.get(i));
-                        case 3 -> gameController = new ImgController(players.get(i));
+        if(players.isEmpty())
+            newGame(event);
+        else {
+            players.sort((a, b) -> Boolean.compare(a.getWinner(), b.getWinner()));
+            for (int i = 0; i < players.size(); i++) {
+                if (!players.get(i).getWinner()){
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/com/puzzle/views/Exit.fxml"));
+                    DialogPane root;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
-                    FXMLLoader loader1 = new FXMLLoader();
-                    loader1.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
-                    loader1.setController(gameController);
-                    Parent root1 = loader1.load();
-                    scene = new Scene(root1);
-                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                    gameController.labelEvents();
-                    gameController.setBoardClass();
+                    Label label= new Label("deseja jogar \n o jogo salvo?");
+                    label.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-alignment: center; -fx-text-alignment: center");
+                    root.setContent(label);
 
-                    PauseTransition pause = new PauseTransition(Duration.millis(100));
-                    pause.setOnFinished(e -> {
-                        dialog.close();
-                        stage.setScene(scene);
-                        stage.show();
-                    });
-                    pause.play();
-                    break;
+                    javafx.scene.control.Dialog<ButtonType> dialog = new Dialog<>();
+                    setDialog(dialog,root);
+                    Optional<ButtonType> clickedButton = dialog.showAndWait();
+                    if(clickedButton.orElse(null) == ButtonType.OK){
+
+                        switch (players.get(i).getChoice()) {
+                            case 1 -> gameController = new NumberController(players.get(i));
+                            case 2 -> gameController = new CharController(players.get(i));
+                            case 3 -> gameController = new ImgController(players.get(i));
+                        }
+                        FXMLLoader loader1 = new FXMLLoader();
+                        loader1.setLocation(getClass().getResource("/com/puzzle/views/Game.fxml"));
+                        loader1.setController(gameController);
+                        Parent root1 = loader1.load();
+                        scene = new Scene(root1);
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                        gameController.labelEvents();
+                        gameController.setBoardClass();
+
+                        PauseTransition pause = new PauseTransition(Duration.millis(100));
+                        pause.setOnFinished(e -> {
+                            dialog.close();
+                            stage.setScene(scene);
+                            stage.show();
+                        });
+                        pause.play();
+                        break;
+                    } else {
+                        PlayerDAO playerDAO1 = new PlayerDAO();
+                        playerDAO1.delete(players.get(i));
+                        newGame(event);
+                    }
                 } else {
-                    PlayerDAO playerDAO1 = new PlayerDAO();
-                    playerDAO1.delete(players.get(i));
                     newGame(event);
                 }
-            } else {
-                newGame(event);
             }
         }
     }
