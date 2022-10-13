@@ -1,12 +1,12 @@
 # JogoPuzzleFX
 ### Jogo puzzle para projeto de LPOO
 
-### PRÉ-REQUISITOS:
-### 1. ter docker instalado e funcionando
+## PRÉ-REQUISITOS:
+1. ter docker instalado e funcionando
 
-### link para download: https://docs.docker.com/get-docker/
+link para download: https://docs.docker.com/get-docker/
 
-### 2. executar o comando "docker-compose up -d" no terminal
+2. executar o comando "docker-compose up -d" no terminal
 
 ### Tela inical do jogo
 
