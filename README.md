@@ -8,6 +8,8 @@
 
 ### 2. executar o comando "docker-compose up -d" no terminal
 
+### Tela inical do jogo
+
 ![tela1](https://user-images.githubusercontent.com/105398448/195472548-1f9f9577-1ddc-4127-a09c-4cc116052144.PNG)
 
 ### com possibilidade de escolher opções para jogar
