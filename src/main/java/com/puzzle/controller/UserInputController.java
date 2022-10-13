@@ -59,13 +59,12 @@ public class UserInputController  implements Initializable, IController {
     }
 
     public boolean handleTextField() throws InvalidInputException {
-        if(nameTextField.getText().length() == 0 || nameTextField.getText().length() > 12){
+        if(nameTextField.getText().trim().length() == 0 || nameTextField.getText().trim().length() > 12){
            throw new InvalidInputException(nameTextField.getText().length());
         } else{
 
             nameTextField.setStyle(null);
             player.setPlayerName(nameTextField.getText());
-            System.out.println(player.getPlayerName());
             inputError.setStyle(null);
             inputError.setText(null);
             return true;
@@ -88,15 +87,12 @@ public class UserInputController  implements Initializable, IController {
             if(level.getSelectedToggle() == easyLevel) {
 
                 player.setLevel(3);
-                System.out.println(player.getLevel());
             }else if(level.getSelectedToggle() == mediumLevel){
 
                 player.setLevel(4);
-                System.out.println(player.getLevel());
             } else if (level.getSelectedToggle() == hardLevel) {
 
                 player.setLevel(5);
-                System.out.println(player.getLevel());
             }
             difError.setStyle(null);
             difError.setText(null);
@@ -123,15 +119,12 @@ public class UserInputController  implements Initializable, IController {
             if(type.getSelectedToggle() == crazy) {
 
                 player.setCrazyFeature(1);
-                System.out.println(player.getCrazyFeature());
             }else if(type.getSelectedToggle() == insane){
 
                 player.setCrazyFeature(2);
-                System.out.println(player.getLevel());
             } else if (type.getSelectedToggle() == extreme) {
 
                 player.setCrazyFeature(3);
-                System.out.println(player.getCrazyFeature());
             }
             typeError.setStyle(null);
             typeError.setText(null);

@@ -59,7 +59,6 @@ public abstract class Board <T> implements IBoard <T>{
             for(int j = 0; j < getC(); j++) {
                 if(  Arrays.deepEquals(tiles, sortedTiles)) {
                     won = true;
-                    System.out.print(tiles[i][j]);
 
                 } else {
                     won = false;

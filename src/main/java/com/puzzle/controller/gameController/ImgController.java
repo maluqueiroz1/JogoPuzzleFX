@@ -76,10 +76,10 @@ public class ImgController extends GameController <Integer>{
         Integer[] linearTiles = new Integer[getPlayer().getLevel()*getPlayer().getLevel()];
         ImageView[][] imageViews = new ImageView[getPlayer().getLevel()][getPlayer().getLevel()];
 
-        if(getPlayer().getChoice() == 3 && getPlayer().get2DNTiles() != null){
+        if(getPlayer().getChoice() == 3 && getPlayer().get2DTiles() != null){
             for (int i = 0; i < getPlayer().getLevel(); i++) {
                 for (int j = 0; j < getPlayer().getLevel(); j++) {
-                    numberTiles[i][j] = Integer.valueOf(getPlayer().get2DNTiles()[i][j]);
+                    numberTiles[i][j] = Integer.valueOf(getPlayer().get2DTiles()[i][j]);
                 }
             }
             addImages(imageViews,numberTiles);
@@ -92,7 +92,7 @@ public class ImgController extends GameController <Integer>{
         }
 
         setTemp(numberTiles);
-        getPlayer().set2DNTiles(getTemp());
+        getPlayer().set2DTiles(getTemp());
 
         ImageView[][] helpView = new ImageView[getPlayer().getLevel()][getPlayer().getLevel()];
         addImages(helpView,numberSortedTiles);

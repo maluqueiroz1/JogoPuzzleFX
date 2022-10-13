@@ -66,7 +66,7 @@ public class CharMov extends Movements <Character>{
                 checkIfCrazy(cTiles,cSortedTiles,getButtons());
                 checkIfGreen(cTiles[getRowN()][getColN()], cSortedTiles[getRowN()][getColN()]);
 
-                getPlayer().set2DNTiles(charController.getTemp());
+                getPlayer().set2DTiles(charController.getTemp());
                 charController.updateMoves(getPlayer().getMoves()+1);
 
                 checkIfWon(charBoard.win(cTiles),actionEvent);

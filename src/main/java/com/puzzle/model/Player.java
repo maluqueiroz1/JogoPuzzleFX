@@ -78,15 +78,15 @@ public class Player {
         this.crazyFeature = crazyFeature;
     }
 
-    public void set1DNTiles(String[] tilesAmount){
+    public void set1DTiles(String[] tilesAmount){
         this.tilesAmount = tilesAmount;
     }
 
-    public String[] get1DNTiles(){
+    public String[] get1DTiles(){
         return tilesAmount;
     }
 
-    public String[][] get2DNTiles(){
+    public String[][] get2DTiles(){
 
         if(tilesAmount != null){
             String[][] tiles = new String[level][level];
@@ -98,7 +98,7 @@ public class Player {
             return null;
     }
 
-    public void set2DNTiles(String[][] tiles){
+    public void set2DTiles(String[][] tiles){
 
         if(tiles != null){
             tilesAmount = new String[level*level];

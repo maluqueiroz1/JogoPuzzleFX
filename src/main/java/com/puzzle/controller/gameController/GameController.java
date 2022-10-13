@@ -148,7 +148,6 @@ public abstract class GameController <T> implements Initializable, IController {
     }
 
     public void handlePlayerTime(){
-        System.out.println(player.getTime());
         if(player.getTime() != 0.0){
             mil = (int) (player.getTime() * 1000);
             clockMath();
@@ -183,7 +182,6 @@ public abstract class GameController <T> implements Initializable, IController {
         double millisec = Integer.parseInt(time.split(":")[3]);
         double totalSec = hour*60*60 + min*60 + sec + (millisec/1000);
         double t = Math.round(totalSec * 1000) / 1000.0;
-        System.out.println(" "+t);
         return t;
     }
 

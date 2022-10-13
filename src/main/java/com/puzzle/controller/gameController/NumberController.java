@@ -28,15 +28,15 @@ public class NumberController extends GameController <Integer>{
         }
         while (!numberBoard.solvable(linearTiles, numberTiles));
 
-        if(getPlayer().getChoice() == 1 && getPlayer().get2DNTiles() != null){
+        if(getPlayer().getChoice() == 1 && getPlayer().get2DTiles() != null){
             for (int i = 0; i < getPlayer().getLevel(); i++) {
                 for (int j = 0; j < getPlayer().getLevel(); j++) {
-                    numberTiles[i][j] = Integer.valueOf(getPlayer().get2DNTiles()[i][j]);
+                    numberTiles[i][j] = Integer.valueOf(getPlayer().get2DTiles()[i][j]);
                 }
             }
         }
         setTemp(numberTiles);
-        getPlayer().set2DNTiles(getTemp());
+        getPlayer().set2DTiles(getTemp());
         setMovements(new NumberMov(this,getPlayer(), getClock(), getTimeLabel(), numberBoard, numberTiles, numberSortedTiles));
 
         for (int i = 0; i < getPlayer().getLevel(); i++) {

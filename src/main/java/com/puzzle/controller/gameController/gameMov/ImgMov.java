@@ -97,7 +97,7 @@ public class ImgMov extends Movements<Integer>{
                     if (Objects.equals(nTiles[getRowN()][getColN()], nSortedTiles[getRowN()][getColN()]))
                         getButtons()[getRowN()][getColN()].setStyle("-fx-background-color: #c9ff08; -fx-text-fill: TRANSPARENT; -fx-padding: 0px; ");
 
-                    getPlayer().set2DNTiles(imgController.getTemp());
+                    getPlayer().set2DTiles(imgController.getTemp());
                     imgController.updateMoves(getPlayer().getMoves()+1);
 
                     checkIfWon(imgBoard.win(nTiles), actionEvent);

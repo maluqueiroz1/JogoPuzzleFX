@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  db:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: Fbmaya97
+      POSTGRES_USER: postgres
+      POSTGRES_DB: puzzlebd
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    restart: unless-stopped

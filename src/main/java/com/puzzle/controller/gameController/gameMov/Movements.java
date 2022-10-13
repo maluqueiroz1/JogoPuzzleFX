@@ -71,7 +71,6 @@ public abstract class Movements <T> implements EventHandler<ActionEvent> {
         double millisec = Integer.parseInt(time.split(":")[3]);
         double totalSec = hour*60*60 + min*60 + sec + (millisec/1000);
         double t = Math.round(totalSec * 1000) / 1000.0;
-        System.out.println(" "+t);
         return t;
     }
 

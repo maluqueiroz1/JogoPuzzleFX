@@ -22,13 +22,11 @@ public class PlayerDAO {
             if (count <= 0){
                 System.out.println("creating db");
                 statement.executeUpdate("CREATE DATABASE PUZZLEBD");
-            } else
-                System.out.println("db already exists");
+            }
 
             DatabaseMetaData metaData = con.getMetaData();
             ResultSet resultSet = metaData.getTables(null,null,"player",null);
             if(!resultSet.next()){
-                System.out.println("no table");
                 String query = "CREATE TABLE player"+"(id serial," +
                         "time double precision," +
                         "level integer not null," +
@@ -97,7 +95,7 @@ public class PlayerDAO {
             statement.setString(5, player.getPlayerName());
             statement.setInt(6,player.getCrazyFeature());
             statement.setInt(7,player.getChoice());
-            statement.setArray(8,convertToSQLArray(player.get1DNTiles()));
+            statement.setArray(8,convertToSQLArray(player.get1DTiles()));
             statement.setLong(9,player.getId());
             statement.execute();
             statement.close();
@@ -144,7 +142,7 @@ public class PlayerDAO {
                 player.setWinner(set.getBoolean("winner"));
                 player.setChoice(set.getInt("choice"));
                 if(set.getArray("playerarray") != null)
-                    player.set1DNTiles(convertToJava(set.getArray("playerarray")));
+                    player.set1DTiles(convertToJava(set.getArray("playerarray")));
                 players.add(player);
             }
             statement.close();

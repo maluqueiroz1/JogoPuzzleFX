@@ -67,7 +67,7 @@ public class NumberMov extends Movements <Integer> {
                 checkIfGreen(nTiles[getRowN()][getColN()], nSortedTiles[getRowN()][getColN()]);
 
 
-                getPlayer().set2DNTiles(numberController.getTemp());
+                getPlayer().set2DTiles(numberController.getTemp());
                 numberController.updateMoves(getPlayer().getMoves()+1);
 
                 checkIfWon(numberBoard.win(nTiles), actionEvent);
