@@ -1,6 +1,6 @@
 package com.puzzle.controller;
 
-import com.puzzle.model.DAO.PlayerDAO;
+import com.puzzle.model.dao.PlayerDAO;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;

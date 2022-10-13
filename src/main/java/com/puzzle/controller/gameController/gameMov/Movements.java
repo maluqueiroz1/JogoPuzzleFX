@@ -1,7 +1,7 @@
 package com.puzzle.controller.gameController.gameMov;
 
 import com.puzzle.controller.WinnerController;
-import com.puzzle.model.DAO.PlayerDAO;
+import com.puzzle.model.dao.PlayerDAO;
 import com.puzzle.model.Player;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;

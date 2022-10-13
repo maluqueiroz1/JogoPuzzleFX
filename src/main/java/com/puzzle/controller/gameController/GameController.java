@@ -3,7 +3,7 @@ package com.puzzle.controller.gameController;
 import com.puzzle.controller.IController;
 import com.puzzle.controller.gameController.barMov.ResetMov;
 import com.puzzle.controller.gameController.gameMov.Movements;
-import com.puzzle.model.DAO.PlayerDAO;
+import com.puzzle.model.dao.PlayerDAO;
 import com.puzzle.model.Player;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

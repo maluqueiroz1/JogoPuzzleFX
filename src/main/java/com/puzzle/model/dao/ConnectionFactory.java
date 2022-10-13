@@ -1,4 +1,4 @@
-package com.puzzle.model.DAO;
+package com.puzzle.model.dao;
 
 import java.sql.*;
 public class ConnectionFactory {

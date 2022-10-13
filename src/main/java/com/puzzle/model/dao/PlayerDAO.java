@@ -1,4 +1,4 @@
-package com.puzzle.model.DAO;
+package com.puzzle.model.dao;
 
 import com.puzzle.model.Player;
 
