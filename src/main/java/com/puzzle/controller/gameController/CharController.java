@@ -53,7 +53,7 @@ public class CharController extends GameController <Character>{
                     getMovements().setColN(j);
                 }else{
                      if (Objects.equals(charTiles[i][j], charSortedTiles[i][j]))
-                        getGButton()[i][j].setStyle("-fx-background-color: #c9ff08");
+                         setGreenStyle(getGButton()[i][j]);
                 }
                 getGButton()[i][j].setOnAction(getMovements());
                 getGrid().add(getGButton()[i][j],j,i);
